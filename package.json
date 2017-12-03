@@ -1,0 +1,52 @@
+{
+  "name": "deployer",
+  "version": "0.2.1",
+  "description": "standard deployer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mulberryx/deployer.git"
+  },
+  "author": "chenxiangyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mulberryx/deployer/issues",
+    "email": "wowcxy2008@126.com"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint --ext .js, .jsx src test/specs",
+    "test": "cross-env BABEL_ENV=test karma start test/karma.conf.js --single-run"
+  },
+  "dependencies": {
+    "express": "latest",
+    "shelljs": "latest",
+    "eslint": "latest",
+    "eslint-config-airbnb": "latest",
+    "eslint-config-ali": "latest",
+    "eslint-friendly-formatter": "latest",
+    "eslint-loader": "latest",
+    "eslint-plugin-html": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsx-a11y": "latest",
+    "eslint-plugin-node": "latest",
+    "eslint-plugin-promise": "latest",
+    "eslint-plugin-standard": "latest",
+    "pre-commit": "latest",
+    "babel-core": "latest",
+    "babel-eslint": "latest",
+    "babel-loader": "latest",
+    "babel-plugin-istanbul": "latest",
+    "babel-plugin-transform-decorators-legacy": "latest",
+    "babel-plugin-transform-runtime": "latest",
+    "babel-polyfill": "latest",
+    "babel-preset-env": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-es2015-node-auto": "latest",
+    "babel-preset-stage-0": "latest",
+    "babel-register": "latest"
+  },
+  "engines": {
+    "node": ">= 8.9.1",
+    "npm": ">= 4.0.0"
+  }
+}

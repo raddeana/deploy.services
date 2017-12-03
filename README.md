@@ -1,2 +1,2 @@
-# auto-deploy
-auto deploy service
+# deployer
+deploy service
