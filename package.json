@@ -1,23 +1,28 @@
 {
-  "name": "deployer",
+  "name": "deploy-service",
   "version": "0.2.1",
-  "description": "standard deployer",
+  "description": "standard deploy-service",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mulberryx/deployer.git"
+    "url": "https://github.com/mulberryx/deploy-service.git"
   },
   "author": "chenxiangyu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mulberryx/deployer/issues",
+    "url": "https://github.com/mulberryx/deploy-service/issues",
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
-    "start": "node server.js",
-    "lint": "eslint --ext .js, .jsx src test/specs",
-    "test": "cross-env BABEL_ENV=test karma start test/karma.conf.js --single-run"
+    "start": "node app.js",
+    "lint": "eslint --ext .js, src test/specs",
+    "test": "mocha"
   },
   "dependencies": {
+    "mocha": "latest",
+    "chai": "latest",
+    "chai-http": "latest",
+    "forever": "latest",
+    "forever-monitor": "latest",
     "express": "latest",
     "shelljs": "latest",
     "eslint": "latest",
@@ -44,9 +49,5 @@
     "babel-preset-es2015-node-auto": "latest",
     "babel-preset-stage-0": "latest",
     "babel-register": "latest"
-  },
-  "engines": {
-    "node": ">= 8.9.1",
-    "npm": ">= 4.0.0"
   }
 }
