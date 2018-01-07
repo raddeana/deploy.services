@@ -17,6 +17,8 @@
     "lint": "eslint --ext .js, src test/specs",
     "test": "mocha"
   },
+ "pre-commit": [
+  ],
   "dependencies": {
     "qiniu": "latest",
     "ejs": "latest",
