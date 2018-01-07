@@ -4,13 +4,12 @@
  */
 
 var Detector = {
+  canvas: !! window.CanvasRenderingContext2D,
+  webgl: ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )(),
+  workers: !! window.Worker,
+  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
 
-  canvas : !! window.CanvasRenderingContext2D,
-  webgl : ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )(),
-  workers : !! window.Worker,
-  fileapi : window.File && window.FileReader && window.FileList && window.Blob,
-
-  getWebGLErrorMessage : function () {
+  getWebGLErrorMessage: function () {
 
     var domElement = document.createElement( 'div' );
 
@@ -24,10 +23,9 @@ var Detector = {
     domElement.style.margin = '5em auto 0';
 
     return domElement;
-
   },
 
-  addGetWebGLMessage : function ( parameters ) {
+  addGetWebGLMessage: function ( parameters ) {
 
     var parent, id, domElement;
 
@@ -45,7 +43,6 @@ var Detector = {
 
 };
 
-
 var ele, container;
 var camera, scene, renderer, position;
 var mesh, geometry, material;
@@ -57,23 +54,23 @@ var start_time = Date.now();
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
-function clouds(id) {
+function clouds (id) {
   ele = document.getElementById(id);
 
-  container = document.createElement( 'div' );
+  container = document.createElement('div');
   ele.appendChild( container );
 
   // Bg gradient
 
-  var canvas = document.createElement( 'canvas' );
+  var canvas = document.createElement('canvas');
   canvas.width = 32;
   canvas.height = ele.scrollHeight;
 
-  var context = canvas.getContext( '2d' );
+  var context = canvas.getContext('2d');
 
   var gradient = context.createLinearGradient( 0, 0, 0, canvas.height );
-  gradient.addColorStop(0, "#1e4877");
-  gradient.addColorStop(0.5, "#4584b4");
+  gradient.addColorStop(0, '#1e4877');
+  gradient.addColorStop(0.5, '#4584b4');
 
   context.fillStyle = gradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
@@ -88,33 +85,30 @@ function clouds(id) {
 
   geometry = new THREE.Geometry();
 
-  var texture = THREE.ImageUtils.loadTexture( 'http://ocgkyeaew.bkt.clouddn.com/images/ui/cloud-1e62f6552c.png', null, animate );
+  var texture = new THREE.TextureLoader().load('/images/cloud10.png', animate);
+
   texture.magFilter = THREE.LinearMipMapLinearFilter;
   texture.minFilter = THREE.LinearMipMapLinearFilter;
 
   var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
 
-  material = new THREE.ShaderMaterial( {
-
+  material = new THREE.ShaderMaterial({
     uniforms: {
-
-      "map": { type: "t", value: texture },
-      "fogColor" : { type: "c", value: fog.color },
-      "fogNear" : { type: "f", value: fog.near },
-      "fogFar" : { type: "f", value: fog.far },
-
+      'map': {type: 't', value: texture },
+      'fogColor': {type: 'c', value: fog.color},
+      'fogNear': {type: 'f', value: fog.near},
+      'fogFar': {type: 'f', value: fog.far},
     },
-    vertexShader: document.getElementById( 'vs' ).textContent,
-    fragmentShader: document.getElementById( 'fs' ).textContent,
+    vertexShader: document.getElementById('vs').textContent,
+    fragmentShader: document.getElementById('fs').textContent,
     depthWrite: false,
     depthTest: false,
-    transparent: true
+    transparent: true,
+  });
 
-  } );
+  var plane = new THREE.Mesh(new THREE.PlaneGeometry(64, 64));
 
-  var plane = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
-
-  for ( var i = 0; i < 8000; i++ ) {
+  for (var i = 0; i < 8000; i++) {
 
     plane.position.x = Math.random() * 1000 - 500;
     plane.position.y = - Math.random() * Math.random() * 200 - 15;
@@ -124,48 +118,51 @@ function clouds(id) {
 
     plane.updateMatrix();
 
-    geometry.merge( plane.geometry, plane.matrix );
-
+    geometry.merge(plane.geometry, plane.matrix);
   }
 
-  mesh = new THREE.Mesh( geometry, material );
+  mesh = new THREE.Mesh(geometry, material);
   scene.add( mesh );
 
-  mesh = new THREE.Mesh( geometry, material );
+  mesh = new THREE.Mesh(geometry, material);
   mesh.position.z = - 8000;
   scene.add( mesh );
 
-  renderer = new THREE.WebGLRenderer( { antialias: false , alpha: true, precision: 'highp'} );
-  renderer.setSize( ele.scrollWidth, ele.scrollHeight );
+  renderer = new THREE.WebGLRenderer({ antialias: false , alpha: true, precision: 'highp'});
+  renderer.setSize(ele.scrollWidth, ele.scrollHeight);
   renderer.setClearColor('#fff', 0);
 
-  container.appendChild( renderer.domElement );
+  container.appendChild(renderer.domElement);
 
-  ele.addEventListener( 'mousemove', onDocumentMouseMove, false );
-  window.addEventListener( 'resize', onWindowResize, false );
+  ele.addEventListener('mousemove', onDocumentMouseMove, false);
+  window.addEventListener('resize', onWindowResize, false);
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function onDocumentMouseMove( event ) {
+function onDocumentMouseMove (event) {
   mouseX = ( event.clientX - windowHalfX ) * 0.25;
   mouseY = ( event.clientY - windowHalfY ) * 0.15;
 }
 
-function onWindowResize( event ) {
+function onWindowResize (event) {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function animate() {
-  requestAnimationFrame( animate );
+function animate () {
+  requestAnimationFrame(animate);
 
-  position = ( ( Date.now() - start_time ) * 0.03 ) % 8000;
+  position = (( Date.now() - start_time ) * 0.03) % 8000;
 
-  camera.position.x += ( mouseX - camera.position.x ) * 0.01;
-  camera.position.y += ( - mouseY - camera.position.y ) * 0.01;
+  camera.position.x += (mouseX - camera.position.x) * 0.01;
+  camera.position.y += (- mouseY - camera.position.y) * 0.01;
   camera.position.z = - position + 8000;
 
-  renderer.render( scene, camera );
+  renderer.render(scene, camera);
 }
 
-clouds('body');            
+clouds('body');         

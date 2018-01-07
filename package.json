@@ -18,6 +18,8 @@
     "test": "mocha"
   },
   "dependencies": {
+    "qiniu": "latest",
+    "ejs": "latest",
     "mocha": "latest",
     "chai": "latest",
     "chai-http": "latest",
