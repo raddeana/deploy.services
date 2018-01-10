@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-  path: "~/projects/deploy-services",
+  dir: '~/projects/deploy-services',
   email: "wowcxy2008@126.com",
   publish: "auto#publish",
   ignore: "auto#ignore",

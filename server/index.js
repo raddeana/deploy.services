@@ -6,10 +6,14 @@
 const path = require('path');
 const express = require('express');
 const ejs = require('ejs');
-const deploy = require('./services/deploy');
+const bodyParser = require('body-parser');
+const cors = require('./cors');
+const statistics = require('./statistics');
+const deploy = require('../services/deploy');
 
 const app = express();
-const static = express.static(path.join(__dirname, 'www/static'), {
+const base_dir = __dirname.replace('/server', '');
+const static = express.static(path.join(base_dir, 'www/static'), {
   maxAge: '30d',
 });
 
@@ -18,9 +22,14 @@ app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
 //指定模板位置
-app.set('views', __dirname + '/www');
+app.set('views', base_dir + '/www');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(static);
+app.use(statistics);
+app.use(cors);
 
 app.get('/', (req, res) => {
   res.render('index.html');
