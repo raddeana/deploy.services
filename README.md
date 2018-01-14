@@ -1,2 +1,2 @@
-# deploy-service
-nodejs project deploy service for github webhook
+# deploy-services
+deploy services for github webhook
