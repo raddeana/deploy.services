@@ -5,6 +5,7 @@
 
 // 项目开发语言配置
 module.exports.type = {
+  "blog": "java",
   "deploy.services": "node",
   "blog.images": "static",
   "blog.libs": "static",
@@ -13,7 +14,6 @@ module.exports.type = {
   "blog.app": "cordova",
   "blog.robot": "static",
   "blog.robot.web": "static",
-  "blog": "java",
   "blog.app.webchat": "webchat",
   "blog.apis": "php",
   "blog.services": "node",

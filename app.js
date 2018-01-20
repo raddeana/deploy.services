@@ -14,7 +14,7 @@ import './mongo'
 
 const app = express();
 const base_dir = __dirname.replace('/server', '');
-const static = express.static(path.join(base_dir, 'www/static'), {
+const resource = express.static(path.join(base_dir, '/www/static'), {
   maxAge: '30d',
 });
 
@@ -28,7 +28,7 @@ app.set('views', base_dir + '/www');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(static);
+app.use(resource);
 app.use(statistics);
 app.use(cors);
 
@@ -36,8 +36,8 @@ app.get('/', (req, res) => {
   res.render('index.html');
 });
 
-app.get('/statistics', (req, res) => {
-  res.render('statistics.html');
+app.get('/logs', (req, res) => {
+  res.render('logs.html');
 });
 
 app.post('/deploy', (req, res) => {

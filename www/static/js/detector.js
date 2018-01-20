@@ -10,8 +10,7 @@ var Detector = {
   fileapi: window.File && window.FileReader && window.FileList && window.Blob,
 
   getWebGLErrorMessage: function () {
-
-    var domElement = document.createElement( 'div' );
+    var domElement = document.createElement('div');
 
     domElement.style.fontFamily = 'monospace';
     domElement.style.fontSize = '13px';
@@ -25,9 +24,10 @@ var Detector = {
     return domElement;
   },
 
-  addGetWebGLMessage: function ( parameters ) {
-
-    var parent, id, domElement;
+  addGetWebGLMessage: function (parameters) {
+    var parent, 
+        id, 
+        domElement;
 
     parameters = parameters || {};
 
@@ -37,10 +37,8 @@ var Detector = {
     domElement = Detector.getWebGLErrorMessage();
     domElement.id = id;
 
-    parent.appendChild( domElement );
-
+    parent.appendChild(domElement);
   }
-
 };
 
 var ele, container;
@@ -157,7 +155,6 @@ function animate () {
   requestAnimationFrame(animate);
 
   position = (( Date.now() - start_time ) * 0.03) % 8000;
-
   camera.position.x += (mouseX - camera.position.x) * 0.01;
   camera.position.y += (- mouseY - camera.position.y) * 0.01;
   camera.position.z = - position + 8000;
