@@ -18,11 +18,11 @@ const static = express.static(path.join(base_dir, 'www/static'), {
   maxAge: '30d',
 });
 
-//指定模板引擎
+// 指定模板引擎
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
-//指定模板位置
+// 指定模板位置
 app.set('views', base_dir + '/www');
 
 app.use(bodyParser.json());
