@@ -1,5 +1,5 @@
 /**
- * logs
+ * log
  * @author mulberry
  */
 import mongoose from 'mongoose'
@@ -7,35 +7,22 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 /**
- * logs schema
+ * log schema
  */
 const schema = new Schema({
-  type: {
-    type: String,
-    default: '',
-    trim: true
+  commit: {
+    type: Schema.ObjectId,
+    ref : 'commit'
   },
-  action: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  repository: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  comment: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  errorMsg: {
-    default: '',
-    default: '',
-    trim: true
+  error: {
+    type: Schema.ObjectId,
+    ref : 'error'
   },
   createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updateAt: {
     type: Date,
     default: Date.now
   },
@@ -44,7 +31,8 @@ const schema = new Schema({
 /**
  * 校验
  */
-schema.path('type').required(true, 'type cannot be blank')
+schema.path('commit').required(true, 'commit cannot be blank')
+schema.path('createdAt').required(true, 'createdAt cannot be blank')
 
 schema.statics = {
   /**
@@ -53,7 +41,7 @@ schema.statics = {
    * @return {array} list
    */
   add (log) {
-
+    
   },
 
   /**
@@ -71,5 +59,5 @@ schema.statics = {
   },
 }
 
-mongoose.model('logs', schema)
+mongoose.model('log', schema)
 
