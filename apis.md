@@ -2,8 +2,9 @@
 
 ### logs
 
-- /api/logs
-  - pageSize
-  - pageIndex
-  - startTime
-  - endTime
+#### /api/logs
+##### parameters:
+- pageSize
+- pageIndex
+- startTime
+- endTime
