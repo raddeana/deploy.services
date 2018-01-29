@@ -1,9 +1,10 @@
 ### deploy
+#### url: /api/deploy
+##### params: github webhook
 
 ### logs
-
-#### /api/logs
-##### parameters:
+#### url: /api/logs
+##### params:
 - pageSize
 - pageIndex
 - startTime
