@@ -1,2 +1,2 @@
-# deploy-services
-deploy services for github webhook
+# deploy.services
+deploy services work with github webhook
