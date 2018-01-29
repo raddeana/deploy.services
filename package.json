@@ -41,7 +41,6 @@
     "pre-commit": "latest",
     "mocha": "latest",
     "chai": "latest",
-    "chai-http": "latest",
-    "should": "latest"
+    "chai-http": "latest"
   }
 }
