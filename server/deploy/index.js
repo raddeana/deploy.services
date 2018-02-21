@@ -4,8 +4,8 @@
  */
 
 const parse = require('./parse');
-const pull = require('./git/pull');
-const push = require('./git/push');
+const gitPull = require('./git/pull');
+const gitPush = require('./git/push');
 const build = require('./build');
 const publish = require('./publish');
 const restart = require('./restart');
@@ -16,18 +16,18 @@ const restart = require('./restart');
  * @param {object} 响应对象
  * @return none
  */
-module.exports = function (req, res) {
-  const configure = parse(req);
+export default function (req, res) {
+  const configure = parse(req)
   
-  pull(configure);
-  build(configure);
+  gitPull(configure)
+  build(configure)
 
   if (configure.type) {
-    publish(configure);
-    push(configure);
+    publish(configure)
+    gitPush(configure)
   } else {
-    restart(configure);
+    restart(configure)
   }
 
-  res.send('Hello, Github');
-};
+  res.send('Hello, Github')
+}

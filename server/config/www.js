@@ -1,6 +1,6 @@
 /**
  * 页面配置
- * @author mulberry
+ * @author tmuffin
  */
 
 export const types = {
@@ -22,17 +22,17 @@ export const types = {
   wma: "audio/x-ms-wma",
   wmv: "video/x-ms-wmv",
   xml: "text/xml",
-};
+}
 
 export const expires = {
   fileMatch: /^(gif|png|jpg|js|css)$/ig,
   maxAge: 60 * 60 * 24 * 365
-};
+}
 
 export const compress = {
   match: /css|js|html/ig
-};
+}
 
 export const welcome = {
   file: "index.html"
-};
+}

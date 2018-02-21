@@ -1,15 +1,15 @@
 {
-  "name": "deploy-service",
+  "name": "deploy.service",
   "version": "0.2.1",
-  "description": "standard deploy-service",
+  "description": "standard deploy.service",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mulberryx/deploy-service.git"
+    "url": "https://github.com/tmuffin/deploy.service.git"
   },
   "author": "chenxiangyu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mulberryx/deploy-service/issues",
+    "url": "https://github.com/tmuffin/deploy.service/issues",
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
@@ -24,8 +24,11 @@
   "dependencies": {
     "express": "latest",
     "body-parser": "latest",
+    "multer": "multer",
     "ejs": "latest",
-    "qiniu": "latest"
+    "qn": "latest",
+    "urllib": "latest",
+    "agentkeepalive": "latest",
   },
   "devDependencies": {
     "nodemon": "latest",
