@@ -16,7 +16,7 @@
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "lint": "eslint --ext .js, server test",
-    "test": "mocha"
+    "test": "mocha --recursive test"
   },
   "pre-commit": [
     "lint"
@@ -24,14 +24,14 @@
   "dependencies": {
     "agentkeepalive": "latest",
     "body-parser": "latest",
-    "config-lite": "^2.1.0",
     "ejs": "latest",
     "express": "latest",
     "express-mongoose": "^0.1.0",
     "mongoose": "^5.0.9",
     "qn": "latest",
     "shelljs": "^0.8.1",
-    "urllib": "latest"
+    "urllib": "latest",
+    "agentkeepalive": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",
