@@ -1,6 +1,6 @@
 /**
  * 一些配置
- * @author philip
+ * @author tmuffin
  */
 
 const shelljs = require('shelljs/global');

@@ -3,7 +3,7 @@
  * @author tmuffin
  */
 
-export const types = {
+module.exports.types = {
   css: "text/css",
   gif: "image/gif",
   html: "text/html",
@@ -24,15 +24,15 @@ export const types = {
   xml: "text/xml",
 }
 
-export const expires = {
+module.exports.expires = {
   fileMatch: /^(gif|png|jpg|js|css)$/ig,
   maxAge: 60 * 60 * 24 * 365
 }
 
-export const compress = {
+module.exports.compress = {
   match: /css|js|html/ig
 }
 
-export const welcome = {
+module.exports.welcome = {
   file: "index.html"
 }

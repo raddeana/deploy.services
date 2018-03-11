@@ -1,20 +1,21 @@
 /**
  * 一些配置
- * @author philip
+ * @author tmuffin
  */
 
-import shelljs from 'shelljs/global'
-import qn from 'qn'
-import fs from 'fs'
-import path from 'path'
+const shelljs = require('shelljs/global')
+const qn = require('qn')
+const fs = require('fs')
+const path = require('path')
+const qniu = require('../config/qniu')
 
-import { accessKey, secretKey, getBucket, getDomain } from '../config/qniu'
+const { accessKey, secretKey, getBucket, getDomain } = qniu
 
 /**
  * 发布
  * @return 
  */
-export default function (configure) {
+module.exports = (configure) => {
   const bucket = getBucket(configure.project)
   const origin = getDomain(configure.project)
 
@@ -41,7 +42,7 @@ function ergodicUpload (prodPath, folderPath, clinet) {
       files.forEach(function (filename) {
         const filedir = path.join(folderPath, filename)
 
-        fs.stat(filedir, function (eror,stats) {
+        fs.stat(filedir, function (eror, stats) {
           if (eror) {
             console.error('获取文件stats失败')
           } else {  
@@ -62,7 +63,7 @@ function ergodicUpload (prodPath, folderPath, clinet) {
               })
             }
 
-            if (isDir){  
+            if (isDir) {
               fileDisplay(filedir, clinet)
             }
           }

@@ -3,15 +3,16 @@
  * @author tmuffin
  */
 
-import path from 'path'
-import express from 'express'
-import ejs from 'ejs'
-import bodyParser from 'body-parser'
-import multer from 'multer'
-import cors from './middlewares/cors'
-import statistics from './middlewares/statistics'
-import deploy from './deploy'
-import './mongo'
+const path = require('path')
+const express = require('express')
+const ejs = require('ejs')
+const bodyParser = require('body-parser')
+const expressMongoose = require('express-mongoose')
+const mongo = require('./mongo')
+const cors = require('./middlewares/cors')
+const logs = require('./middlewares/logs')
+const deploy = require('./controllers/deploy')
+const getLogs = require('./controllers/logs')
 
 const app = express()
 const base_dir = __dirname.replace('/server', '')
@@ -28,18 +29,21 @@ app.set('views', base_dir + '/www')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(multer())
 
-app.use(static);
-app.use(statistics);
-app.use(cors);
+app.use(static)
+app.use(cors)
+app.use(logs)
 
 app.get('/', (req, res) => {
-  res.render('index.html');
+  res.render('index.html')
 })
 
 app.post('/deploy', (req, res) => {
-  deploy(req, res);
+  deploy(req, res)
+})
+
+app.post('/logs', (req, res) => {
+  getLogs(req, res)
 })
 
 app.listen(3030)

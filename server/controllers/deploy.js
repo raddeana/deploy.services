@@ -1,16 +1,9 @@
 /**
- * 请求参数解析
+ * 部署控制器
  * @author tmuffin
  */
 
-const base = require('../config/base')
-
-/**
- * 请求参数解析
- * @param {object} 请求对象
- * @return {object} 可用配置对象
- */
-module.exports = (res) => {
+function parse (res) {
   const data = req.body
   const commits = data.commits;
 
@@ -41,4 +34,11 @@ module.exports = (res) => {
   }
 
   return configure
+}
+
+/**
+ * 部署
+ */
+module.exports = function () {
+  
 }

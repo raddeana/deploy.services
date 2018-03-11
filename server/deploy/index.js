@@ -1,6 +1,6 @@
 /**
  * 部署
- * @author mulberry
+ * @author tmuffin
  */
 
 const parse = require('./parse');
@@ -16,9 +16,7 @@ const restart = require('./restart');
  * @param {object} 响应对象
  * @return none
  */
-export default function (req, res) {
-  const configure = parse(req)
-  
+module.exports = (configure) => {
   gitPull(configure)
   build(configure)
 

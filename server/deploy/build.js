@@ -1,15 +1,15 @@
 /**
  * 构建
- * @author philip
+ * @author tmuffin
  */
 
 const shelljs = require('shelljs/global');
 
 module.exports.exec = function () {
   if (exec('npm run build').code !== 0) {
-    echo('Error: publish failed');
-    return false;
+    echo('Error: publish failed')
+    return false
   } else {
-    return true;
+    return true
   }
-};
+}

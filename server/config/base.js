@@ -3,7 +3,7 @@
  * @author mulberry
  */
 
-export default {
+module.exports = {
   dir: '~/projects/deploy-services',
   email: "wowcxy2008@126.com",
   publish: "auto#publish",

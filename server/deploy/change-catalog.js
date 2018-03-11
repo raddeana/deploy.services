@@ -1,6 +1,6 @@
 /**
  * 目录变更
- * @author chenxiangyu
+ * @author tmuffin
  */
 
 const shelljs = require('shelljs/global');
@@ -16,7 +16,7 @@ module.exports.to = function (configure) {
     back();
     exit(1);
   }
-};
+}
 
 /**
  * 回到部署服务目录
@@ -26,4 +26,4 @@ module.exports.back = function () {
   if (cd(base.dir).code !== 0) {
     exit(1);
   }
-};
+}

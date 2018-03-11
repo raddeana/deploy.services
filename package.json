@@ -22,13 +22,16 @@
     "lint"
   ],
   "dependencies": {
-    "express": "latest",
-    "body-parser": "latest",
-    "multer": "multer",
-    "ejs": "latest",
-    "qn": "latest",
-    "urllib": "latest",
     "agentkeepalive": "latest",
+    "body-parser": "latest",
+    "config-lite": "^2.1.0",
+    "ejs": "latest",
+    "express": "latest",
+    "express-mongoose": "^0.1.0",
+    "mongoose": "^5.0.9",
+    "qn": "latest",
+    "shelljs": "^0.8.1",
+    "urllib": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",

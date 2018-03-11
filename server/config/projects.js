@@ -4,7 +4,7 @@
  */
 
 // 项目开发语言配置
-export const type = {
+module.exports.type = {
   "blog": "java",
   "deploy.services": "node",
   "blog.images": "static",
@@ -20,7 +20,7 @@ export const type = {
 };
 
 // 项目路径配置
-export const path = {
+module.exports.path = {
   "blog.images": "~/projects/blog.images",
   "blog.libs": "~/projects/blog.libs",
   "blog.web": "~/projects/blog.web",
@@ -38,7 +38,7 @@ export const path = {
 const gitUrl = 'https://github.com/tmuffin';
 
 // 项目路径配置
-export const gitHttpUrls = {
+module.exports.gitHttpUrls = {
   "blog.materials": gitUrl + 'blog.materials',
   "blog.libs": gitUrl + '/blog.libs',
   "blog.web": gitUrl + '/blog.web',
