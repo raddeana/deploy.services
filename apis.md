@@ -1,8 +1,9 @@
-### deploy apis
-- url: /api/event/push
+#### deploy apis
+- push: any git push to a repository
+  - url: /api/event/push
   - method: post
   - params: github webhook
-  
-- url: /api/event/release
+- release: any time a release is published in a repository
+  - url: /api/event/release
   - method: post
   - params github webhook
