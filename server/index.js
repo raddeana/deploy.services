@@ -11,7 +11,8 @@ const expressMongoose = require('express-mongoose')
 const mongo = require('./mongo')
 const cors = require('./middlewares/cors')
 const logs = require('./middlewares/logs')
-const deploy = require('./controllers/deploy')
+const pushHandler = require('./controllers/push')
+const releaseHandler = require('./controllers/release')
 const getLogs = require('./controllers/logs')
 
 const app = express()
@@ -38,12 +39,16 @@ app.get('/', (req, res) => {
   res.render('index.html')
 })
 
-app.post('/deploy', (req, res) => {
-  deploy(req, res)
+app.get('/logs', (req, res) => {
+  getLogs(req, res)
 })
 
-app.post('/logs', (req, res) => {
-  getLogs(req, res)
+app.post('/event/push', (req, res) => {
+  pushHandler(req, res)
+})
+
+app.post('/event/release', (req, res) => {
+  releaseHandler(req, res)
 })
 
 app.listen(3030)
