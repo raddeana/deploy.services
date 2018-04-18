@@ -3,12 +3,9 @@
  * @author tmuffin
  */
 const mongoose = require('mongoose')
- 
 const Schema = mongoose.Schema
 
-/**
- * logs schema
- */
+// log schema
 const schema = new Schema({
   action: {
     type: String,
@@ -36,9 +33,7 @@ const schema = new Schema({
   },
 })
  
-/**
- * 校验
- */
+// 校验
 schema.path('repository').required(true, 'repository cannot be blank')
 schema.path('comment').required(true, 'comment cannot be blank')
 schema.path('action').required(true, 'action cannot be blank')
@@ -58,5 +53,5 @@ schema.statics = {
   },
 }
  
-module.exports = mongoose.model('logs', schema)
+module.exports = mongoose.model('log', schema)
  
