@@ -2,7 +2,6 @@
  * 一些配置
  * @author tmuffin
  */
-
 const shelljs = require('shelljs/global')
 
 /**
