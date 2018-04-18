@@ -6,4 +6,4 @@
 - release: any time a release is published in a repository
   - url: /api/event/release
   - method: post
-  - params github webhook
+  - params: github webhook
