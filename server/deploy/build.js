@@ -2,7 +2,7 @@
  * 构建
  * @author tmuffin
  */
-const shelljs = require('shelljs/global');
+const shelljs = require('shelljs/global')
 
 /**
  * 执行
