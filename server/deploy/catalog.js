@@ -2,8 +2,8 @@
  * 目录变更
  * @author tmuffin
  */
-const shelljs = require('shelljs/global');
-const base = require('../config/base');
+const shelljs = require('shelljs/global')
+const base = require('../config/base')
 
 /**
  * 跳转至项目目录
