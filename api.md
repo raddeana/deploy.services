@@ -1,4 +1,4 @@
-#### Deploy Apis
+### deploy api
 - push: any git push to a repository
   - url: /api/event/push
   - method: post
