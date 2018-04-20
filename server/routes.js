@@ -7,6 +7,6 @@
  * 路由配置
  * @param {object} express app
  */
-module.exports = function (app) {
+module.exports = (app) => {
   
 }
