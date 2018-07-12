@@ -1,9 +1,9 @@
 /**
  * 页面配置
- * @author tmuffin
+ * @author steudnera
  */
 
-module.exports.types = {
+exports const types = {
   css: "text/css",
   gif: "image/gif",
   html: "text/html",
@@ -24,15 +24,15 @@ module.exports.types = {
   xml: "text/xml",
 }
 
-module.exports.expires = {
+export const expires = {
   fileMatch: /^(gif|png|jpg|js|css)$/ig,
   maxAge: 60 * 60 * 24 * 365
 }
 
-module.exports.compress = {
+export const compress = {
   match: /css|js|html/ig
 }
 
-module.exports.welcome = {
+export const welcome = {
   file: "index.html"
 }
