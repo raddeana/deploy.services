@@ -4,12 +4,12 @@
   "description": "standard deploy.service",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tmuffin/deploy.service.git"
+    "url": "https://github.com/steudnera/deploy.service.git"
   },
-  "author": "chenxiangyu",
+  "author": "steudnera",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tmuffin/deploy.service/issues",
+    "url": "https://github.com/steudnera/deploy.service/issues",
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
