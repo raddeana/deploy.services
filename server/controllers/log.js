@@ -1,6 +1,6 @@
 /**
  * 日志控制器
- * @author tmuffin
+ * @author Steudnera
  */
 
 module.exports = function () {
