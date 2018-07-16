@@ -1,9 +1,9 @@
 /**
  * 日志
- * @author tmuffin
+ * @author Steudnera
  */
 
-const Logs = require('../mongo/logs');
+const Log = require('../mongo/log');
 
 module.exports = (req, res, next) => {
   const data = req.body
