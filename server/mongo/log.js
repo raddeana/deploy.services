@@ -1,6 +1,6 @@
 /**
  * 日志
- * @author tmuffin
+ * @author Steudnera
  */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -40,7 +40,7 @@ schema.path('action').required(true, 'action cannot be blank')
 
 schema.statics = {
  /**
-  * 获取 logs 列表
+  * 获取log列表
   * @param {object} options
   * @return {array} list
   */
@@ -53,5 +53,4 @@ schema.statics = {
   },
 }
  
-module.exports = mongoose.model('log', schema)
- 
+export default mongoose.model('log', schema)
