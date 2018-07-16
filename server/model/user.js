@@ -17,6 +17,11 @@ const schema = new Schema({
     default: '',
     trim: true
   },
+  role: {
+    type: String,
+    default: 'admin',
+    trim: true
+  },
 })
  
 // 校验
