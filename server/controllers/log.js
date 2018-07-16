@@ -3,6 +3,10 @@
  * @author Steudnera
  */
 
-module.exports = function () {
+export const list = () => {
+
+}
+
+export const remove = () => {
 
 }
