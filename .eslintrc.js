@@ -19,5 +19,10 @@ module.exports = {
     'generator-star-spacing': 'off',
     'quotes': 'off',
     'no-trailing-spaces': 'off',
-  }
+    'no-unused-vars': 'off',
+  },
+  globals: {
+    exec: true,
+    echo: true,
+  },
 }

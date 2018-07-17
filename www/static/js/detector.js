@@ -1,6 +1,6 @@
 /**
  * 指示器
- * @author mulberry
+ * @author Steudnera
  */
 
 var Detector = {

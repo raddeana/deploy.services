@@ -7,13 +7,10 @@ const path = require('path')
 const express = require('express')
 const ejs = require('ejs')
 const bodyParser = require('body-parser')
-const expressMongoose = require('express-mongoose')
-const mongo = require('./mongo')
-const cors = require('./middlewares/cors')
-const logs = require('./middlewares/logs')
-const pushHandler = require('./controllers/push')
-const releaseHandler = require('./controllers/release')
-const getLogs = require('./controllers/logs')
+const mongo = require('./model/mongo')
+const corsMiddleware = require('./middlewares/cors')
+const hookLogMiddleware = require('./middlewares/hook-log')
+const routes = require('./routes')
 
 const app = express()
 const base_dir = __dirname.replace('/server', '')
@@ -32,23 +29,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(static)
-app.use(cors)
-app.use(logs)
+app.use(corsMiddleware)
+app.use(hookLogMiddleware)
 
-app.get('/', (req, res) => {
-  res.render('index.html')
-})
-
-app.get('/logs', (req, res) => {
-  getLogs(req, res)
-})
-
-app.post('/event/push', (req, res) => {
-  pushHandler(req, res)
-})
-
-app.post('/event/release', (req, res) => {
-  releaseHandler(req, res)
-})
+routes(app)
 
 app.listen(3030)

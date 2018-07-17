@@ -3,10 +3,10 @@
  * @author Steudnera
  */
 
-export const list = () => {
+module.exports.query = () => {
 
 }
 
-export const remove = () => {
+module.exports.remove = () => {
 
 }

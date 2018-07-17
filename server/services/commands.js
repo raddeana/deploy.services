@@ -8,7 +8,7 @@ const shelljs = require('shelljs/global')
  * 构建
  * @return none
  */
-export const build = (project) => {
+module.exports.build = (project) => {
   if (exec('npm run build').code !== 0) {
     echo(`Error:\tbuild\t${project}\tfailed`)
     return false
@@ -21,7 +21,7 @@ export const build = (project) => {
  * 拉取
  * @return none
  */
-export const pull = (project) => {
+module.exports.pull = (project) => {
   if (exec('git pull').code !== 0) {
     echo(`Error:\tpull\t${project}\tfailed`)
     exit(1)
@@ -36,7 +36,7 @@ export const pull = (project) => {
  * node 推送
  * @return none
  */
-export const push = (project) => {
+module.exports.push = (project) => {
   if (exec('git add -A').code !== 0) {
     echo(`Error:\tpull\t${project}\tfailed`)
     exit(1)
@@ -51,7 +51,7 @@ export const push = (project) => {
  * 输出
  * @return none
  */
-export const echo = (message) => {
+module.exports.echo = (message) => {
   echo(message)
 }
 
@@ -59,7 +59,7 @@ export const echo = (message) => {
  * 启动项目
  * @return none
  */
-export const start = (project) => {
+module.exports.start = (project) => {
   if(exec(`pm2 start --name="${project}" npm -- start`).code !== 0) {
     echo('Error:\tstart\t${project}\tfailed')
     return false
@@ -73,7 +73,7 @@ export const start = (project) => {
  * 重启项目
  * @return none
  */
-export const restart = (project) => {
+module.exports.restart = (project) => {
   if (exec(`pm2 restart ${project}`).code !== 0) {
     echo(`Error:\trestart\t${project}\tfailed`)
     return false

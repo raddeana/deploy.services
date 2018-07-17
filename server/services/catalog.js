@@ -10,7 +10,7 @@ const base = require('../config/base')
  * @param {object} 可用配置对象
  * @return none
  */
-export const to = function (configure) {
+module.exports.to = function (configure) {
   if (cd(configure.dir).code !== 0) {
     back();
     exit(1);
@@ -21,7 +21,7 @@ export const to = function (configure) {
  * 回到部署服务目录
  * @return none
  */
-export const back = function () {
+module.exports.back = function () {
   if (cd(base.dir).code !== 0) {
     exit(1);
   }

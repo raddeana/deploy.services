@@ -1,9 +1,9 @@
 /**
- * 日志
+ * 钩子日志
  * @author Steudnera
  */
 
-const Log = require('../mongo/log');
+const Log = require('../model/log');
 
 module.exports = (req, res, next) => {
   const data = req.body

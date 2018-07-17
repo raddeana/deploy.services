@@ -4,10 +4,10 @@
  */
 
 const git = 'https://github.com/steudnera'
-const path = '~/'
+const path = '/root'
 
 // 项目开发语言配置
-export const types = {
+module.exports.types = {
   blog: "java",
   "blog.web": "static",
   "blog.admin": "node",
@@ -17,27 +17,31 @@ export const types = {
   "blog.apis": "node",
   "blog.services": "node",
   "blog.games": "node",
+  "blog.games.web": "static",
   "blog.portal": "node",
+  "blog.portal.web": "static",
   "deploy.services": "node",
 }
 
 // 项目路径配置
-export const paths = {
-  blog: `${path}/blog`,
-  "blog.web": `${path}/blog.web`,
-  "blog.admin.web": `${path}/admin`,
-  "blog.admin.web": `${path}/admin/www`,
-  "blog.robot": `${path}/blog.robot`,
-  "blog.robot.web": `${path}/blog.robot.web`,
-  "blog.apis": `${path}/blog.apis`,
-  "blog.services": `${path}/blog.services`,
-  "blog.games": "node",
-  "blog.portal": "node",
-  "deploy.services": "node",
+module.exports.paths = {
+  blog: `${path}/blog/server`,
+  "blog.web": `${path}/blog/web`,
+  "blog.admin.web": `${path}/admin/server`,
+  "blog.admin.web": `${path}/admin/web`,
+  "blog.robot": `${path}/robot`,
+  "blog.robot.web": `${path}/robot/web`,
+  "blog.apis": `${path}/apis`,
+  "blog.services": `${path}/services`,
+  "blog.games": `${path}/games/server`,
+  "blog.games.web": `${path}/games/web`,
+  "blog.portal": `${path}/portal/server`,
+  "blog.portal.web": `${path}/portal/web`,
+  "deploy.services": `${path}/deploy.services`,
 }
 
 // 仓库地址
-export const libraries = {
+module.exports.libraries = {
   blog: `${git}/blog`,
   "blog.web": `${git}/blog.web`,
   "blog.admin": `${git}/blog.admin`,
@@ -46,7 +50,9 @@ export const libraries = {
   "blog.robot.web": `${git}/blog.robot.web`,
   "blog.apis": `${git}/blog.apis`,
   "blog.services": `${git}/blog.services`,
-  "blog.games": "node",
-  "blog.portal": "node",
+  "blog.games": `${git}/blog.games`,
+  "blog.games.web": `${git}/blog.games.web`,
+  "blog.portal": `${git}/blog.portal`,
+  "blog.portal.web": `${git}/blog.portal.web`,
   "deploy.services": `${git}/deploy.services`,
 }

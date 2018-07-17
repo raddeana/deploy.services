@@ -46,4 +46,4 @@ schema.statics = {
   },
 }
  
-export default mongoose.model('user', schema)
+module.exports = mongoose.model('user', schema)

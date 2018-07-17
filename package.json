@@ -13,8 +13,8 @@
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
-    "dev": "nodemon server/index.js --experimental-modules",
-    "start": "node server/index.js --experimental-modules",
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
     "lint": "eslint --ext .js, server test",
     "test": "mocha --recursive test"
   },
