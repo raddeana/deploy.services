@@ -3,10 +3,18 @@
  * @author Steudnera
  */
 
-module.exports.query = () => {
+/**
+ * 日志查询
+ * @ctrl
+ */
+module.exports.query = (res, req) => {
 
 }
 
-module.exports.remove = () => {
+/**
+ * 日志删除
+ * @ctrl
+ */
+module.exports.remove = (res, req) => {
 
 }
