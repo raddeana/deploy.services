@@ -1,5 +1,7 @@
-// https://eslint.org/docs/user-guide/configuring
-
+/**
+ * eslint 配置
+ * @author Steudnera
+ */
 module.exports = {
   root: true,
   parser: 'babel-eslint',
