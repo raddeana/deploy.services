@@ -51,6 +51,13 @@ schema.statics = {
                .sort({createdAt: -1})
                .exec()
   },
+  /**
+   * 添加日志
+   * @param {object} options
+   * @return {array} list
+   */
+  addLog () {
+  },
 }
  
 module.exports = mongoose.model('log', schema)
