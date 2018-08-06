@@ -3,25 +3,23 @@
  * @author Steudnera
  */
 
-const base = require('../config/base')
+const git = require('../config/git')
 
 /**
  * 请求参数解析
- * @param {object} 请求对象
+ * @param {object} 请求数据
  * @return {object} 可用配置对象
  */
-module.exports = (req) => {
-  const data = req.body
-  const commits = data.commits;
-
+module.exports = (data) => {
+  const commits = data.commits
   const deploy = false
 
-  let modified = []
-  let removed = []
-  let added = []
+  const modified = []
+  const removed = []
+  const added = []
   
-  commits.forEach(function (commit) {
-    if (commit.message !== base.publish && commit.message !== base.ignore) {
+  commits.forEach((commit) => {
+    if (commit.message !== git.release && commit.message !== git.ignore) {
       deploy = true
     }
 
