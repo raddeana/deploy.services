@@ -2,6 +2,7 @@
  * 发布
  * @author Steudnera
  */
+const fs = require('fs');
 const qn = require('qn');
 
 module.exports = {
