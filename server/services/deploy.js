@@ -45,10 +45,10 @@ module.exports.restart = (project) => {
 module.exports.replaceStaticVersion = (lastVersion, currVersion, portalList) => {
   portalList.forEach((portal) => {
     const file = fs.readFileSync('./deploy.config.json', 'utf8')
-    const currVersionManifest = fs.readFileSync(`./dist/${currVersion}/manifest.json`, 'utf8')
+    const currVersionManifest = JSON.parse(fs.readFileSync(`./dist/${currVersion}/manifest.json`, 'utf8'))
     
     if (lastVersion) {
-      const lastVersionManifest = fs.readFileSync(`./dist/${lastVersion}/manifest.json`, 'utf8')
+      const lastVersionManifest = JSON.parse(fs.readFileSync(`./dist/${lastVersion}/manifest.json`, 'utf8'))
 
       Object.keys(lastVersionManifest).forEach((file) => {
         const lastHashFileName = lastVersionManifest[file]
