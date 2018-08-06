@@ -9,45 +9,43 @@ const Schema = mongoose.Schema
 const schema = new Schema({
   action: {
     type: String,
-    default: '',
     trim: true,
   },
   result: {
     type: String,
-    default: '',
     trim: true,
   },
   message: {
     type: String,
-    default: 'admin',
     trim: true,
   },
-  createData: {
+  createDate: {
     type: Date,
     default: new Date(),
   },
 })
  
 // 校验
-schema.path('username').required(true, 'username cannot be blank')
-schema.path('password').required(true, 'password cannot be blank')
+schema.path('action').required(true, 'action cannot be blank')
+schema.path('result').required(true, 'result cannot be blank')
+schema.path('message').required(true, 'message cannot be blank')
 
 schema.statics = {
   /**
-   * 重置密码
+   * 日志列表
    * @author Steudnera
    */
-  resetPassword () {
+  getLogList () {
     
   },
 
   /**
-   * 登录
+   * 添加日志
    * @author Steudnera
    */
-  login () {
+  addLog (log) {
     
   },
 }
 
-module.exports = mongoose.model('user', schema)
+module.exports = mongoose.model('log', log)
