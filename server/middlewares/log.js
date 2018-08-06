@@ -1,5 +1,5 @@
 /**
- * 钩子日志
+ * 日志中间件
  * @author Steudnera
  */
 
