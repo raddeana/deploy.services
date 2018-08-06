@@ -7,20 +7,24 @@ const Schema = mongoose.Schema
 
 // log schema
 const schema = new Schema({
-  username: {
+  action: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
-  password: {
+  result: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
-  role: {
+  message: {
     type: String,
     default: 'admin',
-    trim: true
+    trim: true,
+  },
+  createData: {
+    type: Date,
+    default: new Date(),
   },
 })
  
@@ -45,5 +49,5 @@ schema.statics = {
     
   },
 }
- 
+
 module.exports = mongoose.model('user', schema)
