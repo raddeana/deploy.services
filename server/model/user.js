@@ -1,51 +1,46 @@
 /**
- * 日志
- * @author Steudnera
+ * 用户
+ * @author steudnera
  */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-// log schema
-const schema = new Schema({
-  action: {
+// user
+const user = new Schema({
+  username: {
     type: String,
     trim: true,
   },
-  result: {
+  password: {
     type: String,
     trim: true,
   },
-  message: {
+  avatar: {
     type: String,
     trim: true,
   },
-  createDate: {
+  createAt: {
+    type: Date,
+    default: new Date(),
+  },
+  updateAt: {
     type: Date,
     default: new Date(),
   },
 })
  
 // 校验
-schema.path('action').required(true, 'action cannot be blank')
-schema.path('result').required(true, 'result cannot be blank')
-schema.path('message').required(true, 'message cannot be blank')
+schema.path('username').required(true, 'username cannot be blank')
+schema.path('password').required(true, 'password cannot be blank')
 
 schema.statics = {
   /**
-   * 日志列表
-   * @author Steudnera
+   * 登录
+   * @author steudnera
    */
-  getLogList () {
-    
-  },
-
-  /**
-   * 添加日志
-   * @author Steudnera
-   */
-  addLog (log) {
+  login () {
     
   },
 }
 
-module.exports = mongoose.model('log', log)
+module.exports = mongoose.model('user', user)
