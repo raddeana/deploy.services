@@ -2,7 +2,7 @@
  * 目录变更
  * @author Steudnera
  */
-const shelljs = require('shelljs/global')
+const shell = require('shelljs')
 const base = require('../config/base')
 
 /**
@@ -10,10 +10,10 @@ const base = require('../config/base')
  * @param {object} 可用配置对象
  * @return none
  */
-module.exports.to = function (configure) {
-  if (cd(configure.dir).code !== 0) {
-    back();
-    exit(1);
+module.exports.to = (configure) => {
+  if (shell.cd(configure.dir).code !== 0) {
+    shell.back();
+    shell.exit(1);
   }
 }
 
@@ -21,8 +21,8 @@ module.exports.to = function (configure) {
  * 回到部署服务目录
  * @return none
  */
-module.exports.back = function () {
-  if (cd(base.dir).code !== 0) {
-    exit(1);
+module.exports.back = () => {
+  if (shell.cd(base.dir).code !== 0) {
+    shell.exit(1);
   }
 }
