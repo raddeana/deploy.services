@@ -1,15 +1,15 @@
 {
-  "name": "deploy.service",
+  "name": "deploy.services",
   "version": "0.2.1",
-  "description": "standard deploy.service",
+  "description": "standard deploy services",
   "repository": {
     "type": "git",
-    "url": "https://github.com/steudnera/deploy.service.git"
+    "url": "https://github.com/steudnera/deploy.services.git"
   },
   "author": "steudnera",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/steudnera/deploy.service/issues",
+    "url": "https://github.com/steudnera/deploy.services/issues",
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
@@ -22,28 +22,27 @@
     "lint"
   ],
   "dependencies": {
-    "agentkeepalive": "^3.4.1",
+    "agentkeepalive": "^3.5.1",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "mongoose": "^5.2.3",
+    "mongoose": "^5.2.6",
     "qn": "^1.3.0",
     "shelljs": "^0.8.2",
-    "urllib": "^2.29.0"
+    "urllib": "^2.29.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.5",
+    "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "eslint": "^5.1.0",
+    "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.1",
+    "nodemon": "^1.18.3",
     "pre-commit": "^1.2.2"
   }
 }
