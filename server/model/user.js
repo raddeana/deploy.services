@@ -19,14 +19,6 @@ const user = new Schema({
     type: String,
     trim: true,
   },
-  createAt: {
-    type: Date,
-    default: new Date(),
-  },
-  updateAt: {
-    type: Date,
-    default: new Date(),
-  },
 })
  
 // 校验
@@ -36,10 +28,19 @@ schema.path('password').required(true, 'password cannot be blank')
 schema.statics = {
   /**
    * 登录
-   * @author steudnera
+   * @param {string} 用户名
+   * @param {string} 密码
+   * @return {boolean} 登陆结果
    */
-  login () {
+  login (username, password) {
+    const user = await this.findOne({ username, })
+                           .exec()
     
+    if (user && user.password === password) {
+      return true
+    } else {
+      return false
+    }
   },
 }
 
