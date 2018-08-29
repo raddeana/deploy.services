@@ -1,6 +1,6 @@
 /**
  * 日志
- * @author Steudnera
+ * @author Philip
  */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
