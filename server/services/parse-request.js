@@ -1,6 +1,6 @@
 /**
  * 请求参数解析
- * @author Steudnera
+ * @author Philip
  */
 
 const git = require('../config/git')
