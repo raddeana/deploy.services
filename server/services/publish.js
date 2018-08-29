@@ -8,7 +8,7 @@ const qn = require('qn')
 module.exports = {
   /**
    * 获取项目发布配置
-   * return none
+   * @return none
    */
   getConfigure () {
     let config = null
@@ -24,7 +24,7 @@ module.exports = {
   
   /**
    * 获取qn客户端
-   * return none
+   * @return none
    */
   getClient () {
     const configure = this.getConfigure()
@@ -38,7 +38,7 @@ module.exports = {
    * 遍历目录
    * @param {string} 文件夹路径
    * @param {function} 回调函数
-   * return none
+   * @return none
    */
   traverseDist (path, callback) {
   	const items = fs.readdirSync(path)
@@ -56,7 +56,7 @@ module.exports = {
   
   /**
    * 删除
-   * return none
+   * @return none
    */
   remove (distpath) {
     const client = qn.create(config)
@@ -72,7 +72,7 @@ module.exports = {
   
   /**
    * 上传
-   * return none
+   * @return none
    */
   upload (distpath) {
     const client = qn.create(config)
