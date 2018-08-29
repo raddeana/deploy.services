@@ -1,6 +1,6 @@
 /**
  * 目录变更
- * @author Steudnera
+ * @author Philip
  */
 const shell = require('shelljs')
 const base = require('../config/base')
