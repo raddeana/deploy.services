@@ -1,9 +1,9 @@
 /**
  * 发布
- * @author Steudnera
+ * @author Philip
  */
-const fs = require('fs');
-const qn = require('qn');
+const fs = require('fs')
+const qn = require('qn')
 
 module.exports = {
   /**
@@ -11,7 +11,7 @@ module.exports = {
    * return none
    */
   getConfigure () {
-    let config = null;
+    let config = null
     
     try {
       config = JSON.parse(fs.readFileSync('./deploy.config.json', 'utf8'))
