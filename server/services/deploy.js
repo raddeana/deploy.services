@@ -1,6 +1,6 @@
 /**
  * 命令行操作
- * @author Steudnera
+ * @author Philip
  */
 const fs = require('fs');
 const shell = require('shelljs')
