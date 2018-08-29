@@ -1,6 +1,6 @@
 /**
  * 路由配置
- * @author tmuffin
+ * @author Philip
  */
 
 const authController = require('./controllers/auth')
