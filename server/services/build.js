@@ -1,6 +1,6 @@
 /**
  * 部署构建
- * @author Steudnera
+ * @author Philip
  */
 const shell = require('shelljs')
 
