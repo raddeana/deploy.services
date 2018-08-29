@@ -9,7 +9,7 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const mongo = require('./model/mongo')
 const corsMiddleware = require('./middlewares/cors')
-const hookLogMiddleware = require('./middlewares/hook-log')
+const logMiddleware = require('./middlewares/log')
 const routes = require('./routes')
 
 const app = express()
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(static)
 app.use(corsMiddleware)
-app.use(hookLogMiddleware)
+app.use(logMiddleware)
 
 routes(app)
 
