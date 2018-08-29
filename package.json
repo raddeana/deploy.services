@@ -43,6 +43,8 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "nodemon": "^1.18.3",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "mocha": "^5.2.0",
+    "supertest": "^3.1.0"
   }
 }
