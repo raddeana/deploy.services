@@ -1,6 +1,6 @@
 /**
  * 跨域
- * @author tmuffin
+ * @author Philip
  */
 
 module.exports = (req, res, next) => {
