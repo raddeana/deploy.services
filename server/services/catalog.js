@@ -3,7 +3,7 @@
  * @author Philip
  */
 const shell = require('shelljs')
-const base = require('../config/base')
+const deploy = require('../config/deploy')
 
 /**
  * 跳转至项目目录
