@@ -1,6 +1,6 @@
 /**
  * 用户
- * @author steudnera
+ * @author Philip
  */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
