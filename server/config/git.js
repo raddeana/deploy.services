@@ -1,5 +1,5 @@
 /**
- * 部署服务配置
+ * git配置
  * @author Philip
  */
 module.exports.email = "wowcxy2008@126.com"
