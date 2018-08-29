@@ -1,6 +1,6 @@
 /**
  * 部署控制器
- * @author Steudnera
+ * @author Philip
  */
 const parseRequest = require('../services/parse-request')
 const catalog = require('../services/catalog')
