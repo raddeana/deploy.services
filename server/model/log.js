@@ -29,7 +29,7 @@ const schema = new Schema({
   },
   result: { 
     type: Schema.Types.ObjectId, 
-    ref: 'Result' 
+    ref: 'result' 
   },
 })
  
@@ -57,8 +57,8 @@ schema.statics = {
    * @param {object} log 对象
    * @return {array} list
    */
-  async addLog (log) {
-    const logEntity = new this.model('log')
+  async create (log) {
+    const logEntity = new this.model('log', log)
     return await logEntity.save()
   },
 }
