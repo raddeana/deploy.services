@@ -4,7 +4,7 @@
  */
 
 const authController = require('./controllers/auth')
-const hookController = require('./controllers/hook')
+const deployController = require('./controllers/deploy')
 const logController = require('./controllers/log')
 
 module.exports = (app) => {
@@ -33,10 +33,10 @@ module.exports = (app) => {
   })
 
   app.post('/api/event/push', (req, res) => {
-    hookController.push(req, res)
+    deployController.push(req, res)
   })
 
   app.post('/api/event/release', (req, res) => {
-    hookController.release(req, res)
+    deployController.release(req, res)
   })
 }
