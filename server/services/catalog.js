@@ -3,7 +3,7 @@
  * @author Philip
  */
 const shell = require('shelljs')
-const deploy = require('../config/deploy')
+const path = require('../config/path')
 
 /**
  * 跳转至项目目录
@@ -22,7 +22,7 @@ module.exports.to = (configure) => {
  * @return none
  */
 module.exports.back = () => {
-  if (shell.cd(base.dir).code !== 0) {
+  if (shell.cd(path.deploydir_path).code !== 0) {
     shell.exit(1);
   }
 }
