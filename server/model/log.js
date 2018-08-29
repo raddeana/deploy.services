@@ -10,26 +10,26 @@ const schema = new Schema({
   action: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
   repository: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
   comment: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
   errorMsg: {
     type: String,
     default: '',
-    trim: true
+    trim: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  result: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Result' 
   },
 })
  
@@ -44,19 +44,22 @@ schema.statics = {
   * @param {object} options
   * @return {array} list
   */
-  list (options) {
+  async list (options) {
     const query = options.query || {}
 
-    return this.find(query)
-               .sort({createdAt: -1})
-               .exec()
+    return await this.find(query)
+                     .sort({ createdAt: -1 })
+                     .exec()
   },
+  
   /**
    * 添加日志
-   * @param {object} options
+   * @param {object} log 对象
    * @return {array} list
    */
-  addLog () {
+  async addLog (log) {
+    const logEntity = new this.model('log')
+    return await logEntity.save()
   },
 }
  
