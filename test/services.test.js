@@ -1,5 +1,5 @@
 /**
- * 部署测试
+ * 服务测试
  * @author Philip
  */
 const request = require("supertest")
