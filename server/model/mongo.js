@@ -1,6 +1,6 @@
 /**
  * mongo 初始化
- * @author Steudnera
+ * @author Philip
  */
 const mongoose = require('mongoose')
 
