@@ -1,6 +1,6 @@
 /**
  * 部署服务配置
- * @author Steudnera
+ * @author Philip
  */
 module.exports.email = "wowcxy2008@126.com"
 module.exports.auto_push = "auto#push"
