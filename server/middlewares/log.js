@@ -1,6 +1,6 @@
 /**
  * 日志中间件
- * @author Steudnera
+ * @author Philip
  */
 
 const Log = require('../model/log');
