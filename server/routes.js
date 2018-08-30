@@ -3,9 +3,9 @@
  * @author Philip
  */
 
-const authController = require('./controllers/auth')
-const deployController = require('./controllers/deploy')
 const logController = require('./controllers/log')
+const deployController = require('./controllers/deploy')
+const projectController = require('./controllers/project')
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
@@ -16,22 +16,22 @@ module.exports = (app) => {
     res.render('admin.html')
   })
 
-  app.post('/api/admin/login', (req, res) => {
-    authController.login(req, res)
-  })
-
-  app.post('/api/admin/resetpassword', (req, res) => {
-    authController.resetPassword(req, res)
-  })
-
   app.get('/api/logs', (req, res) => {
     logController.query(req, res)
   })
-
-  app.delete('/api/log/:id', (req, res) => {
-    logController.remove(req, res)
+  
+  app.get('/api/projects', (req, res) => {
+    projectController.query(req, res)
   })
 
+  app.put('/api/projects/:id', (req, res) => {
+    projectController.update(req, res)
+  })
+  
+  app.post('/api/projects/:id', (req, res) => {
+    projectController.create(req, res)
+  })
+  
   app.post('/api/event/push', (req, res) => {
     deployController.push(req, res)
   })
