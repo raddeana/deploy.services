@@ -11,6 +11,7 @@ const shell = require('shelljs')
 module.exports = (project) => {
   if (shell.exec('npm run build').code !== 0) {
     shell.echo(`Error:\tbuild\t${project}\tfailed`)
+    
     return false
   }
   
