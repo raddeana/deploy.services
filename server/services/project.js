@@ -2,7 +2,7 @@
  * 项目重启，替换静态资源版本
  * @author Philip
  */
-const fs = require('fs');
+const fs = require('fs')
 const shell = require('shelljs')
 
 /**
