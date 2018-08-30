@@ -1,5 +1,5 @@
 /**
- * 命令行操作
+ * 项目重启，替换静态资源版本
  * @author Philip
  */
 const fs = require('fs');
