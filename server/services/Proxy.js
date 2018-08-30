@@ -63,27 +63,27 @@ class Proxy {
   getActionErrorMsg (action) {
     switch (action) {
     case 'build':
-      return build
+      return errorMessages.build
     case 'catalog.to':
-      return catalog.to
+      return errorMessages['catalog.to']
     case 'catalog.back':
-      return catalog.back
+      return errorMessages['catalog.back']
     case 'project.start':
-      return project.start
+      return errorMessages['project.start']
     case 'project.restart':
-      return project.restart
+      return errorMessages['project.restart']
     case 'project.replaceStaticVersion':
-      return project.replaceStaticVersion
+      return errorMessages['project.replaceStaticVersion']
     case 'git.push':
-      return git.push
+      return errorMessages['git.push']
     case 'git.pull':
-      return git.pull
+      return errorMessages['git.pull']
     case 'parse-git-request':
-      return parseGitRequest
+      return errorMessages['parse-git-request']
     case 'qn.remove':
-      return qn.remove.bind(qn)
+      return errorMessages['qn.remove']
     case 'qn.upload':
-      return qn.upload.bind(qn)
+      return errorMessages['qn.upload']
     }
   }
 
@@ -107,7 +107,7 @@ class Proxy {
       } else {
         return {
           success: false,
-          message: 'action execute success',
+          message: this.getActionErrorMsg(action),
         }
       }
     } else {
