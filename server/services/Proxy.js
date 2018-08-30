@@ -63,27 +63,27 @@ class Proxy {
   getActionErrorMsg (action) {
     switch (action) {
     case 'build':
-      return errorMessages.build
+      return errorMessages.buildError
     case 'catalog.to':
-      return errorMessages['catalog.to']
+      return errorMessages.catalogToError
     case 'catalog.back':
-      return errorMessages['catalog.back']
+      return errorMessages.catalogBackError
     case 'project.start':
-      return errorMessages['project.start']
+      return errorMessages.projectStartError
     case 'project.restart':
-      return errorMessages['project.restart']
+      return errorMessages.projectRestartError
     case 'project.replaceStaticVersion':
-      return errorMessages['project.replaceStaticVersion']
+      return errorMessages.projectReplaceStaticVersionError
     case 'git.push':
-      return errorMessages['git.push']
+      return errorMessages.gitPushError
     case 'git.pull':
-      return errorMessages['git.pull']
+      return errorMessages.gitPullError
     case 'parse-git-request':
-      return errorMessages['parse-git-request']
+      return errorMessages.parseGitRequestError
     case 'qn.remove':
-      return errorMessages['qn.remove']
+      return errorMessages.qnRemoveError
     case 'qn.upload':
-      return errorMessages['qn.upload']
+      return errorMessages.qnUploadError
     }
   }
 
