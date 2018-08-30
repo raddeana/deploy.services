@@ -42,6 +42,11 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
+  version: {
+    type: String,
+    default: '',
+    trim: true,
+  },
 })
  
 // 校验
