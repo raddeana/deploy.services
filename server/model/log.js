@@ -17,24 +17,29 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
+  master_branch: {
+    type: String,
+    default: '',
+    trim: true,
+  },
   messages: {
     type: Array,
-    default: '',
+    default: [],
     trim: true,
   },
   modified: {
     type: Array,
-    default: '',
+    default: [],
     trim: true,
   },
   removed: {
     type: Array,
-    default: '',
+    default: [],
     trim: true,
   },
   added: {
     type: Array,
-    default: '',
+    default: [],
     trim: true,
   },
   errorMsg: {
@@ -49,8 +54,12 @@ const schema = new Schema({
 })
  
 // 校验
-schema.path('action').required(true, 'repository cannot be blank')
+schema.path('action').required(true, 'action cannot be blank')
 schema.path('repository').required(true, 'repository cannot be blank')
+schema.path('messages').required(true, 'messages cannot be blank')
+schema.path('modified').required(true, 'modified cannot be blank')
+schema.path('removed').required(true, 'removed cannot be blank')
+schema.path('added').required(true, 'added cannot be blank')
 
 schema.statics = {
  /**
