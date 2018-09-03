@@ -43,7 +43,7 @@ const schema = new Schema({
     trim: true,
   },
   result: { 
-    type: Schema.Types.ObjectId, 
+    type: Schema.Types.ObjectId,
     ref: 'result' 
   },
 })
