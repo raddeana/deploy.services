@@ -51,8 +51,6 @@ const schema = new Schema({
 // 校验
 schema.path('action').required(true, 'repository cannot be blank')
 schema.path('repository').required(true, 'repository cannot be blank')
-schema.path('comment').required(true, 'comment cannot be blank')
-schema.path('result').required(true, 'result cannot be blank')
 
 schema.statics = {
  /**
