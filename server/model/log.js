@@ -17,8 +17,23 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
-  comment: {
-    type: String,
+  messages: {
+    type: Array,
+    default: '',
+    trim: true,
+  },
+  modified: {
+    type: Array,
+    default: '',
+    trim: true,
+  },
+  removed: {
+    type: Array,
+    default: '',
+    trim: true,
+  },
+  added: {
+    type: Array,
     default: '',
     trim: true,
   },
@@ -34,9 +49,10 @@ const schema = new Schema({
 })
  
 // 校验
+schema.path('action').required(true, 'repository cannot be blank')
 schema.path('repository').required(true, 'repository cannot be blank')
 schema.path('comment').required(true, 'comment cannot be blank')
-schema.path('action').required(true, 'action cannot be blank')
+schema.path('result').required(true, 'result cannot be blank')
 
 schema.statics = {
  /**
