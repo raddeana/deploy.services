@@ -2,33 +2,33 @@
  * 日志中间件
  * @author Philip
  */
-
 const Log = require('../model/log');
+const parseGitRequest = require('../services/parse-git-request');
+const gitConfig = require('../config/git');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   const data = req.body
-  const commits = data.commits;
+  const parsed = parseGitRequest(data)
+  
+  let release = false
+  
+  parsed.messages.forEach((message) => {
+    if (!gitConfig.autopush.test(message) && 
+        !gitConfig.autorelease.test(message) && 
+        !gitConfig.autoignore.test(message) && 
+        (gitConfig.feature.test(message) || gitConfig.optimize.test(message) || gitConfig.bug.test(message))) {
+      release = true
+    }
+  });
+  
+  const log = await Log.create({
+    release,
+    repository: parsed.repository,
+    messages: parsed.messages,
+    modified: parsed.modified,
+    removed: parsed.removed,
+    added: parsed.added,
+  })
 
-  if (commits) {
-    let comment = [];
-
-    commits.forEach(function (commit) {
-      comment.push(commit.message)
-    })
-
-    const newLog = new Logs({
-      type: '',
-      action: 'push',
-      repository: data.repository.name,
-      comment: comment.join(','),
-    })
-
-    newLog.save(function (err) {
-      if (err) {
-        return console.error(err)
-      }
-    })
-  }
-
-  next()
+  next(parsed, log._id)
 }
