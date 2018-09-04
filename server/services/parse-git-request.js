@@ -27,6 +27,7 @@ module.exports = (data) => {
   })
 
   const configure = {
+    release: null,
     ref: data.ref,
     repository: data.repository.name,
     master_branch: data.repository.master_branch,
