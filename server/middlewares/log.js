@@ -19,10 +19,13 @@ module.exports = async (req, res, next) => {
         (gitConfig.feature.test(message) || gitConfig.optimize.test(message) || gitConfig.bug.test(message))) {
       release = true
     }
-  });
+  })
+  
+  parsed.release = release
   
   const log = await Log.create({
     release,
+    ref: parsed.ref,
     repository: parsed.repository,
     messages: parsed.messages,
     modified: parsed.modified,
