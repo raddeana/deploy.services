@@ -7,11 +7,6 @@ const Schema = mongoose.Schema
 
 // log schema
 const schema = new Schema({
-  action: {
-    type: String,
-    default: '',
-    trim: true,
-  },
   release: {
     type: Boolean,
     default: '',
