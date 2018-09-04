@@ -5,7 +5,7 @@
 
 /**
  * 日志查询
- * @ctrl
+ * @Controller
  */
 module.exports.query = (res, req) => {
 
@@ -13,7 +13,7 @@ module.exports.query = (res, req) => {
 
 /**
  * 日志删除
- * @ctrl
+ * @Controller
  */
 module.exports.remove = (res, req) => {
 
