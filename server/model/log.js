@@ -12,6 +12,11 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
+  release: {
+    type: Boolean,
+    default: '',
+    trim: true,
+  },
   ref: {
     type: String,
     default: '',
