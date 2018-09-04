@@ -12,12 +12,17 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
+  ref: {
+    type: String,
+    default: '',
+    trim: true,
+  },
   repository: {
     type: String,
     default: '',
     trim: true,
   },
-  master_branch: {
+  branch: {
     type: String,
     default: '',
     trim: true,
