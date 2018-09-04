@@ -42,8 +42,13 @@ const schema = new Schema({
     default: '',
     trim: true,
   },
-  version: {
+  currVersion: {
     type: String,
+    default: '',
+    trim: true,
+  },
+  versions: {
+    type: Array,
     default: '',
     trim: true,
   },
