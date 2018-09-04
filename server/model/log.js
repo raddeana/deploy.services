@@ -60,6 +60,7 @@ const schema = new Schema({
  
 // 校验
 schema.path('action').required(true, 'action cannot be blank')
+schema.path('ref').required(true, 'ref cannot be blank')
 schema.path('repository').required(true, 'repository cannot be blank')
 schema.path('messages').required(true, 'messages cannot be blank')
 schema.path('modified').required(true, 'modified cannot be blank')
