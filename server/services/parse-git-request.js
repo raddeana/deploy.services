@@ -20,10 +20,6 @@ module.exports = (data) => {
   const messages = []
   
   commits.forEach((commit) => {
-    if (commit.message === git.release) {
-      deploy = true
-    }
-  
     messages.push(commit.message)
     modified = modified.concat(commit.modified)
     removed = removed.concat(commit.removed)
@@ -31,10 +27,10 @@ module.exports = (data) => {
   })
 
   const configure = {
-    deploy,
     ref: data.ref,
     repository: data.repository.name,
     master_branch: data.repository.master_branch,
+    default_branch: data.repository.default_branch,
     messages,
     modified,
     removed,
