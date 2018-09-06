@@ -1,5 +1,5 @@
 /**
- * 请求结果封装
+ * 响应数据
  * @author chenxiangyu
  */
  
