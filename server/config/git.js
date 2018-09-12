@@ -1,6 +1,6 @@
 /**
  * git配置
- * @author Philip
+ * @author philip
  */
 module.exports.email = "wowcxy2008@126.com"
 module.exports.autopush = /^autopush$/
