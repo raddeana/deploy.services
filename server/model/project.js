@@ -80,7 +80,7 @@ schema.statics = {
    * @return {array} list
    */
   async update (project) {
-    return await this.model('project').update({ _id: project._id }, project);
+    return await this.update({ _id: project._id }, project);
   },
 
   /**
@@ -89,7 +89,7 @@ schema.statics = {
    * @return {array} list
    */
   async query (condition, pageSize, pageIndex) {
-    const queryResult = await this.model('project').find(condition).exec()
+    const queryResult = await this.find(condition).exec()
     const total = await queryResult.count()
     const list = await queryResult.skip((pageIndex - 1) * pageSize).limit(pageSize).sort({'_id':-1}).exec()
     
@@ -105,7 +105,7 @@ schema.statics = {
    * @return {array} list
    */
   async delete (projectId) {
-    return await this.model('project').remove({ _id: projectId });
+    return await this.remove({ _id: projectId });
   },
 }
  
