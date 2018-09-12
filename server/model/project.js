@@ -98,6 +98,15 @@ schema.statics = {
       total,
     }
   },
+  
+  /**
+   * 删除项目
+   * @param {string} 项目id
+   * @return {array} list
+   */
+  async delete (projectId) {
+    return await this.model('project').remove({ _id: projectId });
+  },
 }
  
 module.exports = mongoose.model('project', schema)
