@@ -90,6 +90,14 @@ schema.statics = {
     const logEntity = new this.model('log', log)
     return await logEntity.save()
   },
+  
+  /**
+   * 删除日志
+   * @param {string} log id
+   * @return {array} list
+   */
+  async delete (logId) {
+  },
 }
  
 module.exports = mongoose.model('log', schema)
