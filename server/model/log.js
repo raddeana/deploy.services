@@ -97,6 +97,7 @@ schema.statics = {
    * @return {array} list
    */
   async delete (logId) {
+    return await this.remove({ _id: logId });
   },
 }
  
