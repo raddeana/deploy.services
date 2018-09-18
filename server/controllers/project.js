@@ -2,7 +2,7 @@
  * 项目
  * @author Philip
  */
-const projectModel = require('../model/project') 
+const projectDao = require('../dao/project') 
 
 /**
  * 项目查询
@@ -20,7 +20,7 @@ module.exports.query = (req, res) => {
     }
   })
   
-  const result = projectModel.query(condition, params.pageIndex, params.pageSize)
+  const result = projectDao.query(condition, params.pageIndex, params.pageSize)
   
   if (result.success) {
     res.json(result.data)
@@ -34,7 +34,7 @@ module.exports.query = (req, res) => {
  * @Controller
  */
 module.exports.create = (req, res) => {
-  const result = projectModel.create(req.body)
+  const result = projectDao.create(req.body)
   
   if (result.success) {
     res.json(result.data)
@@ -48,7 +48,7 @@ module.exports.create = (req, res) => {
  * @Controller
  */
 module.exports.update = (req, res) => {
-  const result = projectModel.update(req.body)
+  const result = projectDao.update(req.body)
   
   if (result.success) {
     res.json(result.data)
