@@ -7,7 +7,7 @@
 const errorMessages = require('../constants/error-messages');
 
 // 部署行为
-const build = require('./build');
+const npm = require('./npm');
 const catalog = require('./catalog');
 const project = require('./project');
 const git = require('./git');
@@ -30,8 +30,10 @@ class Proxy {
    */
   getActionHandler (action) {
     switch (action) {
-    case 'build':
-      return build
+    case 'npm.build':
+      return npm.build
+    case 'npm.lint':
+      return npm.lint
     case 'catalog.to':
       return catalog.to
     case 'catalog.back':
