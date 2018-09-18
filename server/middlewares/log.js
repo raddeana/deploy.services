@@ -2,7 +2,7 @@
  * 日志中间件
  * @author Philip
  */
-const Log = require('../model/log');
+const Log = require('../dao/log');
 const parseGitRequest = require('../services/parse-git-request');
 const gitConfig = require('../config/git');
 
