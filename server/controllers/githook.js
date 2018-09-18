@@ -2,13 +2,7 @@
  * git hook 发出的请求
  * @author Philip
  */
-
-const qn = require('../config/qn')
-const npm = require('../config/npm')
-const git = require('../config/git')
-const catalog = require('../config/catalog')
-const project = require('../config/project')
-const proxy = require('../config/proxy')
+const Proxy = require('../config/proxy')
 
 /**
  * @git提交钩子
