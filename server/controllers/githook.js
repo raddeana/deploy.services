@@ -2,7 +2,7 @@
  * git hook 发出的请求
  * @author Philip
  */
-const Proxy = require('../config/proxy')
+const Proxy = require('../services/proxy')
 
 /**
  * @git提交钩子
