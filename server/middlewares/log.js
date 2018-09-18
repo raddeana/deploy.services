@@ -2,12 +2,16 @@
  * 日志中间件
  * @author Philip
  */
-const Log = require('../dao/log');
-const parseGitRequest = require('../services/parse-git-request');
-const gitConfig = require('../config/git');
+const Log = require('../dao/log')
+const parseGitRequest = require('../services/parse-git-request')
+const gitConfig = require('../config/git')
+const gitHookApisMap = require('../config/git-hook-apis-map')
 
 module.exports = async (req, res, next) => {
   const data = req.body
+    
+  console.log(req.url)
+  
   const parsed = parseGitRequest(data)
   
   let release = false
