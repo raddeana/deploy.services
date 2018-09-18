@@ -62,7 +62,7 @@ schema.path('web').required(true, 'web cannot be blank')
 schema.path('server').required(true, 'server cannot be blank')
 schema.path('domain').required(true, 'domain cannot be blank')
 schema.path('ip').required(true, 'ip cannot be blank')
-schema.path('version').required(true, 'version cannot be blank')
+schema.path('versions').required(true, 'version cannot be blank')
 
 schema.statics = {
   /**
