@@ -9,8 +9,11 @@ const gitHookApisMap = require('../config/git-hook-apis-map')
 
 module.exports = async (req, res, next) => {
   const data = req.body
-    
-  console.log(req.url)
+  
+  if (gitHookApisMap.release !== req.url && gitHookApisMap.release !== req.url) {
+    next()
+    return
+  }
   
   const parsed = parseGitRequest(data)
   
