@@ -1,7 +1,7 @@
-### deploy.services
+### Deploy Services
 deploy services work with github webhook
 
-### deps
+### Deps
 - express
 - ejs
 - mongoose
