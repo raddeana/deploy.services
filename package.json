@@ -18,6 +18,9 @@
     "lint": "eslint --ext .js, server test",
     "test": "mocha --recursive test"
   },
+  "pre-commit": {
+    "run": ["lint"]
+  },
   "dependencies": {
     "agentkeepalive": "^3.5.1",
     "express-session": "^1.15.6",
@@ -33,6 +36,7 @@
     "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
+    "pre-commit": "^1.2.2",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",
