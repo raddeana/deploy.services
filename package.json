@@ -16,11 +16,9 @@
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "lint": "eslint --ext .js, server test",
-    "test": "mocha --recursive test"
+    "test": "mocha --recursive test",
+    "precommit": "npm run lint"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "dependencies": {
     "agentkeepalive": "^3.5.1",
     "express-session": "^1.15.6",
@@ -44,7 +42,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "nodemon": "^1.18.3",
-    "pre-commit": "^1.2.2",
+    "git-pre-commit": "^2.1.4",
     "mocha": "^5.2.0",
     "supertest": "^3.1.0"
   }
