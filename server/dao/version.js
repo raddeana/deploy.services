@@ -7,6 +7,11 @@ const Schema = mongoose.Schema
 
 // result schema
 const schema = new Schema({
+  projectId: {
+    type: String,
+    default: '',
+    trim: true,
+  },
   version: {
     type: String,
     default: '',
