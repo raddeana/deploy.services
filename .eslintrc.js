@@ -1,6 +1,6 @@
 /**
  * eslint 配置
- * @author Steudnera
+ * @author Philip
  */
 module.exports = {
   root: true,
