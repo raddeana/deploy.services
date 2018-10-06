@@ -4,15 +4,14 @@
  */
  
 // 行为错误信息
-const errorMessages = require('../constants/error-messages');
+const errorMessages = require("../constants/error-messages")
 
-// 部署行为
-const npm = require('./npm');
-const catalog = require('./catalog');
-const project = require('./project');
-const git = require('./git');
-const qn = require('./qn');
-const parseGitRequest = require('./parse-git-request');
+// 部署服务
+const npm = require("./npm")
+const git = require("./git")
+const catalog = require("./catalog")
+const project = require("./project")
+const publish = require("./publish")
 
 class Proxy {
   /**
@@ -30,30 +29,26 @@ class Proxy {
    */
   getActionHandler (action) {
     switch (action) {
-    case 'npm.build':
-      return npm.build
-    case 'npm.lint':
-      return npm.lint
-    case 'catalog.to':
-      return catalog.to
-    case 'catalog.back':
-      return catalog.back
-    case 'project.start':
-      return project.start
-    case 'project.restart':
-      return project.restart
-    case 'project.replaceStaticVersion':
-      return project.replaceStaticVersion
-    case 'git.push':
-      return git.push
-    case 'git.pull':
-      return git.pull
-    case 'parse-git-request':
-      return parseGitRequest
-    case 'qn.remove':
-      return qn.remove.bind(qn)
-    case 'qn.upload':
-      return qn.upload.bind(qn)
+      case "npm.build":
+        return npm.build.bind(npm)
+      case "npm.lint":
+        return npm.lint.bind(npm)
+      case "catalog.to":
+        return catalog.to.bind(catalog)
+      case "catalog.back":
+        return catalog.back.bind(catalog)
+      case "project.start":
+        return project.start.bind(project)
+      case "project.restart":
+        return project.restart.bind(project)
+      case "project.replaceHash":
+        return project.replaceHash.bind(project)
+      case "git.push":
+        return git.push.bind(git)
+      case "git.pull":
+        return git.pull.bind(git)
+      case "publish.upload":
+        return publish.upload.bind(publish)
     }
   }
   
@@ -64,28 +59,24 @@ class Proxy {
    */
   getActionErrorMsg (action) {
     switch (action) {
-    case 'build':
-      return errorMessages.buildError
-    case 'catalog.to':
-      return errorMessages.catalogToError
-    case 'catalog.back':
-      return errorMessages.catalogBackError
-    case 'project.start':
-      return errorMessages.projectStartError
-    case 'project.restart':
-      return errorMessages.projectRestartError
-    case 'project.replaceStaticVersion':
-      return errorMessages.projectReplaceStaticVersionError
-    case 'git.push':
-      return errorMessages.gitPushError
-    case 'git.pull':
-      return errorMessages.gitPullError
-    case 'parse-git-request':
-      return errorMessages.parseGitRequestError
-    case 'qn.remove':
-      return errorMessages.qnRemoveError
-    case 'qn.upload':
-      return errorMessages.qnUploadError
+      case "build":
+        return errorMessages.buildError
+      case "catalog.to":
+        return errorMessages.catalogToError
+      case "catalog.back":
+        return errorMessages.catalogBackError
+      case "project.start":
+        return errorMessages.startError
+      case "project.restart":
+        return errorMessages.restartError
+      case "project.replaceHash":
+        return errorMessages.replaceHashError
+      case "git.push":
+        return errorMessages.gitPushError
+      case "git.pull":
+        return errorMessages.gitPullError
+      case "publish.upload":
+        return errorMessages.publishUploadError
     }
   }
 
@@ -104,18 +95,18 @@ class Proxy {
       if (success) {
         return {
           success: true,
-          message: 'action execute success',
+          message: "execute success"
         }
       } else {
         return {
           success: false,
-          message: this.getActionErrorMsg(action),
+          message: this.getActionErrorMsg(action)
         }
       }
     } else {
       return {
         success: false,
-        message: '未知行为名称',
+        message: "未知行为名称"
       }
     }
   }

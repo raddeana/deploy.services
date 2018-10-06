@@ -2,28 +2,28 @@
  * 用户
  * @author Philip
  */
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 // user
-const user = new Schema({
+const schema = new Schema({
   username: {
     type: String,
-    trim: true,
+    trim: true
   },
   password: {
     type: String,
-    trim: true,
+    trim: true
   },
   avatar: {
     type: String,
-    trim: true,
-  },
+    trim: true
+  }
 })
  
 // 校验
-schema.path('username').required(true, 'username cannot be blank')
-schema.path('password').required(true, 'password cannot be blank')
+schema.path("username").required(true, "username cannot be blank")
+schema.path("password").required(true, "password cannot be blank")
 
 schema.statics = {
   /**
@@ -32,16 +32,16 @@ schema.statics = {
    * @param {string} 密码
    * @return {boolean} 登陆结果
    */
-  login (username, password) {
-    const user = await this.findOne({ username, })
-                           .exec()
+  async login (username, password) {
+    const user = await this.findOne({ username })
+      .exec()
     
     if (user && user.password === password) {
       return true
     } else {
       return false
     }
-  },
+  }
 }
 
-module.exports = mongoose.model('user', user)
+module.exports = mongoose.model("user", schema)

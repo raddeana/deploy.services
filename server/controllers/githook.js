@@ -2,14 +2,34 @@
  * git hook 发出的请求
  * @author Philip
  */
-const Proxy = require('../services/proxy')
+const path = require("../config/path")
+const Proxy = require("../services/proxy")
+const HookData = require("../dto/hook-data")
 
 /**
- * @git提交钩子
- * @param {object} 已编译的请求数据
- * @param {string} 日志 id
+ * git release
  * @controller
  */
-module.exports.githook = (parsed, logId, req, res) => {
-    
+module.exports.release = (req, res) => {
+  const proxy = new Proxy()
+  const hookData = new HookData(req.body)
+
+  proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
+  proxy.call("git.pull", [])
+
+  // 需要发布至 qn
+  if (hookData.isQnPublish()) {
+    proxy.call("npm.build", [`${hookData.project}`])
+
+    proxy.call("publish.upload", [])
+    proxy.call("project.replaceHash", [])
+
+    proxy.call("git.push", [`${hookData.project}`])
+  }
+
+  proxy.call("project.restart", [`${hookData.project}`])
+  proxy.call("project.start", [`${hookData.project}`])
+  proxy.call("catalog.back", [])
+
+  res.send({ message: "hello github" })
 }

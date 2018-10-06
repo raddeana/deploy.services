@@ -2,31 +2,31 @@
  * 版本
  * @author Philip
  */
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 // result schema
 const schema = new Schema({
   projectId: {
     type: String,
-    default: '',
-    trim: true,
+    default: "",
+    trim: true
   },
   version: {
     type: String,
-    default: '',
-    trim: true,
+    default: "",
+    trim: true
   },
   manifest: {
     type: Object,
-    default: '',
-    trim: true,
-  },
+    default: "",
+    trim: true
+  }
 })
  
 // 校验
-schema.path('version').required(true, 'version cannot be blank')
-schema.path('manifest').required(true, 'manifest cannot be blank')
+schema.path("version").required(true, "version cannot be blank")
+schema.path("manifest").required(true, "manifest cannot be blank")
 
 schema.statics = {
   /**
@@ -35,8 +35,11 @@ schema.statics = {
    * @return {array} list
    */
   async create (version) {
-    const versionEntity = new this.model('version', version)
-    return await versionEntity.save()
+    const Version = this.model("version", version)
+    const versionEntity = new Version()
+    const result = versionEntity.save()
+    
+    return result
   },
   
   /**
@@ -45,7 +48,9 @@ schema.statics = {
    * @return {array} list
    */
   async update (version) {
-    return await this.update({ _id: version._id }, project);
+    const result = await this.update({ _id: version._id }, version)
+
+    return result
   },
 
   /**
@@ -56,11 +61,11 @@ schema.statics = {
   async query (condition, pageSize, pageIndex) {
     const queryResult = await this.find(condition).exec()
     const total = await queryResult.count()
-    const list = await queryResult.skip((pageIndex - 1) * pageSize).limit(pageSize).sort({'_id':-1}).exec()
+    const list = await queryResult.skip((pageIndex - 1) * pageSize).limit(pageSize).sort({ "_id": -1 }).exec()
     
     return {
       list,
-      total,
+      total
     }
   },
 
@@ -70,7 +75,9 @@ schema.statics = {
    * @return {object} list
    */
   async getVersion (versionId) {
-    return await this.findOne({ _id: versionId })
+    const result = await this.findOne({ _id: versionId })
+
+    return result
   },
   
   /**
@@ -79,8 +86,10 @@ schema.statics = {
    * @return {array} list
    */
   async delete (projectId) {
-    return await this.remove({ _id: projectId });
-  },
+    const result = await this.remove({ _id: projectId })
+
+    return result
+  }
 }
 
-module.exports = mongoose.model('version', schema)
+module.exports = mongoose.model("version", schema)

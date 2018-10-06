@@ -17,17 +17,3 @@ module.exports.build = (project) => {
   
   return true
 }
-
-/**
- * 运行预发格式 lint
- * @return none
- */
-module.exports.lint = (project) => {
-  if (shell.exec('npm run lint').code !== 0) {
-    shell.echo(`Error:\tlint\t${project}\tfailed`)
-    
-    return false
-  }
-  
-  return true
-}

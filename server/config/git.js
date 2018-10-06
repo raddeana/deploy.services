@@ -10,4 +10,3 @@ module.exports.feature = /^feature#/
 module.exports.optimize = /^optimize#/
 module.exports.bug = /^bug#/
 module.exports.secret = "87656aca-9b3d-4f48-8db2-38ddcd4ad27f"
-

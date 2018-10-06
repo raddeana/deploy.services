@@ -7,28 +7,28 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	    <link rel="bookmark"  type="image/x-icon"  href="/images/logo.png"/>
 	    <link rel="shortcut icon" href="/images/logo.png">
-	    <link rel="stylesheet">
-		body {
-		  background-color: #326696;
-		  margin: 0px;
-		  overflow: hidden;
-		  font-family: Monospace;
-		  font-size: 13px;
-		  text-align: center;
-		  font-weight: bold;
-		  text-align: center;
-		}
+	    <style type="text/css">
+				body {
+				  background-color: #326696;
+				  margin: 0px;
+				  overflow: hidden;
+				  font-family: Monospace;
+				  font-size: 13px;
+				  text-align: center;
+				  font-weight: bold;
+				  text-align: center;
+				}
 
-		a {
-		  color:#0078ff;
-		}
-	    </link>
+				a {
+				  color:#0078ff;
+				}
+	    </style>
 	</head>
 	<body id="body">
 		<script id="vs" type="x-shader/x-vertex">
 	    varying vec2 vUv;
 
-	    void main() {
+	    void main () {
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 	    }
@@ -52,6 +52,6 @@
 	    }
 		</script>
 		<script type="text/javascript" src="/libs/three.min.js"></script>
-		<script type="text/javascript" src="/js/detector.js"></script>
+		<script type="text/javascript" src="/js/utils/detector.js"></script>
 	</body>
 </html>

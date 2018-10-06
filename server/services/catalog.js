@@ -2,18 +2,18 @@
  * 目录变更
  * @author Philip
  */
-const shell = require('shelljs')
-const path = require('../config/path')
+const shell = require("shelljs")
+const path = require("../config/path")
 
 /**
  * 跳转至项目目录
  * @param {object} 可用配置对象
  * @return none
  */
-module.exports.to = (configure) => {
-  if (shell.cd(configure.dir).code !== 0) {
-    shell.back();
-    shell.exit(1);
+module.exports.to = (dir) => {
+  if (shell.cd(dir).code !== 0) {
+    shell.back()
+    shell.exit(1)
   }
 }
 
@@ -23,6 +23,6 @@ module.exports.to = (configure) => {
  */
 module.exports.back = () => {
   if (shell.cd(path.deploydir_path).code !== 0) {
-    shell.exit(1);
+    shell.exit(1)
   }
 }

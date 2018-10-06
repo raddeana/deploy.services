@@ -3,34 +3,55 @@
  * @author Philip
  */
 
-const path = require('path')
-const express = require('express')
-const ejs = require('ejs')
-const bodyParser = require('body-parser')
-const connect = require('./dao/connect')
-const corsMiddleware = require('./middlewares/cors')
-const logMiddleware = require('./middlewares/log')
-const routes = require('./routes')
+const path = require("path")
+const express = require("express")
+const session = require("express-session")
+const cookieParser = require("cookie-parser")
+const ejs = require("ejs")
+const bodyParser = require("body-parser")
+const connect = require("./dao/connect")
+const corsMiddleware = require("./middlewares/cors")
+const authMiddleware = require("./middlewares/auth")
+const routes = require("./routes")
 
 const app = express()
-const base_dir = __dirname.replace('/server', '')
-const static = express.static(path.join(base_dir, 'www/static'), {
-  maxAge: '30d',
+const baseDir = __dirname.replace("/server", "")
+const midStatic = express.static(path.join(baseDir, "www/static"), {
+  maxAge: "30d"
 })
 
 // 指定模板引擎
-app.engine('.html', require('ejs').__express)
-app.set('view engine', 'html')
+app.engine(".html", require("ejs").__express)
+app.set("view engine", "html")
 
 // 指定模板位置
-app.set('views', base_dir + '/www')
+app.set("views", baseDir + "/www")
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(static)
+app.use(midStatic)
+
+const { url, secret } = require("./config/session")
+const MongoStore = require("connect-mongodb")
+const db = require("./services/msession")
+
+app.use(cookieParser(secret))
+app.use(session({ 
+  secret,
+  store: new MongoStore({
+    url,
+    db
+  }),
+  saveUninitialized: false,
+  httpOnly: true,
+  cookie: {
+    maxAge: 1000 * 60 * 30
+  }
+}))
+
 app.use(corsMiddleware)
-app.use(logMiddleware)
+app.use(authMiddleware)
 
 routes(app)
 

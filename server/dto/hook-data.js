@@ -6,12 +6,11 @@
 class HookData {
   constructor (data) {
     const commits = data.commits
-    const deploy = false
 
-    const modified = []
-    const removed = []
-    const added = []
-    const messages = []
+    let modified = []
+    let removed = []
+    let added = []
+    let messages = []
 
     commits.forEach((commit) => {
       messages.push(commit.message)
@@ -29,7 +28,7 @@ class HookData {
       messages,
       modified,
       removed,
-      added,
+      added
     }
 
     this.data = _data

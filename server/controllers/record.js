@@ -2,7 +2,7 @@
  * git钩子记录
  * @author Philip
  */
-const hookRecordDao = require('../dao/hook-record') 
+const hookRecordDao = require("../dao/record") 
 
 /**
  * 记录查询
@@ -15,7 +15,7 @@ module.exports.query = (res, req) => {
   Objects.keys(params).forEach((key) => {
     const val = params[key]
     
-    if (key !== 'pageIndex' || key !== 'pageSize') {
+    if (key !== "pageIndex" || key !== "pageSize") {
       condition[key] = val
     }
   })
@@ -40,7 +40,7 @@ module.exports.remove = (res, req) => {
   Objects.keys(params).forEach((key) => {
     const val = params[key]
     
-    if (key !== 'pageIndex' || key !== 'pageSize') {
+    if (key !== "pageIndex" || key !== "pageSize") {
       condition[key] = val
     }
   })

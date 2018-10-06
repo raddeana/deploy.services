@@ -12,7 +12,7 @@ const shell = require('shelljs')
  */
 module.exports.start = (project) => {
   if (shell.exec(`pm2 start --name="${project}" npm -- start`).code !== 0) {
-    shell.echo('Error:\tstart\t${project}\tfailed')
+    shell.echo(`Error:\tstart\t${project}\tfailed`)
     return false
   }
 
@@ -37,30 +37,18 @@ module.exports.restart = (project) => {
 
 /**
  * 替换静态资源版本
- * @param {object} 上一版本 manifest
- * @param {object} 当前版本 manifest
- * @param {array} 入口列表
  * @return none
  */
-module.exports.replaceStaticVersion = (lastVersion, currVersion, portalList) => {
-  portalList.forEach((portal) => {
-    const file = fs.readFileSync('./deploy.config.json', 'utf8')
-    const currVersionManifest = JSON.parse(fs.readFileSync(`./dist/${currVersion}/manifest.json`, 'utf8'))
-    
-    if (lastVersion) {
-      const lastVersionManifest = JSON.parse(fs.readFileSync(`./dist/${lastVersion}/manifest.json`, 'utf8'))
+module.exports.replaceHash = () => {
+  const text = fs.readFileSync('./portals.json', 'utf8')
+  const portals = JSON.parse(text)
 
-      Object.keys(lastVersionManifest).forEach((file) => {
-        const lastHashFileName = lastVersionManifest[file]
-        const currHashFileName = currVersionManifest[file]
+  portals.forEach((portal) => {
+    const file = fs.readFileSync(portal, 'utf8')
+    const manifest = JSON.parse(fs.readFileSync(`./dist/manifest.json`, 'utf8'))
 
-        file.replace(lastHashFileName, currHashFileName)
-      })
-    } else {
-      Object.keys(currVersionManifest).forEach((file) => {
-        file.replace(file, currVersionManifest[file])
-      })
-    }
+    Object.keys(manifest).forEach((origin) => {
+      file.replace(origin, manifest[origin])
+    })
   })
 }
-

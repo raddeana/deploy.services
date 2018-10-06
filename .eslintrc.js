@@ -24,7 +24,9 @@ module.exports = {
     'no-unused-vars': 'off',
   },
   globals: {
-    exec: true,
-    echo: true,
+    Objects: true,
+    assert: true,
+    it: true,
+    describe: true,
   },
 }
