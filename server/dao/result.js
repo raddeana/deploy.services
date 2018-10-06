@@ -41,5 +41,5 @@ schema.statics = {
     return data
   }
 }
- 
+
 module.exports = mongoose.model("result", schema)
