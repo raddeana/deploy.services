@@ -26,7 +26,7 @@
   "dependencies": {
     "agentkeepalive": "^3.5.1",
     "body-parser": "^1.18.3",
-    "connect-mongodb": "^1.1.5",
+    "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
