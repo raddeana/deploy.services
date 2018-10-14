@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(midStatic)
 
 const { url, secret } = require("./config/session")
-const MongoStore = require("connect-mongodb")
+const MongoStore = require("connect-mongo")(session)
 const db = require("./services/msession")
 
 app.use(cookieParser(secret))
