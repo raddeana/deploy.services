@@ -2,13 +2,35 @@
  * git hook 发出的请求
  * @author Philip
  */
+const fs = require("fs")
 const path = require("../config/path")
 const Proxy = require("../services/proxy")
+const aliOss = require("../services/ali-oss")
 const HookData = require("../dto/hook-data")
 
 /**
+ * 遍历文件夹
+ * @param {string} 文件夹路径
+ * @param {function} 处理函数
+ * @return none
+ */
+const ergodicFolder = (folderPath, handler) => {
+  const files = fs.readdirSync(folderPath)
+  
+  files.forEach((f, index) => {
+      const stat = fs.lstatSync(folderPath + '/' + f)
+      
+      if (stat.isDirectory() === true) { 
+        ergodicFolder(folderPath + '/' + f, handler);
+      } else {
+        handler(folderPath + '/' + f);
+      }
+  })
+}
+
+/**
  * git release
- * @controller
+ * @Controller
  */
 module.exports.release = (req, res) => {
   const proxy = new Proxy()
@@ -32,4 +54,8 @@ module.exports.release = (req, res) => {
   proxy.call("catalog.back", [])
 
   res.send({ message: "hello github" })
+  
+  ergodicFolder(`${hookData.project}/${path.web}`, (filepath) => {
+    aliOss.upload(filepath)
+  })
 }
