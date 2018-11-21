@@ -4,6 +4,10 @@
  */
 
 class HookData {
+  /**
+   * 构造函数
+   * @Contrutor
+   */
   constructor (data) {
     const commits = data.commits
 
