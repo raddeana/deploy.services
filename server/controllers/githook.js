@@ -18,7 +18,7 @@ module.exports.release = (req, res) => {
   proxy.call("git.pull", [])
 
   // 需要发布至 qn
-  if (hookData.isQnPublish()) {
+  if (hookData.isAliOssPublish()) {
     proxy.call("npm.build", [`${hookData.project}`])
 
     proxy.call("publish.upload", [])
