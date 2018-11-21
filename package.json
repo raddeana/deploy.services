@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "agentkeepalive": "^3.5.1",
+    "ali-oss": "^6.0.1",
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
