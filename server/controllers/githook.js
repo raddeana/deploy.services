@@ -5,6 +5,8 @@
 const fs = require("fs")
 const path = require("../config/path")
 const Proxy = require("../services/proxy")
+const Record = require("../model/record")
+const RecordDTO = require("../dto/record")
 const aliOss = require("../services/ali-oss")
 const HookData = require("../dto/hook-data")
 
@@ -14,16 +16,16 @@ const HookData = require("../dto/hook-data")
  * @param {function} 处理函数
  * @return none
  */
-const ergodicFolder = (folderPath, handler) => {
+const ergodicFolder = async function (folderPath, handler) {
   const files = fs.readdirSync(folderPath)
   
-  files.forEach((f, index) => {
+  files.forEach(function (f, index) {
       const stat = fs.lstatSync(folderPath + '/' + f)
       
       if (stat.isDirectory() === true) { 
-        ergodicFolder(folderPath + '/' + f, handler);
+        await ergodicFolder(folderPath + '/' + f, handler);
       } else {
-        handler(folderPath + '/' + f);
+        await handler(folderPath + '/' + f);
       }
   })
 }
@@ -32,18 +34,17 @@ const ergodicFolder = (folderPath, handler) => {
  * git release
  * @Controller
  */
-module.exports.release = (req, res) => {
+module.exports.release = async function (req, res) {
   const proxy = new Proxy()
   const hookData = new HookData(req.body)
+  const config = aliOss.getConfig()
 
   proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
   proxy.call("git.pull", [])
 
-  // 需要发布至 qn
-  if (hookData.isAliOssPublish()) {
+  // 构建可发布版本
+  if (config.type == = 'web') {
     proxy.call("npm.build", [`${hookData.project}`])
-
-    proxy.call("publish.upload", [])
     proxy.call("project.replaceHash", [])
 
     proxy.call("git.push", [`${hookData.project}`])
@@ -53,9 +54,26 @@ module.exports.release = (req, res) => {
   proxy.call("project.start", [`${hookData.project}`])
   proxy.call("catalog.back", [])
 
-  res.send({ message: "hello github" })
-  
-  ergodicFolder(`${hookData.project}/${path.web}`, (filepath) => {
-    aliOss.upload(filepath)
+  res.send({
+    message: "hello github", 
   })
+  
+  let oss = {
+    success: 0,
+    fail: 0,
+  };
+  
+  if (config.type === 'web') {
+    ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
+      const result = await aliOss.upload(filepath)
+      
+      if (result) {
+        oss.success ++;
+      } else {
+        oss.fail ++;
+      }
+    })
+  }
+  
+  await Record.create(new RecordDTO(hookData).get(), oss)
 }
