@@ -11,7 +11,6 @@ const npm = require("./npm")
 const git = require("./git")
 const catalog = require("./catalog")
 const project = require("./project")
-const publish = require("./publish")
 
 class Proxy {
   /**
@@ -47,8 +46,6 @@ class Proxy {
         return git.push.bind(git)
       case "git.pull":
         return git.pull.bind(git)
-      case "publish.upload":
-        return publish.upload.bind(publish)
     }
   }
   
@@ -75,8 +72,6 @@ class Proxy {
         return errorMessages.gitPushError
       case "git.pull":
         return errorMessages.gitPullError
-      case "publish.upload":
-        return errorMessages.publishUploadError
     }
   }
 
