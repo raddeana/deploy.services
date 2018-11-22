@@ -6,7 +6,6 @@
 const recordController = require("./controllers/record")
 const githookController = require("./controllers/githook")
 const projectController = require("./controllers/project")
-const versionController = require("./controllers/version")
 
 module.exports = (app) => {
   app.get("/", (req, res) => {
@@ -39,14 +38,6 @@ module.exports = (app) => {
   
   app.post("/api/projects/:id", (req, res) => {
     projectController.create(req, res)
-  })
-
-  app.post("/api/projects/version", (req, res) => {
-    versionController.create(req, res)
-  })
-
-  app.delete("/api/projects/version", (req, res) => {
-    versionController.create(req, res)
   })
 
   app.post("/api/git/release", (req, res) => {
