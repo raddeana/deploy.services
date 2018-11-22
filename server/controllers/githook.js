@@ -11,9 +11,6 @@ const path = require("../config/path")
 const Proxy = require("../services/proxy")
 const aliOss = require("../services/ali-oss")
 
-// model
-const Record = require("../model/record")
-
 // dto
 const RecordDTO = require("../dto/record")
 const HookData = require("../dto/hook-data")
