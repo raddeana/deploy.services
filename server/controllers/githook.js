@@ -20,8 +20,8 @@ const ergodicFolder = async function (folderPath, handler) {
   const files = fs.readdirSync(folderPath)
   
   for (let i = 0, len = files.length; i < len; i ++)
-    const f = files[i];
-    const stat = fs.lstatSync(folderPath + '/' + f)
+    let f = files[i];
+    let stat = fs.lstatSync(folderPath + '/' + f)
 
     if (stat.isDirectory() === true) { 
       await ergodicFolder(folderPath + '/' + f, handler);
