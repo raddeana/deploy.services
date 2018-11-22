@@ -1,5 +1,5 @@
 /**
- * 日志
+ * release 记录列表
  * @author Philip
  */
 const mongoose = require("mongoose")
@@ -68,7 +68,7 @@ schema.path("added").required(true, "added cannot be blank")
 
 schema.statics = {
 /**
-  * 获取log列表
+  * 获取release 记录列表
   * @param {object} options
   * @return {array} list
   */
@@ -83,25 +83,23 @@ schema.statics = {
   
   /**
    * 添加日志
-   * @param {object} log 对象
+   * @param {object} release 记录
    * @return {array} list
    */
-  async create (log) {
+  async create (_record) {
     const Record = this.model("record", log)
-    const logEntity = new Record()
-    const result = await logEntity.save()
-
-    return result
+    const record = new Record(_record)
+    
+    return await record.save()
   },
   
   /**
    * 删除日志
-   * @param {string} log id
+   * @param {string} 记录id
    * @return {array} list
    */
-  async delete (logId) {
-    const result = await this.remove({ _id: logId })
-    return result
+  async delete (id) {
+    return await this.remove({ _id: id })
   }
 }
  
