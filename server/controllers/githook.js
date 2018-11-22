@@ -36,6 +36,7 @@ var ergodicFolder = async function (folderPath, handler) {
     } else {
       await handler(folderPath + '/' + fof);
     }
+  }
 }
 
 /**
