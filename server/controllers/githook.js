@@ -19,7 +19,7 @@ const HookData = require("../dto/hook-data")
 const ergodicFolder = async function (folderPath, handler) {
   const files = fs.readdirSync(folderPath)
   
-  for (var i = 0, len = files.length; i < len; i ++)
+  for (var i = 0, len = files.length; i < len; i ++) {
     var fof = files[i];
     var stat = fs.lstatSync(folderPath + '/' + fof)
 
