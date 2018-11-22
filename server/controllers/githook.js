@@ -24,8 +24,8 @@ const HookData = require("../dto/hook-data")
  * @param {function} 处理函数
  * @return none
  */
-const ergodicFolder = async function (folderPath, handler) {
-  const files = fs.readdirSync(folderPath)
+var ergodicFolder = async function (folderPath, handler) {
+  var files = fs.readdirSync(folderPath)
   
   for (var i = 0, len = files.length; i < len; i ++) {
     var fof = files[i];
@@ -43,9 +43,9 @@ const ergodicFolder = async function (folderPath, handler) {
  * @Controller
  */
 module.exports.release = async function (req, res) {
-  const proxy = new Proxy()
-  const hookData = new HookData(req.body)
-  const config = aliOss.getConfig()
+  var proxy = new Proxy()
+  var hookData = new HookData(req.body)
+  var config = aliOss.getConfig()
 
   proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
   proxy.call("git.pull", [])
@@ -73,7 +73,7 @@ module.exports.release = async function (req, res) {
   
   if (config.type === 'web') {
     ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
-      const result = await aliOss.upload(filepath)
+      var result = await aliOss.upload(filepath)
       
       if (result) {
         oss.success ++;
