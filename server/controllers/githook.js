@@ -3,11 +3,19 @@
  * @author Philip
  */
 const fs = require("fs")
+
+// 配置
 const path = require("../config/path")
+
+// 服务
 const Proxy = require("../services/proxy")
-const Record = require("../model/record")
-const RecordDTO = require("../dto/record")
 const aliOss = require("../services/ali-oss")
+
+// model
+const Record = require("../model/record")
+
+// dto
+const RecordDTO = require("../dto/record")
 const HookData = require("../dto/hook-data")
 
 /**
