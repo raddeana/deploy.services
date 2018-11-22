@@ -43,7 +43,7 @@ module.exports.release = async function (req, res) {
   proxy.call("git.pull", [])
 
   // 构建可发布版本
-  if (config.type == = 'web') {
+  if (config.type === 'web') {
     proxy.call("npm.build", [`${hookData.project}`])
     proxy.call("project.replaceHash", [])
 
