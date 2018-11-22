@@ -46,9 +46,9 @@ module.exports = {
     const config = this.getConfig()
     
     try {
-      await client.delete(objectname);
+      return await client.delete(objectname)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   },
   
@@ -62,9 +62,9 @@ module.exports = {
     const config = this.getConfig()
     
     try {
-      await client.put(objectname, filepath);
+      return await client.put(objectname, filepath)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 }
