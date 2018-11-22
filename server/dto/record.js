@@ -37,4 +37,4 @@ class Record {
   }
 }
 
-export.default = Record
+module.exports = Record
