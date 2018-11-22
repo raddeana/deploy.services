@@ -61,7 +61,7 @@ module.exports.release = async function (req, res) {
   let oss = {
     success: 0,
     fail: 0,
-  };
+  }
   
   if (config.type === 'web') {
     ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
