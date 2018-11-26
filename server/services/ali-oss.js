@@ -2,6 +2,7 @@
  * ali oss
  * @author Philip
  */
+
 const fs = require("fs")
 const AliOss = require("ali-oss")
 
@@ -11,15 +12,16 @@ module.exports = {
    * @return {AliOss} 阿里云 Oss SDK 实例
    */
   getClient () {
-    const client = new AliOss({
-      accessKeyId: 'LTAI2PBQSdfLOUme',
-      accessKeySecret: 'uMuFXEuK06PGTEmHRiFCvoCNtgx8nb',
-      bucket: 'raddeana',
-      region: 'oss-cn-beijing',
-    })
+    var config = this.getConfig()
+    var client = null
+
+    if (config) {
+      client = new AliOss(config.ali_oss)
+    }
     
     return client
   },
+
   /**
    * 获取部署配置
    * @return {object} 部署配置
@@ -28,9 +30,9 @@ module.exports = {
     let config = null
     
     try {
-      config = JSON.parse(fs.readFileSync("./deploy.config.json", "utf8"))
+      config = JSON.parse(fs.readFileSync(".deploy.json", "utf8"))
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
     
     return config
@@ -66,5 +68,5 @@ module.exports = {
     } catch (err) {
       console.error(err)
     }
-  },
+  }
 }

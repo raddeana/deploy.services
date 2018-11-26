@@ -8,7 +8,7 @@ class Result {
    * @constructor
    */
   constructor (data) {
-    this.data = data;
+    this.data = data
   }
   
   /**
@@ -17,16 +17,15 @@ class Result {
    * @return none
    */
   setData (data) {
-    this.data = data;
+    this.data = data
   }
-
   
   /**
    * 获取数据
    * @return {object} 数据
    */
   getData () {
-    return this.data;
+    return this.data
   }
   
   /**
@@ -36,19 +35,19 @@ class Result {
    * @return {object} 分页结果集
    */
   getPagination (pageSize, pageIndex) {
-    const data = this.data;
-    let listData = null;
+    var data = this.data
+    var listData = null
     
     if (data instanceof Array) {
-      listData = Array;
+      listData = Array
     } else {
-      listData = [data];
+      listData = [data]
     }
     
     return {
       data: listData.slice((pageIndex - 1) * pageSize, pageIndex * pageSize),
-      total: listData.length,
-    };
+      total: listData.length
+    }
   }
   
   /**
@@ -57,7 +56,7 @@ class Result {
    */
   getErrorMsg (errorMsg) {
     return {
-      errorMsg,
-    };
+      errorMsg
+    }
   }
 }

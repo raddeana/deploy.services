@@ -73,8 +73,8 @@ schema.statics = {
   * @return {array} list
   */
   async list (options) {
-    const query = options.query || {}
-    const result = await this.find(query)
+    var query = options.query || {}
+    var result = await this.find(query)
       .sort({ createdAt: -1 })
       .exec()
 
@@ -87,10 +87,11 @@ schema.statics = {
    * @return {array} list
    */
   async create (_record) {
-    const Record = this.model("record", log)
-    const record = new Record(_record)
+    var Record = this.model("record")
+    var record = new Record(_record)
+    var result = await record.save()
     
-    return await record.save()
+    return result
   },
   
   /**
@@ -99,7 +100,9 @@ schema.statics = {
    * @return {array} list
    */
   async delete (id) {
-    return await this.remove({ _id: id })
+    var result = await this.remove({ _id: id })
+
+    return result
   }
 }
  

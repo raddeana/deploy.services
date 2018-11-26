@@ -11,6 +11,9 @@ const path = require("../config/path")
 const Proxy = require("../services/proxy")
 const aliOss = require("../services/ali-oss")
 
+// dao
+const Record = require("../dto/record")
+
 // dto
 const RecordDTO = require("../dto/record")
 const HookData = require("../dto/hook-data")
@@ -24,14 +27,14 @@ const HookData = require("../dto/hook-data")
 var ergodicFolder = async function (folderPath, handler) {
   var files = fs.readdirSync(folderPath)
   
-  for (var i = 0, len = files.length; i < len; i ++) {
-    var fof = files[i];
+  for (var i = 0, len = files.length; i < len; i++) {
+    var fof = files[i]
     var stat = fs.lstatSync(folderPath + '/' + fof)
 
     if (stat.isDirectory() === true) { 
-      await ergodicFolder(folderPath + '/' + fof, handler);
+      await ergodicFolder(folderPath + '/' + fof, handler)
     } else {
-      await handler(folderPath + '/' + fof);
+      await handler(folderPath + '/' + fof)
     }
   }
 }
@@ -61,12 +64,12 @@ module.exports.release = async function (req, res) {
   proxy.call("catalog.back", [])
 
   res.send({
-    message: "hello github", 
+    message: "hello github"
   })
   
   let oss = {
     success: 0,
-    fail: 0,
+    fail: 0
   }
   
   if (config.type === 'web') {
@@ -74,9 +77,9 @@ module.exports.release = async function (req, res) {
       var result = await aliOss.upload(filepath)
       
       if (result) {
-        oss.success ++;
+        oss.success++
       } else {
-        oss.fail ++;
+        oss.fail++
       }
     })
   }

@@ -32,8 +32,8 @@ class Record {
       messages: this.hookData.messages,
       modified: this.hookData.modified,
       removed: this.hookData.removed,
-      added: this.hookData.added,
-    };
+      added: this.hookData.added
+    }
   }
 }
 
