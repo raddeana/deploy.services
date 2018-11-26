@@ -11,7 +11,7 @@ module.exports = {
     accessKeyId: 'LTAI2PBQSdfLOUme',
     accessKeySecret: 'uMuFXEuK06PGTEmHRiFCvoCNtgx8nb',
     bucket: 'raddeana',
-    region: 'oss-cn-beijing',
+    region: 'oss-cn-beijing'
   },
-  start: 'npm run start',
-};
+  start: 'npm run start'
+}
