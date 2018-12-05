@@ -18,18 +18,12 @@
     "lint": "eslint --ext .js, server test",
     "test": "mocha --recursive test"
   },
-  "pre-commit": {
-    "run": [
-      "lint"
-    ]
-  },
   "dependencies": {
     "agentkeepalive": "^3.5.1",
     "ali-oss": "^6.0.1",
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
-    "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -42,7 +36,7 @@
     "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "pre-commit": "^1.2.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",
@@ -50,8 +44,8 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "nodemon": "^1.18.3",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
     "supertest": "^3.1.0"
   }
 }
