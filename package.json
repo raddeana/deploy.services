@@ -13,8 +13,8 @@
     "email": "wowcxy2008@126.com"
   },
   "scripts": {
-    "dev": "nodemon server/index.js",
-    "start": "node server/index.js",
+    "start": "cross-env NODE_ENV=prod node server/index.js",
+    "dev": "cross-env NODE_ENV=dev nodemon -e js server/index.js --harmony",
     "lint": "eslint --ext .js, server test",
     "test": "mocha --recursive test"
   },
@@ -29,6 +29,7 @@
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
+    "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
