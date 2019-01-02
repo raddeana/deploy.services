@@ -1,0 +1,8 @@
+html {
+    font-size: 12px;
+}
+
+.header {
+    position: relative;
+    border-bottom: 1px solid #d0d0d0;
+}

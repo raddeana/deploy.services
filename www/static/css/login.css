@@ -1,12 +1,41 @@
 body {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+circle {
+  fill: none;
+  stroke: #08881c;
+  stroke-width: 10px;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 70;
+  animation: rotation 2000ms ease-in-out infinite alternate;
+}
+
+svg {
+  position: absolute;
+  top: -160px;
   bottom: 0;
-  margin: 0;
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  color: #333;
+  left: -100px;
+  right: 0;
+  margin: auto;
+  filter: drop-shadow(100px 0 0 #00ccff);
+}
+
+@keyframes rotation {
+  0% {
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 70;
+  }
+  
+  100% {
+    stroke-dasharray: 20 20;
+    stroke-dashoffset: -600;
+  }
 }
 
 .login-panel {
@@ -17,17 +46,18 @@ body {
   bottom: 0;
   width: 280px;
   height: 195px;
-  padding: 10px 15px;
-  background: #fff;
+  padding: 3px 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid #7b7b7b;
   border-radius: 4px;
   margin: auto;
   text-align: center;
 }
 
 .login-panel-title {
-  margin: 15px 0 0 0;
-  font-size: 16px;
-  color: #8ae3d9;
+  margin: 10px 0 15px 0;
+  font-size: 14px;
+  color: #efefef;
 }
 
 .login-form-input {
@@ -36,22 +66,23 @@ body {
   border-radius: 3px;
   margin: 0 auto;
   line-height: 22px;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
-  border: 1px solid #8bdfe0;
-  color: #87ebcb;
+  border: 1px solid #333;
+  color: #efefef;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .login-form-input::-webkit-input-placeholder {
-  color: #89e2d9;
+  color: #333;
 }
 
 .login-form-input:-moz-placeholder {
-  color: #89e2d9;
+  color: #333;
 }
 
 .login-form-input:-ms-input-placeholder {
-  color: #89e2d9;
+  color: #333;
 }
 
 
@@ -74,4 +105,10 @@ body {
 
 .button-login:hover {
   background: #7bc8e4;
+}
+
+.message-processing {
+  color: #efefef;
+  font-size: 14px;
+  display: none;
 }

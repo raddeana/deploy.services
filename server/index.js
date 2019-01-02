@@ -15,8 +15,8 @@ const authMiddleware = require("./middlewares/auth")
 const routes = require("./routes")
 
 const app = express()
-const baseDir = __dirname.replace("/server", "")
-const midStatic = express.static(path.join(baseDir, "www/static"), {
+const baseDir = __dirname.replace(/(\\|\/)server/, "")
+const midStatic = express.static(path.join(baseDir, `www${path.sep}static`), {
   maxAge: "30d"
 })
 
@@ -25,7 +25,7 @@ app.engine(".html", require("ejs").__express)
 app.set("view engine", "html")
 
 // 指定模板位置
-app.set("views", baseDir + "/www")
+app.set("views", baseDir + `${path.sep}www`)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
