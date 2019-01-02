@@ -6,6 +6,7 @@
 module.exports = [
   "/admin",
   "/api/record",
-  "/api/delete",
+  "/api/records",
+  "/api/project",
   "/api/projects"
 ]

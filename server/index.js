@@ -37,7 +37,7 @@ const MongoStore = require("connect-mongo")(session)
 const db = require("./services/msession")
 
 app.use(cookieParser(secret))
-app.use(session({ 
+app.use(session({
   secret,
   store: new MongoStore({
     url,

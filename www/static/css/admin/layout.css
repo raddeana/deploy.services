@@ -5,4 +5,13 @@ html {
 .header {
     position: relative;
     border-bottom: 1px solid #d0d0d0;
+    background: #03c3ff;
+}
+
+.header .navbar-brand {
+    color: #fff;
+}
+
+.header .nav-link {
+    color: #fff;
 }

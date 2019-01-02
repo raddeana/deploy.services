@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>部署服务 - 后台管理</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta content="<%= csrfToken %>" name="csrf-token">
+        <link rel="bookmark"  type="image/x-icon"  href="/images/logo.png"/>
+        <link rel="shortcut icon" href="/images/logo.png">
+        <link rel="stylesheet" href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/admin/layout.css">
+        <link rel="stylesheet" href="/css/admin/index.css">
+    </head>
+    <body>
+        <div class="wrapper">
+        <div class="header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">DS-Admin</a>
+            <button 
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="/charts">可视化图表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/charts">可视化图表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/projects">项目列表</a>
+                </li>
+                </div>
+                <div class="navbar-nav navbar-nav__right">
+                <li class="nav-item dropdown">
+                    <a
+                        id="navbarDropdownMenuLink" 
+                        class="nav-link dropdown-toggle" 
+                        href="#" 
+                        role="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    >
+                        用户
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">修改密码</a>
+                        <a class="dropdown-item" href="#">登出</a>
+                    </div>
+                    </li>
+                </div>
+            </div>
+            </nav>
+        </div>
+        <div class="">
+
+        </div>
+        </div>
+        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript">
+
+        </script>
+        <script
+            type="text/javascript" 
+            src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/requirejs/require.js"
+            data-main="js/admin/index.js"
+        ></script>
+    </body>
+</html>
+      
