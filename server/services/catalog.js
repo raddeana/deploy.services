@@ -11,10 +11,10 @@ const path = require("../config/path")
  * @return none
  */
 module.exports.to = (dir) => {
-  if (shell.cd(dir).code !== 0) {
-    shell.back()
-    shell.exit(1)
-  }
+    if (shell.cd(dir).code !== 0) {
+        shell.back()
+        shell.exit(1)
+    }
 }
 
 /**
@@ -22,7 +22,7 @@ module.exports.to = (dir) => {
  * @return none
  */
 module.exports.back = () => {
-  if (shell.cd(path.deploydir_path).code !== 0) {
-    shell.exit(1)
-  }
+    if (shell.cd(path.deploydir_path).code !== 0) {
+        shell.exit(1)
+    }
 }

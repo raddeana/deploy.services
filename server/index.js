@@ -2,7 +2,6 @@
  * 服务入口文件
  * @author Philip
  */
-
 const path = require("path")
 const express = require("express")
 const session = require("express-session")
@@ -17,7 +16,7 @@ const routes = require("./routes")
 const app = express()
 const baseDir = __dirname.replace(/(\\|\/)server/, "")
 const midStatic = express.static(path.join(baseDir, `www${path.sep}static`), {
-  maxAge: "30d"
+    maxAge: "30d"
 })
 
 // 指定模板引擎
@@ -38,16 +37,16 @@ const db = require("./services/msession")
 
 app.use(cookieParser(secret))
 app.use(session({
-  secret,
-  store: new MongoStore({
-    url,
-    db
-  }),
-  saveUninitialized: false,
-  httpOnly: true,
-  cookie: {
-    maxAge: 1000 * 60 * 30
-  }
+    secret,
+    store: new MongoStore({
+        url,
+        db
+    }),
+    saveUninitialized: false,
+    httpOnly: true,
+    cookie: {
+        maxAge: 1000 * 60 * 30
+    }
 }))
 
 app.use(corsMiddleware)

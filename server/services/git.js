@@ -9,14 +9,14 @@ const shell = require('shelljs')
  * @return none
  */
 module.exports.pull = (project) => {
-  if (shell.exec("git pull").code !== 0) {
-    shell.echo(`Error:\tpull\t${project}\tfailed`)
-    shell.exit(1)
-    
-    return false
-  }
-  
-  return true
+    if (shell.exec("git pull").code !== 0) {
+        shell.echo(`Error:\tpull\t${project}\tfailed`)
+        shell.exit(1)
+
+        return false
+    }
+
+    return true
 }
 
 /**
@@ -24,12 +24,12 @@ module.exports.pull = (project) => {
  * @return none
  */
 module.exports.push = (project) => {
-  if (shell.exec("git add -A").code !== 0 && shell.exec("git common -m'auto@build'").code !== 0 && shell.exec("git push").code !== 0) {
-    shell.echo(`Error:\tpull\t${project}\tfailed`)
-    shell.exit(1)
+    if (shell.exec("git add -A").code !== 0 && shell.exec("git common -m'auto@build'").code !== 0 && shell.exec("git push").code !== 0) {
+        shell.echo(`Error:\tpull\t${project}\tfailed`)
+        shell.exit(1)
+        
+        return false
+    }
     
-    return false
-  }
-  
-  return true
+    return true
 }

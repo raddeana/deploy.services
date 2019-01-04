@@ -7,19 +7,19 @@ const Schema = mongoose.Schema
 
 // result schema
 const schema = new Schema({
-  code: {
-    type: Number,
-    trim: true
-  },
-  message: {
-    type: String,
-    trim: true
-  },
-  retry: {
-    type: Number,
-    default: 0,
-    trim: true
-  }
+    code: {
+        type: Number,
+        trim: true
+    },
+    message: {
+        type: String,
+        trim: true
+    },
+    retry: {
+        type: Number,
+        default: 0,
+        trim: true
+    }
 })
  
 // 校验

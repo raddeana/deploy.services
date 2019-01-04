@@ -11,13 +11,13 @@ const shell = require('shelljs')
  * @return none
  */
 module.exports.start = (project) => {
-  if (shell.exec(`pm2 start --name="${project}" npm -- start`).code !== 0) {
-    shell.echo(`Error:\tstart\t${project}\tfailed`)
-    return false
-  }
+    if (shell.exec(`pm2 start --name="${project}" npm -- start`).code !== 0) {
+        shell.echo(`Error:\tstart\t${project}\tfailed`)
+        return false
+    }
 
-  shell.echo(`Info: start\t${project}\tsuccess`)
-  return true
+    shell.echo(`Info: start\t${project}\tsuccess`)
+    return true
 }
 
 /**
@@ -26,13 +26,13 @@ module.exports.start = (project) => {
  * @return none
  */
 module.exports.restart = (project) => {
-  if (shell.exec(`pm2 restart ${project}`).code !== 0) {
-    shell.echo(`Error:\trestart\t${project}\tfailed`)
-    return false
-  }
-  
-  shell.echo(`Error:\trestart\t${project}\tsuccess`)
-  return true
+    if (shell.exec(`pm2 restart ${project}`).code !== 0) {
+        shell.echo(`Error:\trestart\t${project}\tfailed`)
+        return false
+    }
+    
+    shell.echo(`Error:\trestart\t${project}\tsuccess`)
+    return true
 }
 
 /**
@@ -40,15 +40,15 @@ module.exports.restart = (project) => {
  * @return none
  */
 module.exports.replaceHash = () => {
-  const text = fs.readFileSync('./portals.json', 'utf8')
-  const portals = JSON.parse(text)
+    const text = fs.readFileSync('./portals.json', 'utf8')
+    const portals = JSON.parse(text)
 
-  portals.forEach((portal) => {
-    const file = fs.readFileSync(portal, 'utf8')
-    const manifest = JSON.parse(fs.readFileSync(`./dist/manifest.json`, 'utf8'))
+    portals.forEach((portal) => {
+        const file = fs.readFileSync(portal, 'utf8')
+        const manifest = JSON.parse(fs.readFileSync(`./dist/manifest.json`, 'utf8'))
 
-    Object.keys(manifest).forEach((origin) => {
-      file.replace(origin, manifest[origin])
+        Object.keys(manifest).forEach((origin) => {
+            file.replace(origin, manifest[origin])
+        })
     })
-  })
 }

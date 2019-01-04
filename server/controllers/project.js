@@ -48,11 +48,11 @@ module.exports.create = (req, res) => {
  * @Controller
  */
 module.exports.update = (req, res) => {
-  const result = projectDao.update(req.body)
+    const result = projectDao.update(req.body)
   
-  if (result.success) {
-    res.json(result.data)
-  } else {
-    res.send(result.code, { message: result.message })
-  }
+    if (result.success) {
+        res.json(result.data)
+    } else {
+        res.send(result.code, { message: result.message })
+    }
 }

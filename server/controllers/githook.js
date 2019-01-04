@@ -24,19 +24,19 @@ const HookData = require("../dto/hook-data")
  * @param {function} 处理函数
  * @return none
  */
-var ergodicFolder = async function (folderPath, handler) {
-  var files = fs.readdirSync(folderPath)
-  
-  for (var i = 0, len = files.length; i < len; i++) {
-    var fof = files[i]
-    var stat = fs.lstatSync(folderPath + '/' + fof)
+let ergodicFolder = async function (folderPath, handler) {
+    let files = fs.readdirSync(folderPath)
+    
+    for (let i = 0, len = files.length; i < len; i++) {
+        let fof = files[i]
+        let stat = fs.lstatSync(folderPath + '/' + fof)
 
-    if (stat.isDirectory() === true) { 
-      await ergodicFolder(folderPath + '/' + fof, handler)
-    } else {
-      await handler(folderPath + '/' + fof)
+        if (stat.isDirectory() === true) { 
+            await ergodicFolder(folderPath + '/' + fof, handler)
+        } else {
+            await handler(folderPath + '/' + fof)
+        }
     }
-  }
 }
 
 /**
@@ -44,45 +44,45 @@ var ergodicFolder = async function (folderPath, handler) {
  * @Controller
  */
 module.exports.release = async function (req, res) {
-  var proxy = new Proxy()
-  var hookData = new HookData(req.body)
-  var config = aliOss.getConfig()
+    let proxy = new Proxy()
+    let hookData = new HookData(req.body)
+    let config = aliOss.getConfig()
 
-  proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
-  proxy.call("git.pull", [])
+    proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
+    proxy.call("git.pull", [])
 
-  // 构建可发布版本
-  if (config.type === 'web') {
-    proxy.call("npm.build", [`${hookData.project}`])
-    proxy.call("project.replaceHash", [])
+    // 构建可发布版本
+    if (config.type === 'web') {
+        proxy.call("npm.build", [`${hookData.project}`])
+        proxy.call("project.replaceHash", [])
 
-    proxy.call("git.push", [`${hookData.project}`])
-  }
+        proxy.call("git.push", [`${hookData.project}`])
+    }
 
-  proxy.call("project.restart", [`${hookData.project}`])
-  proxy.call("project.start", [`${hookData.project}`])
-  proxy.call("catalog.back", [])
+    proxy.call("project.restart", [`${hookData.project}`])
+    proxy.call("project.start", [`${hookData.project}`])
+    proxy.call("catalog.back", [])
 
-  res.send({
-    message: "hello github"
-  })
-  
-  let oss = {
-    success: 0,
-    fail: 0
-  }
-  
-  if (config.type === 'web') {
-    ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
-      var result = await aliOss.upload(filepath)
-      
-      if (result) {
-        oss.success++
-      } else {
-        oss.fail++
-      }
+    res.send({
+        message: "hello github"
     })
-  }
-  
-  await Record.create(new RecordDTO(hookData).get(), oss)
+    
+    let oss = {
+        success: 0,
+        fail: 0
+    }
+    
+    if (config.type === 'web') {
+        ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
+            let result = await aliOss.upload(filepath)
+            
+            if (result) {
+                oss.success++
+            } else {
+                oss.fail++
+            }
+        })
+    }
+    
+    await Record.create(new RecordDTO(hookData).get(), oss)
 }

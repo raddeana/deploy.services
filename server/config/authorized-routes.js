@@ -4,9 +4,9 @@
  */
 
 module.exports = [
-  "/admin",
-  "/api/record",
-  "/api/records",
-  "/api/project",
-  "/api/projects"
+    "/admin",
+    "/api/record",
+    "/api/records",
+    "/api/project",
+    "/api/projects"
 ]

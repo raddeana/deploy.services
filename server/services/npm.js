@@ -9,11 +9,11 @@ const shell = require('shelljs')
  * @return none
  */
 module.exports.build = (project) => {
-  if (shell.exec('npm run build').code !== 0) {
-    shell.echo(`Error:\tbuild\t${project}\tfailed`)
-    
-    return false
-  }
-  
-  return true
+    if (shell.exec('npm run build').code !== 0) {
+        shell.echo(`Error:\tbuild\t${project}\tfailed`)
+
+        return false
+    }
+
+    return true
 }
