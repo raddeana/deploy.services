@@ -33,8 +33,7 @@ schema.statics = {
      * @return {boolean} 登陆结果
      */
     async login (username, password) {
-        const user = await this.findOne({ username })
-          .exec()
+        let user = await this.findOne({ username }).exec()
         
         if (user && user.password === password) {
             return true

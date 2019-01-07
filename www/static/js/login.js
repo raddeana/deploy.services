@@ -29,34 +29,34 @@
 
         if (!username && !unReg.test(username)) {
             $.toast({
-                heading: '服务器或者网络错误',
-                text: '用户名填写错误',
+                heading: '用户名填写错误',
                 position: {
                     top: 20,
                     right: 85
                 },
                 icon: 'warning'
             })
+
             return
         }
 
         if (!password && !pwReg.test(password)) {
             $.toast({
-                heading: '服务器或者网络错误',
-                text: '密码填写错误',
+                heading: '密码填写错误',
                 position: {
                     top: 20,
                     right: 85
                 },
                 icon: 'warning'
             })
+
             return
         }
 
         toggleProcessing(true)
 
         $.ajax({
-            url: '/admin/login',
+            url: '/api/login',
             method: 'post',
             data: {
                 username,
@@ -78,6 +78,4 @@
             toggleProcessing(false)
         })
     })
-
-
 })()

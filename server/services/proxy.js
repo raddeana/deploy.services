@@ -1,6 +1,6 @@
 /**
  * 部署相关行为代理
- * @author
+ * @author Philip
  */
  
 // 行为错误信息
@@ -30,8 +30,6 @@ class Proxy {
         switch (action) {
             case "npm.build":
                 return npm.build.bind(npm)
-            case "npm.lint":
-                return npm.lint.bind(npm)
             case "catalog.to":
                 return catalog.to.bind(catalog)
             case "catalog.back":
@@ -51,8 +49,8 @@ class Proxy {
   
     /**
      * 获取行为错误信息
-     * @param { string } 行为
-     * @return { string } 行为错误信息
+     * @param {string} 行为
+     * @return {string} 行为错误信息
      */
     getActionErrorMsg (action) {
         switch (action) {
@@ -77,8 +75,8 @@ class Proxy {
 
   /**
    * 调用部署行为
-   * @param { string } 行为
-   * @param { array } 调用数组
+   * @param {string} 行为
+   * @param {array} 调用数组
    * @return {object} 调用结果
    */
     call (action, args) {

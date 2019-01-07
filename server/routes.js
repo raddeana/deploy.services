@@ -6,6 +6,7 @@
 const recordController = require("./controllers/record")
 const projectController = require("./controllers/project")
 const githookController = require("./controllers/githook")
+const authorizedController = require("./controllers/githook")
 const csrf = require('csurf')
 
 // csrf
@@ -21,7 +22,7 @@ module.exports = (app) => {
   app.get("/login", (req, res) => {
     res.render("login.html")
   })
-  
+
   // 管理员
   app.get("/admin", csrfProtection, (req, res) => {
     res.render("admin.html", { csrfToken: req.csrfToken() })
@@ -40,6 +41,16 @@ module.exports = (app) => {
   // 记录
   app.get("/records", csrfProtection, (req, res) => {
     res.render("records.html")
+  })
+
+  // 查询发布记录
+  app.get("/api/login", (req, res) => {
+    authorizedController.login(req, res)
+  })
+
+  // 查询发布记录
+  app.get("/api/logout", (req, res) => {
+    authorizedController.logout(req, res)
   })
 
   // 查询发布记录
