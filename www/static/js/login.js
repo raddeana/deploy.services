@@ -65,9 +65,12 @@
         }).then(() => {
             window.location.href = '/admin'
         }, (res) => {
+            let data = res.responseJSON
+            let { status, message } = res
+
             $.toast({
-                heading: '服务器或者网络错误',
-                text: res.message || `未知错误${res.status}`,
+                heading: status === '500' ? '服务器内部错误' : '',
+                text: message || `未知错误${status}`,
                 position: {
                     top: 20,
                     right: 85

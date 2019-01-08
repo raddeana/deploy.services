@@ -36,9 +36,22 @@ schema.statics = {
         let user = await this.findOne({ username }).exec()
         
         if (user && user.password === password) {
-            return true
+            return {
+                success: true,
+                user
+            }
         } else {
-            return false
+            if (!user) {
+                return {
+                    success: false,
+                    message: "用户名错误"
+                }
+            } else {
+                return {
+                    success: false,
+                    message: "密码不正确"
+                }
+            }
         }
     }
 }

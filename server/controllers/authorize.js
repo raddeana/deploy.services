@@ -9,20 +9,13 @@ const userDao = require('../dao/user')
  * @Controller
  */
 module.exports.login = async (req, res) => {
-    let params = req.params
-    let condition = {
-        username: params.username,
-        password: params.password
-    }
+    let { username, password } = req.params
+    let { success, user, message } = await userDao.login(username, password)
 
-    let result = userDao.query(condition)
-
-    console.log(result)
-
-    if (result.success) {
-        res.json(result.data)
+    if (success) {
+        req.session.user = user
     } else {
-        res.send(result.code, { message: result.message })
+        res.send('403', { message })
     }
 }
 

@@ -6,7 +6,7 @@
 const recordController = require("./controllers/record")
 const projectController = require("./controllers/project")
 const githookController = require("./controllers/githook")
-const authorizedController = require("./controllers/githook")
+const authorizeController = require("./controllers/authorize")
 const csrf = require('csurf')
 
 // csrf
@@ -44,13 +44,13 @@ module.exports = (app) => {
   })
 
   // 查询发布记录
-  app.get("/api/login", (req, res) => {
-    authorizedController.login(req, res)
+  app.post("/api/login", (req, res) => {
+    authorizeController.login(req, res)
   })
 
   // 查询发布记录
-  app.get("/api/logout", (req, res) => {
-    authorizedController.logout(req, res)
+  app.post("/api/logout", (req, res) => {
+    authorizeController.logout(req, res)
   })
 
   // 查询发布记录
