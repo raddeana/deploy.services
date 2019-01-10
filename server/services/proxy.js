@@ -13,10 +13,10 @@ const catalog = require("./catalog")
 const project = require("./project")
 
 class Proxy {
-  /**
-   * 构造函数
-   * @contructor
-   */
+    /**
+     * 构造函数
+     * @contructor
+     */
     contructor (context) {
         this.context = context
     }

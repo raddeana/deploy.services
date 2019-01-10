@@ -3,45 +3,6 @@
  * 指示器
  * @author Philip
  */
-
-let Detector = {
-  canvas: !! window.CanvasRenderingContext2D,
-  webgl: ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )(),
-  workers: !! window.Worker,
-  fileapi: window.File && window.FileReader && window.FileList && window.Blob,
-
-  getWebGLErrorMessage: function () {
-    let domElement = document.createElement('div')
-
-    domElement.style.fontFamily = 'monospace'
-    domElement.style.fontSize = '13px'
-    domElement.style.textAlign = 'center'
-    domElement.style.background = '#eee'
-    domElement.style.color = '#000'
-    domElement.style.padding = '1em'
-    domElement.style.width = '475px'
-    domElement.style.margin = '5em auto 0'
-
-    return domElement
-  },
-
-  addGetWebGLMessage: function (parameters) {
-    let parent, 
-        id, 
-        domElement
-
-    parameters = parameters || {}
-
-    parent = parameters.parent !== undefined ? parameters.parent : document.body
-    id = parameters.id !== undefined ? parameters.id : 'oldie'
-
-    domElement = Detector.getWebGLErrorMessage()
-    domElement.id = id
-
-    parent.appendChild(domElement)
-  }
-};
-
 let ele, container
 let camera, scene, renderer, position
 let mesh, geometry, material
@@ -83,7 +44,7 @@ function clouds (id) {
   scene = new THREE.Scene()
   geometry = new THREE.Geometry()
 
-  let texture = new THREE.TextureLoader().load('/images/cloud10.png', animate)
+  let texture = new THREE.TextureLoader().load('https://raddeana-materials.oss-cn-hangzhou.aliyuncs.com/images/cloud.png', animate)
 
   texture.magFilter = THREE.LinearMipMapLinearFilter
   texture.minFilter = THREE.LinearMipMapLinearFilter
@@ -92,10 +53,10 @@ function clouds (id) {
 
   material = new THREE.ShaderMaterial({
     uniforms: {
-      'map': {type: 't', value: texture },
-      'fogColor': {type: 'c', value: fog.color},
-      'fogNear': {type: 'f', value: fog.near},
-      'fogFar': {type: 'f', value: fog.far}
+      'map': { type: 't', value: texture },
+      'fogColor': { type: 'c', value: fog.color },
+      'fogNear': { type: 'f', value: fog.near },
+      'fogFar': { type: 'f', value: fog.far }
     },
     vertexShader: document.getElementById('vs').textContent,
     fragmentShader: document.getElementById('fs').textContent,
@@ -119,13 +80,18 @@ function clouds (id) {
   }
 
   mesh = new THREE.Mesh(geometry, material)
-  scene.add( mesh )
+  scene.add(mesh)
 
   mesh = new THREE.Mesh(geometry, material)
   mesh.position.z = - 8000
-  scene.add( mesh )
+  scene.add(mesh)
 
-  renderer = new THREE.WebGLRenderer({ antialias: false , alpha: true, precision: 'highp'})
+  renderer = new THREE.WebGLRenderer({ 
+    antialias: false, 
+    alpha: true, 
+    precision: 'highp'
+  })
+  
   renderer.setSize(ele.scrollWidth, ele.scrollHeight)
   renderer.setClearColor('#fff', 0)
 

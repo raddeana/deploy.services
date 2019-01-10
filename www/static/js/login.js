@@ -2,7 +2,16 @@
  * 登录
  * @author Philip
  */
-(() => {
+require.config({
+    baseUrl: 'js/',
+    paths: {
+        'jquery': 'https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min',
+        'jquery-toast': 'https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery.toast.min',
+        'constants': 'constants/http-codes'
+    }
+})
+
+require(['jquery', 'jquery-toast'], function () {
     let $form = $('#form')
     let $username = $('#login-form-input__username')
     let $password = $('#login-form-input__password')
@@ -81,4 +90,4 @@
             toggleProcessing(false)
         })
     })
-})()
+})

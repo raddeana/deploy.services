@@ -7,32 +7,49 @@
         <link rel="bookmark" type="image/x-icon" href="/images/logo.png" />
         <link rel="shortcut icon" href="/images/logo.png">
         <link href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace-theme-flash.min.css" rel="stylesheet">
-        <script src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace.min.js"></script>
+        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace.min.js"></script>
         <link rel="stylesheet" href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/extra/normalize.css">
         <link rel="stylesheet" href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery.toast.min.css">
         <link rel="stylesheet" href="/css/login.css">
     </head>
     <body>
-        <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="95" /></svg>
+        <svg 
+            viewBox="0 0 200 200"
+            width="200"
+            height="200"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle
+                cx="100"
+                cy="100"
+                r="95"
+            />
+        </svg>
         <div class="login-panel">
             <h4 class="login-panel-title">登录</h4>
             <form class="login-form" id="form">
                 <div class="login-form-row">
-                    <input id="login-form-input__username" class="login-form-input login-form-input__username" placeholder="请输入用户" /></div>
+                    <input 
+                        id="login-form-input__username" 
+                        class="login-form-input login-form-input__username" 
+                        placeholder="请输入用户" 
+                    />
+                </div>
                 <div class="login-form-row">
-                    <input id="login-form-input__password" class="login-form-input login-form-input__password" placeholder="请输入密码" type="password" /></div>
-                <button id="button-login" class="button-login">登录</button></form>
+                    <input 
+                        id="login-form-input__password" 
+                        class="login-form-input login-form-input__password" 
+                        placeholder="请输入密码" 
+                        type="password" 
+                    />
+                </div>
+                <button id="button-login" class="button-login">登录</button>
+            </form>
         </div>
-        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery.toast.min.js"></script>
-        <script type="text/javascript">require.config({
-                baseUrl: 'js/',
-                paths: {
-                    'jquery': 'https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min.js',
-                    'index': 'index'
-                }
-            })</script>
-        <script type="text/javascript" data-main="/js/login.js" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/requirejs/require.js"></script>
+        <script 
+            type="text/javascript"
+            data-main="/js/login"
+            src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/requirejs/require.js"
+        ></script>
     </body>
 </html>

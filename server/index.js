@@ -8,7 +8,7 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
-const connect = require("./dao/connect")
+const connect = require("./services/mongo")
 const corsMiddleware = require("./middlewares/cors")
 const authMiddleware = require("./middlewares/auth")
 const routes = require("./routes")
@@ -31,9 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(midStatic)
 
-const { url, secret } = require("./config/session")
+const { url, secret } = require("./config/mongo")
+const db = require("./services/mongo")
 const MongoStore = require("connect-mongo")(session)
-const db = require("./services/msession")
 
 app.use(cookieParser(secret))
 app.use(session({
