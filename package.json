@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=prod node server/index.js",
-    "dev": "cross-env NODE_ENV=dev nodemon -e js server/index.js --harmony",
+    "dev": "cross-env NODE_ENV=dev nodemon -e js,html server/index.js --harmony",
     "lint": "eslint --ext .js, server test",
     "test": "mocha --recursive test"
   },

@@ -11,7 +11,21 @@
         <link rel="stylesheet" href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/css/admin/layout.css">
         <link rel="stylesheet" href="/css/admin/index.css"></head>
-    
+        <style type="text/css">
+            html, body { 
+                margin: 0; 
+                overflow: hidden; 
+                background-color: #222;
+                display: flex;
+                height: 100%;
+                width: 100%;
+            }
+            
+            canvas { 
+                width: 100%; 
+                height: 100%;
+            }
+        </style>
     <body>
         <div class="wrapper">
             <div class="header">
@@ -44,17 +58,180 @@
 
             </div>
         </div>
+        <script type="x-shader/x-vertex" id="vertexshader">
+	
+            precision highp float;
+            
+            attribute float size;
+            uniform vec4 planet1;
+            uniform vec4 planet2;
+            
+            varying float vDisplay;
+            varying float vColor;
+            
+            vec4 distanceTo(vec3 p1, vec4 p2){ // simple function that returns a vec4 of the distance between 3d points.  each position being that axis' distance.  the 4th position being the overall distance
+                vec3 d = vec3(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
+                
+                return vec4(abs(d.x),
+                          abs(d.y),
+                          abs(d.z),
+                          sqrt(d.x*d.x + d.y*d.y + d.z*d.z));
+            }
+            
+            void main() {
+                vec3 p = position;
+                
+                float g = 5000.; // constant rate of gravity, I treat it sort of like a scaler
+        
+                vec4 distP1 = distanceTo(p, planet1); // get distance from point to planet
+                //vec4 distP2 = distanceTo(p, planet2);
+        
+                vec3 vp1 = vec3(p.x - planet1.x, p.y - planet1.y, p.z - planet1.z); // find vector between point and planet (kind of like the angle between the two points)
+                //vec3 vp2 = vec3(p.x - planet2.x, p.y - planet2.y, p.z - planet2.z);
+        
+                float pull = (g*planet1.w) / (distP1.w * distP1.w); // find the amount gravity is effecting this point
+                vec3 newp = p.xyz + (-pull * vp1.xyz); // push the point towards the planet with the "angle" vector we made above, with the amount set in the pull variable
+                
+                //pull = (g*planet2.w) / (distP2.w * distP2.w);
+                //newp = newp.xyz + (-pull * vp2.xyz);
+        
+        
+                gl_PointSize = 1.;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(newp, 1.0);
+                
+                vDisplay = 0.;
+                if(pull < 1.){ vDisplay = 1.; } // hide overly-pulled vertex's
+                
+                vColor = clamp(pull, 0.133333333, 1.);
+            }
+        </script>
+        
+        <script type="x-shader/x-fragment" id="fragmentshader">
+            uniform sampler2D texture;
+            uniform vec2 resolution;
+            
+            varying float vDisplay;
+            varying float vColor;
+            
+            void main() {
+                vec2 st = gl_FragCoord.xy/resolution.xy;
+                st.x *= resolution.x/resolution.y;
+        
+        
+                float c = clamp(vColor, 0.0, 0.4);
+                
+                gl_FragColor = vec4(c, c, c, vDisplay );
+            }
+        </script>
+        <script type="text/javascript">
+            let container = document.body;
+
+            let scene = new THREE.Scene();
+            let camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000000);
+
+            let uScale = container.offsetWidth / 178960000 * 80000;
+
+            let renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            container.appendChild(renderer.domElement);
+
+            let startTime = new Date().getTime();
+            let currentTime = 0;
+
+            let planetGeom = new THREE.SphereGeometry( Math.floor(6371*uScale), 32, 32 );
+            let planetMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+            let planet1 = new THREE.Mesh( planetGeom, planetMaterial );
+
+            planet1.mass = 59720*uScale;
+            scene.add( planet1 );
+
+            let planetGeom = new THREE.SphereGeometry( Math.floor(1737*uScale), 32, 32 );
+            let planetMaterial = new THREE.MeshBasicMaterial( {color: 0xcccccc} );
+            let planet2 = new THREE.Mesh( planetGeom, planetMaterial );
+            planet2.dist = 384400*uScale;
+            planet2.mass = 735*uScale;
+
+            let geometry = new THREE.BufferGeometry();
+            let uniforms = {
+                time: { value: 1.0 },
+                resolution: { value: new THREE.Vector2(container.offsetWidth, container.offsetHeight) },
+                planet1: { value: new THREE.Vector4(planet1.position.x, planet1.position.y, planet1.position.z, planet1.mass) },
+                planet2: { value: new THREE.Vector4(planet2.position.x, planet2.position.y, planet2.position.z, planet2.mass) }
+            }
+
+            let shaderMaterial = new THREE.ShaderMaterial( {
+                uniforms:       uniforms,
+                vertexShader:   document.getElementById('vertexshader').textContent,
+                fragmentShader: document.getElementById('fragmentshader').textContent,
+                blending:       THREE.AdditiveBlending,
+                depthTest:      false,
+                transparent:    true,
+                vertexColors:   true
+            });
+
+            let pointDist = 1;
+            let lineScale = 50;
+            let scale = Math.floor(64*8);
+            let radius = Math.floor(196);
+            let geometry = new THREE.BufferGeometry();
+            let positions = [];
+            let sizes = [];
+
+            function mod (x, y) {
+                return x % y
+            }
+
+            for (let x = 0; x + pointDist < scale; x += pointDist) {
+                for (let y = 0; y + pointDist < scale; y += pointDist) {
+                    for (let z = 0; z + pointDist < scale; z += pointDist) {
+                        if((mod(x, lineScale) < 1. && mod(y, lineScale) < 1.) || (mod(y, lineScale) < 1. && mod(z, lineScale) < 1.) || (mod(x, lineScale) < 1. && mod(z, lineScale) < 1.)){
+                            positions.push( (x - (scale/2)) * radius );
+                            positions.push( (y - (scale/2)) * radius );
+                            positions.push( (z - (scale/2)) * radius );
+                            sizes.push( 1 );
+                        }
+                    }
+                }
+            }
+
+            geometry.addAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.addAttribute('size', new THREE.Float32BufferAttribute(sizes, 1).setDynamic(true));
+
+            let spacetime = new THREE.Points( geometry, shaderMaterial );
+            spacetime.position.x = 0;
+            spacetime.position.y = 0;
+            spacetime.position.z = 0;
+            scene.add( spacetime );
+
+
+            camera.position.y = 0;
+            camera.position.x = 0;
+            camera.position.z = 20000;
+
+            function animate () {
+                let now = new Date().getTime();
+                currentTime = (now - startTime) / 1000;
+                uniforms.time.value = currentTime;
+                
+                planet1.position.x = Math.cos(currentTime)*2000;
+                planet1.position.y = Math.sin(-currentTime)*2000;
+                
+                planet2.position.x = planet1.position.x + Math.cos(currentTime)*planet2.dist * uScale;
+                planet2.position.y = planet1.position.y + Math.sin(currentTime)*planet2.dist * uScale;
+                
+                uniforms.planet1.value = new THREE.Vector4(planet1.position.x, planet1.position.y, planet1.position.z, planet1.mass);
+                uniforms.planet2.value = new THREE.Vector4(planet2.position.x, planet2.position.y, planet2.position.z, planet2.mass);
+
+                scene.rotation.z += 0.0002;
+                scene.rotation.y += 0.001;
+                
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+            animate();
+        </script>
         <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/bootstrap/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            require.config({
-                baseUrl: '/js/utils',
-                paths: {
-                    'some': 'some/v1.0'
-                },
-                waitSeconds: 30
-            });
-        </script>
         <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/requirejs/require.js" data-main="js/admin/index.js"></script>
     </body>
 </html>
