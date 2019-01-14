@@ -107,6 +107,10 @@ svg {
   background: #7bc8e4;
 }
 
+.button-login:disabled {
+  background: #8e8e8e;
+}
+
 .message-processing {
   color: #efefef;
   font-size: 14px;

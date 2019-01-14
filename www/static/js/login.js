@@ -25,8 +25,10 @@ require(['jquery', 'jquery-toast'], function () {
     let toggleProcessing = function (processing) {
         if (processing) {
             buttonLogin.attr('disabled', 'disabled');
+            buttonLogin.html('正在登录...');
         } else {
             buttonLogin.removeAttr('disabled');
+            buttonLogin.html('登录');
         }
     }
 
@@ -67,10 +69,11 @@ require(['jquery', 'jquery-toast'], function () {
         $.ajax({
             url: '/api/login',
             method: 'post',
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
                 username,
                 password
-            }
+            }),
         }).then(() => {
             window.location.href = '/admin'
         }, (res) => {

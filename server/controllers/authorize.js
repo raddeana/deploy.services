@@ -9,7 +9,7 @@ const userDao = require('../dao/user')
  * @Controller
  */
 module.exports.login = async (req, res) => {
-    let { username, password } = req.params
+    let { username, password } = req.body
     let { success, user, message } = await userDao.login(username, password)
 
     if (success) {

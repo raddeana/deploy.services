@@ -34,6 +34,9 @@ schema.statics = {
      */
     async login (username, password) {
         let user = await this.findOne({ username }).exec()
+
+        console.log(' ================ >')
+        console.log(user)
         
         if (user && user.password === password) {
             return {
