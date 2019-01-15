@@ -25,22 +25,22 @@ module.exports = (app) => {
 
   // 管理员
   app.get("/admin", csrfProtection, (req, res) => {
-    res.render("admin.html", { csrfToken: req.csrfToken() })
+    res.render("admin/index.html", { csrfToken: req.csrfToken() })
   })
 
   // 图表
   app.get("/charts", csrfProtection, (req, res) => {
-    res.render("admin.html", { csrfToken: req.csrfToken() })
+    res.render("admin/charts.html", { csrfToken: req.csrfToken() })
   })
 
   // 项目
   app.get("/projects", csrfProtection, (req, res) => {
-    res.render("admin.html", { csrfToken: req.csrfToken() })
+    res.render("admin/projects.html", { csrfToken: req.csrfToken() })
   })
 
   // 记录
   app.get("/records", csrfProtection, (req, res) => {
-    res.render("records.html")
+    res.render("admin/records.html", { csrfToken: req.csrfToken() })
   })
 
   // 查询发布记录

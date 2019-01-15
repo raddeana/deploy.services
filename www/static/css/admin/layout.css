@@ -2,10 +2,18 @@ html {
     font-size: 12px;
 }
 
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .header {
     position: relative;
     border-bottom: 1px solid #d0d0d0;
-    background: #03c3ff;
+    background: #46A3FF;
 }
 
 .header .navbar-brand {
@@ -14,4 +22,10 @@ html {
 
 .header .nav-link {
     color: #fff;
+}
+
+.panel {
+    height: 360px;
+    background: rgba(0, 0, 0, 0.4);
+    margin: 25px 30px 0;
 }
