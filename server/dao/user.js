@@ -30,29 +30,35 @@ schema.statics = {
      * 登录
      * @param {string} 用户名
      * @param {string} 密码
-     * @return {boolean} 登陆结果
+     * @return {object} 用户
      */
     async login (username, password) {
-        let user = await this.findOne({ username }).exec()
-
-        console.log(' ================ >')
-        console.log(user)
+        let user = null
+    
+        try {
+            user = await this.findOne({ username }).exec()
+        } catch (e) {
+            return {
+                code: 500,
+                message: "未知错误，请重试"
+            }
+        }
         
         if (user && user.password === password) {
             return {
-                success: true,
+                code: 200,
                 user
             }
         } else {
             if (!user) {
                 return {
-                    success: false,
-                    message: "用户名错误"
+                    code: 403,
+                    message: '用户名错误'           
                 }
             } else {
                 return {
-                    success: false,
-                    message: "密码不正确"
+                    code: 403,
+                    message: '密码错误'
                 }
             }
         }

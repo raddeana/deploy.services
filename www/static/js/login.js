@@ -8,6 +8,11 @@ require.config({
         'jquery': 'https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery-3.3.1.min',
         'jquery-toast': 'https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/jquery/jquery.toast.min',
         'constants': 'constants/http-codes'
+    },
+    shim: {
+		'jquery-toast': {
+            deps: ['jquery']
+        }
     }
 })
 
@@ -77,11 +82,10 @@ require(['jquery', 'jquery-toast'], function () {
         }).then(() => {
             window.location.href = '/admin'
         }, (res) => {
-            let data = res.responseJSON
-            let { status, message } = res
+            let { status, responseJSON } = res
+            let { message } = responseJSON
 
             $.toast({
-                heading: status === '500' ? '服务器内部错误' : '',
                 text: message || `未知错误${status}`,
                 position: {
                     top: 20,

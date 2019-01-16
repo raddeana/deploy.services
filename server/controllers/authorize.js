@@ -2,7 +2,7 @@
  * 登录
  * @author Philip
  */
-const userDao = require('../dao/user')
+const userDao = require("../dao/user")
 
 /**
  * 登录
@@ -10,12 +10,17 @@ const userDao = require('../dao/user')
  */
 module.exports.login = async (req, res) => {
     let { username, password } = req.body
-    let { success, user, message } = await userDao.login(username, password)
+    let { message, user, code } = await userDao.login(username, password)
 
-    if (success) {
+    if (code === '200') {
         req.session.user = user
+        res.send(code, user)
     } else {
-        res.send('403', { message })
+        if (!user) {
+            res.send(code, { message })
+        } else {
+            res.send(code, { message })
+        }
     }
 }
 

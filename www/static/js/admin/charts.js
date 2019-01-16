@@ -108,7 +108,9 @@ require(['jquery', 'jquery-toast'], function () {
             stack: '总量',
             data:[220, 182, 191, 234, 290, 330, 310]
         }],
-        saveAsImage: false 
+        toolbox: {
+            show: false,
+        }
     }
 
     let axisChart = echarts.init(document.getElementById('axis'))
