@@ -1,5 +1,5 @@
 /**
- * 管理
+ * 项目
  * @author Philip
  */
 require.config({

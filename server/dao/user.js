@@ -37,6 +37,8 @@ schema.statics = {
     
         try {
             user = await this.findOne({ username }).exec()
+
+            console.log(user, username)
         } catch (e) {
             return {
                 code: 500,

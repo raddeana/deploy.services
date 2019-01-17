@@ -39,18 +39,6 @@ app.use(midStatic)
 const db = require("./services/mongo")
 const MongoStore = require("connect-mongo")(session)
 
-const UserDao = require('./dao/user')
-
-var ud = new UserDao({
-    password:  "Mongoose",
-    username: "L",
-    body:   "Documents are instances of out model. Creating them and saving to the database is easy"
-});
-
-ud.save(function (err, docs){
-    console.log('保存成功：' + docs);
-});
-
 app.use(cookieParser(secret))
 app.use(session({
     secret,

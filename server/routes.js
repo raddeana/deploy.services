@@ -25,22 +25,34 @@ module.exports = (app) => {
 
   // 管理员
   app.get("/admin", csrfProtection, (req, res) => {
-    res.render("admin/index.html", { csrfToken: req.csrfToken() })
+    res.render("admin/index.html", { 
+      csrfToken: req.csrfToken(),
+      name: 'index'
+    })
   })
 
   // 图表
   app.get("/charts", csrfProtection, (req, res) => {
-    res.render("admin/charts.html", { csrfToken: req.csrfToken() })
+    res.render("admin/charts.html", { 
+      csrfToken: req.csrfToken(),
+      name: 'charts'
+    })
   })
 
   // 项目
   app.get("/projects", csrfProtection, (req, res) => {
-    res.render("admin/projects.html", { csrfToken: req.csrfToken() })
+    res.render("admin/projects.html", { 
+      csrfToken: req.csrfToken(),
+      name: 'projects'
+    })
   })
 
   // 记录
   app.get("/records", csrfProtection, (req, res) => {
-    res.render("admin/records.html", { csrfToken: req.csrfToken() })
+    res.render("admin/records.html", { 
+      csrfToken: req.csrfToken(),
+      name: 'records'
+    })
   })
 
   // 查询发布记录
@@ -49,7 +61,7 @@ module.exports = (app) => {
   })
 
   // 查询发布记录
-  app.post("/api/logout", (req, res) => {
+  app.post("/logout", (req, res) => {
     authorizeController.logout(req, res)
   })
 
