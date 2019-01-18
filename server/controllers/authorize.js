@@ -13,7 +13,7 @@ module.exports.login = async (req, res) => {
     let { message, user, code } = await userDao.login(username, password)
 
     if (code === '200') {
-        req.session.user = user
+        req.session.userId = user._id
         res.send(code, user)
     } else {
         if (!user) {
@@ -30,7 +30,6 @@ module.exports.login = async (req, res) => {
  */
 module.exports.logout = async (req, res) => {
 	req.session.user = null
-    req.session.error = null
     
 	res.redirect("/login")
 }

@@ -7,21 +7,60 @@
         <div class="wrapper">
             <% include ./common/nav.html %>
             <div class="layout">
-                <div class="panel">
-                    <div class="chart-pie" id="pie"></div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="view-projects">
+                    <div class="panel">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">项目名称</th>
+                                    <th scope="col">git名称</th>
+                                    <th scope="col">类型</th>
+                                    <th scope="col">语言</th>
+                                    <th scope="col">git地址</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>
+                                        <a href="javascript:;">删除</a>
+                                        <a href="javascript:;">编辑</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a 
+                                        class="page-link" 
+                                        href="#" 
+                                        tabindex="-1" 
+                                        aria-disabled="true"
+                                    >
+                                        Previous
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
             <% include ./common/footer.html %>

@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
 const { url, secret } = require("./config/mongo")
 const connect = require("./services/mongo")
 const corsMiddleware = require("./middlewares/cors")
-const authMiddleware = require("./middlewares/auth")
+const authorizeMiddleware = require("./middlewares/authorize")
 const routes = require("./routes")
 
 const app = express()
@@ -54,7 +54,7 @@ app.use(session({
 }))
 
 app.use(corsMiddleware)
-app.use(authMiddleware)
+app.use(authorizeMiddleware)
 
 routes(app)
 

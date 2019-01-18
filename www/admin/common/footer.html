@@ -84,9 +84,9 @@
     let startTime = new Date().getTime()
     let currentTime = 0
 
-    let planetGeom = new THREE.SphereGeometry(Math.floor(6371 * uScale), 32, 32);
+    let planetGeom = new THREE.SphereGeometry(Math.floor(6354 * uScale), 32, 32);
     let planetMaterial = new THREE.MeshBasicMaterial({
-        color: '#5151A2'
+        color: '#000'
     })
 
     let planet1 = new THREE.Mesh(planetGeom, planetMaterial)

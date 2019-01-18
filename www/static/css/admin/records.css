@@ -1,0 +1,12 @@
+.view-records .panel {
+    padding: 15px 10px 20px;
+}
+
+.view-records .table {
+    font-size: 12px;
+    color: #fff;
+}
+
+.view-records a {
+    text-decoration: none;
+}
