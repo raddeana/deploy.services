@@ -13,10 +13,16 @@ const csrf = require('csurf')
 const csrfProtection = csrf({ cookie: true })
 
 module.exports = (app) => {
+  // 天空页
+  app.get("/", (req, res) => {
+    res.render("index.html")
+  })
+
   // 登陆页
   app.get("/login", (req, res) => {
     res.render("login.html")
   })
+  
 
   // 图表
   app.get("/charts", csrfProtection, (req, res) => {
