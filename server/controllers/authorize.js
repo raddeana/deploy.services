@@ -14,14 +14,19 @@ module.exports.login = async (req, res) => {
 
     if (code === 200) {
         req.session.user = user
+        
         res.send(code, {
             token: req.session.id
         })
     } else {
         if (!user) {
-            res.send(code, { message })
+            res.send(code, { 
+                message
+            })
         } else {
-            res.send(code, { message })
+            res.send(code, {
+                message
+            })
         }
     }
 }
@@ -31,6 +36,8 @@ module.exports.login = async (req, res) => {
  * @Controller
  */
 module.exports.logout = async (req, res) => {
-	req.session.regenerate()
+    req.session.regenerate()
+    req.session.user = null
+    
 	res.redirect("/login")
 }

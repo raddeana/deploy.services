@@ -9,8 +9,7 @@ const Schema = mongoose.Schema
 const schema = new Schema({
     release: {
         type: Boolean,
-        default: "",
-        trim: true
+        default: false
     },
     ref: {
         type: String,
@@ -69,14 +68,21 @@ schema.path("added").required(true, "added cannot be blank")
 schema.statics = {
   /**
     * 获取release 记录列表
-    * @param {object} options
+    * @param {object} 过滤条件
+    * @param {number} 页码
+    * @param {number} 大小
     * @return {array} list
     */
-    async list (options) {
-        let query = options.query || {}
-        let result = await this.find(query)
+    async query (filters, pageIndex, pageSize) {
+        let result = await this.find(filters)
           .sort({ createdAt: -1 })
           .exec()
+
+        if (result) {
+
+        }
+
+        console.log(result)
 
         return result
     },

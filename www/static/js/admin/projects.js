@@ -17,5 +17,7 @@ require.config({
 })
 
 require(['jquery', 'jquery-toast'], function () {
-    
+    $.ajax({
+        url: '/api/list',
+    })
 })

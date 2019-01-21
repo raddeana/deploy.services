@@ -24,10 +24,10 @@ const schema = new Schema({
  
 // 校验
 schema.path("code").required(true, "code cannot be blank")
-schema.path("message").required(true, "message cannot be blank")
 schema.path("retry").required(true, "retry cannot be blank")
+schema.path("message").required(true, "message cannot be blank")
 
-schema.statics = {  
+schema.statics = {
   /**
    * 添加部署结果
    * @param {object} 部署结果对象

@@ -34,13 +34,15 @@ module.exports.query = (req, res) => {
  * @Controller
  */
 module.exports.create = (req, res) => {
-  const result = projectDao.create(req.body)
-  
-  if (result.success) {
-    res.json(result.data)
-  } else {
-    res.send(result.code, { message: result.message })
-  }
+    const result = projectDao.create(req.body)
+    
+    if (result.success) {
+        res.json(result.data)
+    } else {
+        res.send(result.code, { 
+            message: result.message 
+        })
+    }
 }
 
 /**

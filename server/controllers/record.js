@@ -2,30 +2,31 @@
  * git钩子记录
  * @author Philip
  */
-const hookRecordDao = require("../dao/record") 
+const recordDao = require("../dao/record")
 
 /**
  * 记录查询
  * @Controller
  */
-module.exports.query = (res, req) => {
-    const params = req.params
-    const condition = {}
+module.exports.query = async (req, res) => {
+    let params = req.query || {}
+    let { pageIndex, pageSize } = params
+    let filters = {}
     
-    Objects.keys(params).forEach((key) => {
+    Object.keys(params).forEach((key) => {
         const val = params[key]
         
         if (key !== "pageIndex" || key !== "pageSize") {
-            condition[key] = val
+            filters[key] = val
         }
     })
     
-    const result = hookRecordDao.query(condition, params.pageIndex, params.pageSize)
-    
-    if (result.success) {
-        res.json(result.data)
+    const { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
+
+    if (code === 200) {
+        res.json(data)
     } else {
-        res.send(result.code, { message: result.message })
+        res.send(code, { message })
     }
 }
 
@@ -33,11 +34,11 @@ module.exports.query = (res, req) => {
  * 记录删除
  * @Controller
  */
-module.exports.remove = (res, req) => {
-    const params = req.params
+module.exports.remove = (req, res) => {
+    const params = req.params || {}
     const condition = {}
     
-    Objects.keys(params).forEach((key) => {
+    Object.keys(params).forEach((key) => {
         const val = params[key]
         
         if (key !== "pageIndex" || key !== "pageSize") {
@@ -45,7 +46,7 @@ module.exports.remove = (res, req) => {
         }
     })
   
-    const result = hookRecordDao.query(condition, params.pageIndex, params.pageSize)
+    const result = recordDao.query(condition, params.pageIndex, params.pageSize)
   
     if (result.success) {
         res.json(result.data)

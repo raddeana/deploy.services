@@ -59,7 +59,7 @@ module.exports = (app) => {
   })
 
   // 查询发布记录
-  app.get("/api/record", (req, res) => {
+  app.get("/api/records", (req, res) => {
     recordController.query(req, res)
   })
   
