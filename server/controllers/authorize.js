@@ -12,9 +12,11 @@ module.exports.login = async (req, res) => {
     let { username, password } = req.body
     let { message, user, code } = await userDao.login(username, password)
 
-    if (code === '200') {
-        req.session.userId = user._id
-        res.send(code, user)
+    if (code === 200) {
+        req.session.user = user
+        res.send(code, {
+            token: req.session.id
+        })
     } else {
         if (!user) {
             res.send(code, { message })
@@ -29,7 +31,6 @@ module.exports.login = async (req, res) => {
  * @Controller
  */
 module.exports.logout = async (req, res) => {
-	req.session.user = null
-    
+	req.session.regenerate()
 	res.redirect("/login")
 }

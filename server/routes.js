@@ -13,22 +13,9 @@ const csrf = require('csurf')
 const csrfProtection = csrf({ cookie: true })
 
 module.exports = (app) => {
-  // 首页
-  app.get("/", (req, res) => {
-    res.render("index.html")
-  })
-
   // 登陆页
   app.get("/login", (req, res) => {
     res.render("login.html")
-  })
-
-  // 管理员
-  app.get("/admin", csrfProtection, (req, res) => {
-    res.render("admin/index.html", { 
-      csrfToken: req.csrfToken(),
-      name: 'index'
-    })
   })
 
   // 图表
@@ -61,7 +48,7 @@ module.exports = (app) => {
   })
 
   // 查询发布记录
-  app.post("/logout", (req, res) => {
+  app.get("/logout", (req, res) => {
     authorizeController.logout(req, res)
   })
 

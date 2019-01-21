@@ -80,7 +80,7 @@ require(['jquery', 'jquery-toast'], function () {
                 password
             }),
         }).then(() => {
-            window.location.href = '/admin'
+            window.location.href = '/charts'
         }, (res) => {
             let { status, responseJSON } = res
             let { message } = responseJSON
