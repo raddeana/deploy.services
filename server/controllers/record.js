@@ -16,12 +16,12 @@ module.exports.query = async (req, res) => {
     Object.keys(params).forEach((key) => {
         const val = params[key]
         
-        if (key !== "pageIndex" || key !== "pageSize") {
+        if (key !== "pageIndex" && key !== "pageSize") {
             filters[key] = val
         }
     })
     
-    const { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
+    let { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
 
     if (code === 200) {
         res.json(data)
@@ -35,8 +35,8 @@ module.exports.query = async (req, res) => {
  * @Controller
  */
 module.exports.remove = (req, res) => {
-    const params = req.params || {}
-    const condition = {}
+    let params = req.params || {}
+    let condition = {}
     
     Object.keys(params).forEach((key) => {
         const val = params[key]
@@ -46,7 +46,7 @@ module.exports.remove = (req, res) => {
         }
     })
   
-    const result = recordDao.query(condition, params.pageIndex, params.pageSize)
+    let result = recordDao.query(condition, params.pageIndex, params.pageSize)
   
     if (result.success) {
         res.json(result.data)

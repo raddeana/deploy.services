@@ -91,17 +91,24 @@ schema.statics = {
 
   /**
    * 查询项目
-   * @param {object} 查询对象
-   * @return {array} list
+   * @param {object} 过滤条件
+   * @param {number} 页码
+   * @param {number} 大小
+   * @return {object} 查询结果
    */
-  async query (condition, pageSize, pageIndex) {
-    const queryResult = await this.find(condition).exec()
-    const total = await queryResult.count()
-    const list = await queryResult.skip((pageIndex - 1) * pageSize).limit(pageSize).sort({"_id": -1}).exec()
-    
+  async query (filters, pageSize, pageIndex) {
+    let query = this.find(filters)
+    let total = await query.count()
+    let list = await query.skip(pageSize * (pageIndex - 1)).limit(pageSize * pageIndex)
+        .sort({ createdAt: -1 })
+        .exec('find')
+
     return {
-      list,
-      total
+        code: 200,
+        data: {
+            list,
+            total
+        }
     }
   },
   

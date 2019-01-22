@@ -71,20 +71,22 @@ schema.statics = {
     * @param {object} 过滤条件
     * @param {number} 页码
     * @param {number} 大小
-    * @return {array} list
+    * @return {object} 查询结果
     */
     async query (filters, pageIndex, pageSize) {
-        let result = await this.find(filters)
-          .sort({ createdAt: -1 })
-          .exec()
+        let query = this.find(filters)
+        let total = await query.count()
+        let list = await query.skip(pageSize * (pageIndex - 1)).limit(pageSize * pageIndex)
+            .sort({ createdAt: -1 })
+            .exec('find')
 
-        if (result) {
-
+        return {
+            code: 200,
+            data: {
+                list,
+                total
+            }
         }
-
-        console.log(result)
-
-        return result
     },
     
     /**

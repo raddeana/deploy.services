@@ -16,7 +16,7 @@ a {
     text-decoration: none;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 767px) {
     .button-container {
         margin: 10px 0 0 0;
         text-align: right;
