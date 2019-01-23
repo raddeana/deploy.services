@@ -62,6 +62,32 @@ schema.statics = {
                 }
             }
         }
+    },
+
+    /**
+     * 登录
+     * @param {string} 用户名
+     * @param {string} 密码
+     * @return {object} 用户
+     */
+    async modifyPassword (_user) {
+        let user = null
+    
+        try {
+            await user.findByIdAndUpdate(user._id, _user)
+        } catch (e) {
+            return {
+                code: 404,
+                message: "用户未找到"
+            }
+        }
+        
+        return {
+            code: 200,
+            data: {
+                _id: user._id
+            }
+        }
     }
 }
 

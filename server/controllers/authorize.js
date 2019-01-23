@@ -41,3 +41,17 @@ module.exports.logout = async (req, res) => {
     
 	res.redirect("/login")
 }
+
+/**
+ * 修改密码
+ * @Controller
+ */
+module.exports.modifyPassword = async (req, res) => {
+    let user = req.body
+    let result = await userDao.login(username, password)
+    let { code, message } = result
+
+    res.send(code, {
+        message
+    })
+}

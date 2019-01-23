@@ -2,6 +2,7 @@
  * 图表
  * @author Philip
  */
+
 require.config({
     baseUrl: 'js/',
     paths: {
@@ -16,7 +17,7 @@ require.config({
     }
 })
 
-require(['jquery', 'jquery-toast'], function () {
+require(['jquery', 'jquery-toast'], () => {
     let pieConfig = {
         visualMap: {
             show: false,

@@ -2,6 +2,7 @@
  * 项目
  * @author Philip
  */
+
 require.config({
     baseUrl: 'js/',
     paths: {

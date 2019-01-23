@@ -2,6 +2,7 @@
  * 记录
  * @author Philip
  */
+
 require.config({
     baseUrl: 'js/',
     paths: {
