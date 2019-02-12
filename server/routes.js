@@ -3,11 +3,11 @@
  * @author Philip
  */
 
-const recordController = require("./controllers/record")
-const projectController = require("./controllers/project")
-const githookController = require("./controllers/githook")
-const authorizeController = require("./controllers/authorize")
-const statisticsController = require("./controllers/statistics")
+const recordController = require("./controller/record")
+const projectController = require("./controller/project")
+const githookController = require("./controller/githook")
+const authorizeController = require("./controller/authorize")
+const statisticsController = require("./controller/statistics")
 const csrf = require('csurf')
 
 // csrf

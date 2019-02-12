@@ -20,7 +20,7 @@ module.exports.login = async (req, res) => {
         })
     } else {
         if (!user) {
-            res.send(code, { 
+            res.send(code, {
                 message
             })
         } else {
