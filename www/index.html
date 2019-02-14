@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 	<head>
-		<title>无尽天空</title>
+			<title>无尽天空</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="bookmark" type="image/x-icon" href="https://raddeana-materials.oss-cn-hangzhou.aliyuncs.com/images/logo.png" />
-		<link rel="shortcut icon" href="https://raddeana-materials.oss-cn-hangzhou.aliyuncs.com/images/logo.png">
-        <link href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace-theme-flash.min.css" rel="stylesheet">
-        <script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace.min.js"></script>
+			<link rel="bookmark" type="image/x-icon" href="https://raddeana-materials.oss-cn-hangzhou.aliyuncs.com/images/logo.png" />
+			<link rel="shortcut icon" href="https://raddeana-materials.oss-cn-hangzhou.aliyuncs.com/images/logo.png">
+			<link href="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace-theme-flash.min.css" rel="stylesheet">
+			<script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/pace/pace.min.js"></script>
 	    <style type="text/css">
 				body {
 				  background-color: #326696;
@@ -27,33 +27,33 @@
 	    </style>
 	</head>
 	<body id="body">
-		<script id="vs" type="x-shader/x-vertex">
-			varying vec2 vUv;
+			<script id="vs" type="x-shader/x-vertex">
+					varying vec2 vUv;
 
-			void main () {
-				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-			}
-		</script>
-		<script id="fs" type="x-shader/x-fragment">
-			uniform sampler2D map;
+					void main () {
+							vUv = uv;
+							gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+					}
+			</script>
+			<script id="fs" type="x-shader/x-fragment">
+				uniform sampler2D map;
 
-			uniform vec3 fogColor;
-			uniform float fogNear;
-			uniform float fogFar;
+				uniform vec3 fogColor;
+				uniform float fogNear;
+				uniform float fogFar;
 
-			varying vec2 vUv;
+				varying vec2 vUv;
 
-			void main () {
-				float depth = gl_FragCoord.z / gl_FragCoord.w;
-				float fogFactor = smoothstep(fogNear, fogFar, depth);
+				void main () {
+					float depth = gl_FragCoord.z / gl_FragCoord.w;
+					float fogFactor = smoothstep(fogNear, fogFar, depth);
 
-				gl_FragColor = texture2D(map, vUv);
-				gl_FragColor.w *= pow(gl_FragCoord.z, 20.0);
-				gl_FragColor = mix(gl_FragColor, vec4(fogColor, gl_FragColor.w), fogFactor);
-			}
-		</script>
-		<script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/threejs/three.min.js"></script>
-		<script type="text/javascript" src="/js/utils/clouds.js"></script>
+					gl_FragColor = texture2D(map, vUv);
+					gl_FragColor.w *= pow(gl_FragCoord.z, 20.0);
+					gl_FragColor = mix(gl_FragColor, vec4(fogColor, gl_FragColor.w), fogFactor);
+				}
+			</script>
+			<script type="text/javascript" src="https://raddeana-libs.oss-cn-hangzhou.aliyuncs.com/threejs/three.min.js"></script>
+			<script type="text/javascript" src="/js/utils/clouds.js"></script>
 	</body>
 </html>

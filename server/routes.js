@@ -88,12 +88,7 @@ module.exports = (app) => {
         projectController.delete(req, res)
     })
 
-    // github hook 接口
-    app.post("/api/git/release", (req, res) => {
-        githookController.post(req, res)
-    })
-
-    // github hook 接口
+    // 修改密码
     app.post("/api/modify-password", (req, res) => {
         authorizeController.modifypassword(req, res)
     })
@@ -106,5 +101,10 @@ module.exports = (app) => {
     // 提交统计接口
     app.get("/api/statistics/commits", (req, res) => {
         statisticsController.commits(req, res)
+    })
+
+    // github hook 接口
+    app.post("/api/git/release", (req, res) => {
+        githookController.post(req, res)
     })
 }
