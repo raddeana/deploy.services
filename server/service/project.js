@@ -3,20 +3,24 @@
  * @author Philip
  */
 const fs = require('fs')
-const shell = require('shelljs')
+const { exec, echo, exit } = require('./shell')
 
 /**
  * 启动项目
  * @param {string} 项目名称
  * @return none
  */
-module.exports.start = (project) => {
-    if (shell.exec(`pm2 start --name="${project}" npm -- start`).code !== 0) {
-        shell.echo(`Error:\tstart\t${project}\tfailed`)
+module.exports.start = async (args) => {
+    let code = await exec(`pm2 start --name="${args[0]}" npm -- start`)
+
+    if (code !== 0) {
+        echo(`Error:\tstart\t${args[0]}\tfailed`)
+        exit(1)
+        
         return false
     }
 
-    shell.echo(`Info: start\t${project}\tsuccess`)
+    echo(`Info: start\t${args[0]}\tsuccess`)
     return true
 }
 
@@ -25,13 +29,17 @@ module.exports.start = (project) => {
  * @param {string} 项目名称
  * @return none
  */
-module.exports.restart = (project) => {
-    if (shell.exec(`pm2 restart ${project}`).code !== 0) {
-        shell.echo(`Error:\trestart\t${project}\tfailed`)
+module.exports.restart = async (args) => {
+    let code = await exec(`pm2 restart ${args[0]}`)
+
+    if (code !== 0) {
+        echo(`Error:\trestart\t${args[0]}\tfailed`)
+        exit(1)
+
         return false
     }
     
-    shell.echo(`Error:\trestart\t${project}\tsuccess`)
+    echo(`Error:\trestart\t${args[0]}\tsuccess`)
     return true
 }
 

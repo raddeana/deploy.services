@@ -24,31 +24,40 @@ class Proxy {
     /**
      * 获取行为处理函数
      * @param {string} 行为
-     * @return {function} 获取行为处理函数
+     * @param {array} 参数
+     * @return {boolean} 行为结果，成功或者失败
      */
-    getActionHandler (action) {
-        let result = null
+    async actionHandler (action, args) {
+        let success = false
 
         switch (action) {
             case "npm.build":
-                result = npm.build.bind(npm)
+                success = await npm.build(args)
+                break
             case "catalog.to":
-                result = catalog.to.bind(catalog)
+                success = await catalog.to(args)
+                break
             case "catalog.back":
-                result = catalog.back.bind(catalog)
+                success = await catalog.back(args)
+                break
             case "project.start":
-                result = project.start.bind(project)
+                success = await project.start(args)
+                break
             case "project.restart":
-                result = project.restart.bind(project)
+                success = await project.restart(args)
+                break
             case "project.replaceHash":
-                result = project.replaceHash.bind(project)
+                success = await project.replaceHash(args)
+                break
             case "git.push":
-                result = git.push.bind(git)
+                success = await git.push(args)
+                break
             case "git.pull":
-                result = git.pull.bind(git)
+                success = await git.pull(args)
+                break
         }
 
-        return result
+        return success
     }
   
     /**
@@ -94,27 +103,18 @@ class Proxy {
    * @param {array} 调用数组
    * @return {object} 调用结果
    */
-    call (action, args) {
-        const actionHandler = this.getActionHandler(action)
+    async call (action, args) {
+        const success = await this.actionHandler.bind(this)(action, args)
 
-        if (actionHandler) {
-            const success = actionHandler.apply(this.context, args)
-
-            if (success) {
-                return {
-                    success: true,
-                    message: "execute success"
-                }
-            } else {
-                return {
-                    success: false,
-                    message: this.getActionErrorMsg(action)
-                }
+        if (success) {
+            return {
+                success: true,
+                message: "execute success"
             }
         } else {
             return {
                 success: false,
-                message: "未知行为名称"
+                message: this.getActionErrorMsg(action)
             }
         }
     }

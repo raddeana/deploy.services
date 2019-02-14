@@ -2,7 +2,7 @@
  * 统计控制器
  * @author Philip
  */
-const recordDao = require("../dao/record")
+const releaseRecordDao = require("../dao/releaseRecord")
 
 /**
  * 提交分类统计
@@ -12,7 +12,7 @@ module.exports.categories = async (req, res) => {
     let params = req.query || {}
     let { startTime, endTime } = params
 
-    let { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
+    let { code, message, data } = await releaseRecordDao.query(filters, pageIndex, pageSize)
 }
 
 /**
@@ -23,5 +23,5 @@ module.exports.commits = async (req, res) => {
     let params = req.query || {}
     let { startTime, endTime } = params
 
-    let { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
+    let { code, message, data } = await releaseRecordDao.query(filters, pageIndex, pageSize)
 }

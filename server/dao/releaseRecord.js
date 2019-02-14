@@ -7,11 +7,12 @@ const Schema = mongoose.Schema
 
 // 发布记录
 const schema = new Schema({
-    release: {
-        type: Boolean,
-        default: false
+    url: {
+        type: String,
+        default: "",
+        trim: true
     },
-    ref: {
+    tag_name: {
         type: String,
         default: "",
         trim: true
@@ -21,26 +22,10 @@ const schema = new Schema({
         default: "",
         trim: true
     },
-    branch: {
+    published_at: {
         type: String,
         default: "",
         trim: true
-    },
-    messages: {
-        type: Array,
-        default: []
-    },
-    modified: {
-        type: Array,
-        default: []
-    },
-    removed: {
-        type: Array,
-        default: []
-    },
-    added: {
-        type: Array,
-        default: []
     },
     errorMsg: {
         type: String,
@@ -58,12 +43,10 @@ const schema = new Schema({
 })
  
 // 校验
-schema.path("ref").required(true, "ref cannot be blank")
+schema.path("url").required(true, "ref cannot be blank")
 schema.path("repository").required(true, "repository cannot be blank")
-schema.path("messages").required(true, "messages cannot be blank")
-schema.path("modified").required(true, "modified cannot be blank")
-schema.path("removed").required(true, "removed cannot be blank")
-schema.path("added").required(true, "added cannot be blank")
+schema.path("tag_name").required(true, "messages cannot be blank")
+schema.path("published_at").required(true, "modified cannot be blank")
 
 schema.statics = {
   /**
@@ -114,4 +97,4 @@ schema.statics = {
     }
 }
  
-module.exports = mongoose.model("record", schema)
+module.exports = mongoose.model("releaseRecord", schema)

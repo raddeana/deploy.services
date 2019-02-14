@@ -12,10 +12,10 @@ const Proxy = require("../service/proxy")
 const aliOss = require("../service/ali-oss")
 
 // dao
-const Record = require("../dto/ReleaseRecord")
+const releaseRecordDao = require("../dao/releaseRecord")
 
 // dto
-const RecordDTO = require("../dto/ReleaseRecord")
+const RecordDto = require("../dto/ReleaseRecord")
 const HookData = require("../dto/HookData")
 
 /**
@@ -24,7 +24,7 @@ const HookData = require("../dto/HookData")
  * @param {function} 处理函数
  * @return none
  */
-let ergodicFolder = async function (folderPath, handler) {
+let ergodicFolder = async (folderPath, handler) => {
     let files = fs.readdirSync(folderPath)
     
     for (let i = 0, len = files.length; i < len; i++) {
@@ -43,47 +43,46 @@ let ergodicFolder = async function (folderPath, handler) {
  * git release
  * @Controller
  */
-module.exports.release = async function (req, res) {
+module.exports.release = async (req, res) => {
     let proxy = new Proxy()
     let hookData = new HookData(req.body)
-    let config = aliOss.getConfig()
+    let { repository } = hookData.get()
+    let { web_dir, server_dir } = path
+    let isWeb = /\.web/.test(repository)
 
-    let isWeb = /\.web/.test(hookData.repository)
-    let catalog = isWeb ? path.web : path.server
+    repository = repository.replace('blog.', '').replace('.web', '')
 
-    proxy.call("catalog.to", [`${hookData.project}/${catalog}`])
-    proxy.call("git.pull", [])
+    let catalog = isWeb ? web_dir : server_dir
+    let result = {
+        catalogTo: '',
+        gitPull: '',
+        npmBuild: '',
+        projectReplaceHash: '',
+        gitPush: ''
+    }
+
+    result.catalogTo = await proxy.call("catalog.to", [`${repository}/${catalog}`])
+    result.gitPull = await proxy.call("git.pull", [])
 
     // 构建可发布版本
     if (isWeb) {
-        proxy.call("npm.build", [`${hookData.project}`])
-        proxy.call("project.replaceHash", [])
+        result.npmBuild = await proxy.call("npm.build", [`${repository}`])
+        result.projectReplaceHash = proxy.call("project.replaceHash", [])
 
-        proxy.call("git.push", [`${hookData.project}`])
-    }
-
-    let oss = {
-        success: 0,
-        fail: 0
+        result.gitPush = await proxy.call("git.push", [`${repository}`])
     }
     
     if (isWeb) {
-        ergodicFolder(`${hookData.project}/${catalog}`, async (filepath) => {
-            let result = await aliOss.upload(filepath)
-            
-            if (result) {
-                oss.success++
-            } else {
-                oss.fail++
-            }
+        ergodicFolder('dist', (filepath) => {
+            aliOss.upload(filepath)
         })
     }
     
-    await Record.create(new RecordDTO(hookData).get(), oss)
+    await releaseRecordDao.create(new RecordDto(hookData).get(), result)
 
-    proxy.call("project.restart", [`${hookData.project}`])
-    proxy.call("project.start", [`${hookData.project}`])
-    proxy.call("catalog.back", [])
+    await proxy.call("project.restart", [`${hookData.project}`])
+    await proxy.call("project.start", [`${hookData.project}`])
+    await proxy.call("catalog.back", [])
 
     res.send({
         message: "hello github"

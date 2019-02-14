@@ -20,11 +20,11 @@ const schema = new Schema({
   },
   oss: {
     type: Object,
-    default: ""
+    default: {}
   },
   technology: {
     type: Object,
-    default: ""
+    default: {}
   },
   server: {
     type: String,
@@ -48,7 +48,7 @@ const schema = new Schema({
   },
   versions: {
     type: Array,
-    default: ""
+    default: []
   }
 })
  
@@ -120,4 +120,4 @@ schema.statics = {
   }
 }
  
-module.exports = mongoose.model("project", schema)
+module.exports = schema

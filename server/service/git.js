@@ -1,17 +1,19 @@
 /**
- * 命令行操作
+ * git 命令
  * @author Philip
  */
-const shell = require('shelljs')
+const { exec, echo, exit } = require('./shell')
 
 /**
  * 拉取
  * @return none
  */
-module.exports.pull = (project) => {
-    if (shell.exec("git pull").code !== 0) {
-        shell.echo(`Error:\tpull\t${project}\tfailed`)
-        shell.exit(1)
+module.exports.pull = async (args) => {
+    let code = await exec("git pull")
+
+    if (code !== 0) {
+        echo(`Error:\tpull\t${args[0]}\tfailed`)
+        exit(1)
 
         return false
     }
@@ -23,13 +25,10 @@ module.exports.pull = (project) => {
  * node 推送
  * @return none
  */
-module.exports.push = (project) => {
-    if (shell.exec("git add -A").code !== 0 && shell.exec("git common -m'auto@build'").code !== 0 && shell.exec("git push").code !== 0) {
-        shell.echo(`Error:\tpull\t${project}\tfailed`)
-        shell.exit(1)
-        
-        return false
-    }
+module.exports.push = async () => {
+    await exec("git add -A")
+    await exec("git common -m'auto@build'")
+    await exec("git push")
     
     return true
 }

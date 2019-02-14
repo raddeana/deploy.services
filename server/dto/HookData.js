@@ -9,35 +9,22 @@ class HookData {
      * @Contrutor
      */
     constructor (data) {
-        const commits = data.commits
-
-        let modified = []
-        let removed = []
-        let added = []
-        let messages = []
-
-        console.log(data)
-
-        commits.forEach((commit) => {
-            messages.push(commit.message)
-            modified = modified.concat(commit.modified)
-            removed = removed.concat(commit.removed)
-            added = added.concat(commit.added)
-        })
-
-        const _data = {
-            release: null,
-            ref: data.ref,
-            repository: data.repository.name,
-            master_branch: data.repository.master_branch,
-            default_branch: data.repository.default_branch,
-            messages,
-            modified,
-            removed,
-            added
+        if (typeof data === 'string') {
+            try {
+                data = JSON.parse(data)
+            } catch (e) {
+                throw(e)
+            }
         }
 
-        this.data = _data
+        const { repository, release } = data
+
+        this.data = {
+            url: release.url,
+            tag_name: release.tag_name,
+            repository: repository.name,
+            published_at: release.published_at
+        }
     }
 
     /**

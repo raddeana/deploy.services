@@ -2,18 +2,21 @@
  * 目录变更
  * @author Philip
  */
-const shell = require("shelljs")
+const { exec, echo, exit } = require('./shell')
 const path = require("../config/path")
 
 /**
  * 跳转至项目目录
- * @param {object} 可用配置对象
+ * @param {array} 参数数组
  * @return none
  */
-module.exports.to = (dir) => {
-    if (shell.cd(dir).code !== 0) {
-        shell.back()
-        shell.exit(1)
+module.exports.to = async (args) => {
+    let code = await exec(`cd ${args[0]}`)
+
+    if (code !== 0) {
+        return true
+    } else {
+        return false
     }
 }
 
@@ -21,8 +24,12 @@ module.exports.to = (dir) => {
  * 回到部署服务目录
  * @return none
  */
-module.exports.back = () => {
-    if (shell.cd(path.deploydir_path).code !== 0) {
-        shell.exit(1)
+module.exports.back = async () => {
+    let code = await exec(`cd ${path.deploydir_path}`)
+
+    if (code !== 0) {
+        return true
+    } else {
+        return false
     }
 }
