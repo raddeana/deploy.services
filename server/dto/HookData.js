@@ -16,6 +16,8 @@ class HookData {
         let added = []
         let messages = []
 
+        console.log(data)
+
         commits.forEach((commit) => {
             messages.push(commit.message)
             modified = modified.concat(commit.modified)

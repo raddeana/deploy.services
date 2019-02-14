@@ -2,7 +2,7 @@
  * git钩子记录
  * @author Philip
  */
-const recordDao = require("../dao/record")
+const releaseRecordDao = require("../dao/releaseRecord")
 
 /**
  * 记录查询
@@ -21,7 +21,7 @@ module.exports.query = async (req, res) => {
         }
     })
     
-    let { code, message, data } = await recordDao.query(filters, pageIndex, pageSize)
+    let { code, message, data } = await releaseRecordDao.query(filters, pageIndex, pageSize)
 
     if (code === 200) {
         res.json(data)
@@ -46,7 +46,7 @@ module.exports.remove = (req, res) => {
         }
     })
   
-    let result = recordDao.query(condition, params.pageIndex, params.pageSize)
+    let result = releaseRecordDao.query(condition, params.pageIndex, params.pageSize)
   
     if (result.success) {
         res.json(result.data)

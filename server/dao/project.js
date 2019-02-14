@@ -18,15 +18,13 @@ const schema = new Schema({
     default: "",
     trim: true
   },
-  qn: {
+  oss: {
     type: Object,
-    default: "",
-    trim: true
+    default: ""
   },
-  web: {
-    type: String,
-    default: "",
-    trim: true
+  technology: {
+    type: Object,
+    default: ""
   },
   server: {
     type: String,
@@ -50,15 +48,13 @@ const schema = new Schema({
   },
   versions: {
     type: Array,
-    default: "",
-    trim: true
+    default: ""
   }
 })
  
 // 校验
 schema.path("name").required(true, "name cannot be blank")
 schema.path("git").required(true, "git cannot be blank")
-schema.path("web").required(true, "web cannot be blank")
 schema.path("server").required(true, "server cannot be blank")
 schema.path("domain").required(true, "domain cannot be blank")
 schema.path("ip").required(true, "ip cannot be blank")

@@ -12,11 +12,11 @@ const Proxy = require("../service/proxy")
 const aliOss = require("../service/ali-oss")
 
 // dao
-const Record = require("../dto/record")
+const Record = require("../dto/ReleaseRecord")
 
 // dto
-const RecordDTO = require("../dto/record")
-const HookData = require("../dto/hook-data")
+const RecordDTO = require("../dto/ReleaseRecord")
+const HookData = require("../dto/HookData")
 
 /**
  * 遍历文件夹
@@ -48,32 +48,27 @@ module.exports.release = async function (req, res) {
     let hookData = new HookData(req.body)
     let config = aliOss.getConfig()
 
-    proxy.call("catalog.to", [`${hookData.project}/${path.web}`])
+    let isWeb = /\.web/.test(hookData.repository)
+    let catalog = isWeb ? path.web : path.server
+
+    proxy.call("catalog.to", [`${hookData.project}/${catalog}`])
     proxy.call("git.pull", [])
 
     // 构建可发布版本
-    if (config.type === 'web') {
+    if (isWeb) {
         proxy.call("npm.build", [`${hookData.project}`])
         proxy.call("project.replaceHash", [])
 
         proxy.call("git.push", [`${hookData.project}`])
     }
 
-    proxy.call("project.restart", [`${hookData.project}`])
-    proxy.call("project.start", [`${hookData.project}`])
-    proxy.call("catalog.back", [])
-
-    res.send({
-        message: "hello github"
-    })
-    
     let oss = {
         success: 0,
         fail: 0
     }
     
-    if (config.type === 'web') {
-        ergodicFolder(`${hookData.project}/${path.web}`, async function (filepath) {
+    if (isWeb) {
+        ergodicFolder(`${hookData.project}/${catalog}`, async (filepath) => {
             let result = await aliOss.upload(filepath)
             
             if (result) {
@@ -85,4 +80,12 @@ module.exports.release = async function (req, res) {
     }
     
     await Record.create(new RecordDTO(hookData).get(), oss)
+
+    proxy.call("project.restart", [`${hookData.project}`])
+    proxy.call("project.start", [`${hookData.project}`])
+    proxy.call("catalog.back", [])
+
+    res.send({
+        message: "hello github"
+    })
 }

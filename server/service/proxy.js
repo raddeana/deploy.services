@@ -4,7 +4,7 @@
  */
  
 // 行为错误信息
-const errorMessages = require("../constant/error-messages")
+const errorMessages = require("../constant/errorMessages")
 
 // 部署服务
 const npm = require("./npm")
@@ -27,24 +27,28 @@ class Proxy {
      * @return {function} 获取行为处理函数
      */
     getActionHandler (action) {
+        let result = null
+
         switch (action) {
             case "npm.build":
-                return npm.build.bind(npm)
+                result = npm.build.bind(npm)
             case "catalog.to":
-                return catalog.to.bind(catalog)
+                result = catalog.to.bind(catalog)
             case "catalog.back":
-                return catalog.back.bind(catalog)
+                result = catalog.back.bind(catalog)
             case "project.start":
-                return project.start.bind(project)
+                result = project.start.bind(project)
             case "project.restart":
-                return project.restart.bind(project)
+                result = project.restart.bind(project)
             case "project.replaceHash":
-                return project.replaceHash.bind(project)
+                result = project.replaceHash.bind(project)
             case "git.push":
-                return git.push.bind(git)
+                result = git.push.bind(git)
             case "git.pull":
-                return git.pull.bind(git)
+                result = git.pull.bind(git)
         }
+
+        return result
     }
   
     /**
@@ -53,23 +57,34 @@ class Proxy {
      * @return {string} 行为错误信息
      */
     getActionErrorMsg (action) {
+        let { 
+            BUILDERROR,
+            TOPROJECTERROR,
+            BACKDEPLOYERROR,
+            STARTERROR,
+            RESTARTERROR,
+            REPLACEHASHERROR,
+            PUSHERROR,
+            PULLERROR
+        } = errorMessages;
+
         switch (action) {
             case "build":
-                return errorMessages.buildError
+                return BUILDERROR
             case "catalog.to":
-                return errorMessages.catalogToError
+                return TOPROJECTERROR
             case "catalog.back":
-                return errorMessages.catalogBackError
+                return BACKDEPLOYERROR
             case "project.start":
-                return errorMessages.startError
+                return STARTERROR
             case "project.restart":
-                return errorMessages.restartError
+                return RESTARTERROR
             case "project.replaceHash":
-                return errorMessages.replaceHashError
+                return REPLACEHASHERROR
             case "git.push":
-                return errorMessages.gitPushError
+                return PUSHERROR
             case "git.pull":
-                return errorMessages.gitPullError
+                return PULLERROR
         }
     }
 

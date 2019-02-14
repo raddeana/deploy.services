@@ -5,7 +5,7 @@
 
 const fs = require("fs")
 const AliOss = require("ali-oss")
-const projectDao = require("../dao/project")
+const projectDao = require("../dao/Project")
 
 module.exports = {
     /**
@@ -45,8 +45,8 @@ module.exports = {
      * @return none
      */
     async remove (objectName) {
-        const client = this.getClient()
-        const config = this.getConfig()
+        let client = this.getClient()
+        let config = this.getConfig()
         
         try {
             return await client.delete(objectName)
@@ -61,8 +61,8 @@ module.exports = {
      * @return none
      */
     async upload (objectName, filepath) {
-        const client = this.getClient()
-        const config = this.getConfig()
+        let client = this.getClient()
+        let config = this.getConfig()
         
         try {
             return await client.put(objectName, filepath)

@@ -5,7 +5,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-// log schema
+// 发布记录
 const schema = new Schema({
     release: {
         type: Boolean,
@@ -28,32 +28,32 @@ const schema = new Schema({
     },
     messages: {
         type: Array,
-        default: [],
-        trim: true
+        default: []
     },
     modified: {
         type: Array,
-        default: [],
-        trim: true
+        default: []
     },
     removed: {
         type: Array,
-        default: [],
-        trim: true
+        default: []
     },
     added: {
         type: Array,
-        default: [],
-        trim: true
+        default: []
     },
     errorMsg: {
         type: String,
         default: "",
         trim: true
     },
-    result: { 
-        type: Schema.Types.ObjectId,
-        ref: "result" 
+    result: {
+        type: Object,
+        default: {}
+    },
+    userId:{
+        type: Schema.Types.ObjectId, 
+        ref: 'project' 
     }
 })
  
