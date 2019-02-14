@@ -2,7 +2,7 @@
  * 权限验证
  * @author Philip
  */
-const noAuthentication = require('../constants/no-authentication')
+const noAuthentication = require('../constant/no-authentication')
 
 module.exports = (req, res, next) => {
     let reg = /\/api\//

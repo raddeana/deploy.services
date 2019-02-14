@@ -8,8 +8,8 @@ const fs = require("fs")
 const path = require("../config/path")
 
 // 服务
-const Proxy = require("../services/proxy")
-const aliOss = require("../services/ali-oss")
+const Proxy = require("../service/proxy")
+const aliOss = require("../service/ali-oss")
 
 // dao
 const Record = require("../dto/record")

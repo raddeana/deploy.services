@@ -1,6 +1,6 @@
 {
   "name": "deploy.services",
-  "version": "0.2.1",
+  "version": "0.2.5",
   "description": "standard deploy services",
   "repository": {
     "type": "git",

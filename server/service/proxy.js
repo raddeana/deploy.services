@@ -4,7 +4,7 @@
  */
  
 // 行为错误信息
-const errorMessages = require("../constants/error-messages")
+const errorMessages = require("../constant/error-messages")
 
 // 部署服务
 const npm = require("./npm")

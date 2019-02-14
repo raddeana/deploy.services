@@ -10,9 +10,9 @@ const ejs = require("ejs")
 const bodyParser = require("body-parser")
 const mongoose = require('mongoose')
 const { url, secret } = require("./config/mongo")
-const connect = require("./services/mongo")
-const corsMiddleware = require("./middlewares/cors")
-const authorizeMiddleware = require("./middlewares/authorize")
+const connect = require("./service/mongo")
+const corsMiddleware = require("./middleware/cors")
+const authorizeMiddleware = require("./middleware/authorize")
 const routes = require("./routes")
 
 const app = express()
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(midStatic)
 
-const db = require("./services/mongo")
+const db = require("./service/mongo")
 const MongoStore = require("connect-mongo")(session)
 
 app.use(cookieParser(secret))
