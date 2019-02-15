@@ -66,7 +66,7 @@ class Proxy {
      * @return {string} 行为错误信息
      */
     getActionErrorMsg (action) {
-        let { 
+        let {
             BUILDERROR,
             TOPROJECTERROR,
             BACKDEPLOYERROR,

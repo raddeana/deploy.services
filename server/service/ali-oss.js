@@ -12,8 +12,8 @@ module.exports = {
      * 获取阿里云 Oss 实例
      * @return {AliOss} 阿里云 Oss SDK 实例
      */
-    getClient (project) {
-        let config = this.getConfig(project)
+    getClient () {
+        let config = this.getConfig()
         let client = null
 
         if (config) {

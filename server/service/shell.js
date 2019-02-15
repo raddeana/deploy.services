@@ -10,8 +10,16 @@ module.exports = {
             try {
                 shell.exec(_shell, {
                     silent: true
-                }, (code) => {
+                }, (code, stdout, stderr) => {
                     resolve(code)
+
+                    if (stdout) {
+                        console.error('program output:', stdout)
+                    }
+
+                    if (code !== 0) {
+                        console.error('program stderr:', stderr)
+                    }
                 })
             } catch (e) {
                 resolve('shell error')

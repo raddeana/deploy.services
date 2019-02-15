@@ -27,7 +27,7 @@ module.exports.pull = async (args) => {
  */
 module.exports.push = async () => {
     await exec("git add -A")
-    await exec("git common -m'auto@build'")
+    await exec("git common -m'auto#publish'")
     await exec("git push")
     
     return true

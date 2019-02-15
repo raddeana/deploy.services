@@ -2,8 +2,9 @@
  * 目录变更
  * @author Philip
  */
-const { exec, echo, exit } = require('./shell')
-const path = require("../config/path")
+const path = require('path')
+const shell = require('shelljs')
+const _path = require("../config/path")
 
 /**
  * 跳转至项目目录
@@ -11,13 +12,10 @@ const path = require("../config/path")
  * @return none
  */
 module.exports.to = async (args) => {
-    let code = await exec(`cd ${args[0]}`)
+    shell.cd('..')
+    shell.cd(`${args[0]}`)
 
-    if (code !== 0) {
-        return true
-    } else {
-        return false
-    }
+    return true
 }
 
 /**
@@ -25,11 +23,7 @@ module.exports.to = async (args) => {
  * @return none
  */
 module.exports.back = async () => {
-    let code = await exec(`cd ${path.deploydir_path}`)
+    shell.cd(`${_path.deploydir_path}`)
 
-    if (code !== 0) {
-        return true
-    } else {
-        return false
-    }
+    return true
 }

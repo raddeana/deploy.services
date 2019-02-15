@@ -10,7 +10,7 @@ const { exec, echo, exit } = require('./shell')
  */
 module.exports.build = async (args) => {
     let code = await exec('npm run build')
-
+    
     if (code !== 0) {
         echo(`Error:\tbuild\t${args[0]}\tfailed`)
         exit(1)

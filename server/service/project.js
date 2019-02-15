@@ -48,15 +48,17 @@ module.exports.restart = async (args) => {
  * @return none
  */
 module.exports.replaceHash = () => {
-    const text = fs.readFileSync('./portals.json', 'utf8')
-    const portals = JSON.parse(text)
+    let config = JSON.parse(fs.readFileSync('.deploy.json', 'utf8'))
+    let portals = config.portals
 
     portals.forEach((portal) => {
         const file = fs.readFileSync(portal, 'utf8')
-        const manifest = JSON.parse(fs.readFileSync(`./dist/manifest.json`, 'utf8'))
+        const manifest = JSON.parse(fs.readFileSync(`dist/manifest.json`, 'utf8'))
 
         Object.keys(manifest).forEach((origin) => {
             file.replace(origin, manifest[origin])
         })
+
+        fs.writeFileSync(portal, file, 'utf8')
     })
 }

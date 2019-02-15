@@ -3,9 +3,10 @@
  * @author Philip
  */
 const fs = require("fs")
+const path = require('path')
 
 // 配置
-const path = require("../config/path")
+const _path = require("../config/path")
 
 // 服务
 const Proxy = require("../service/proxy")
@@ -15,7 +16,7 @@ const aliOss = require("../service/ali-oss")
 const releaseRecordDao = require("../dao/releaseRecord")
 
 // dto
-const RecordDto = require("../dto/ReleaseRecord")
+const ReleaseRecordDto = require("../dto/ReleaseRecord")
 const HookData = require("../dto/HookData")
 
 /**
@@ -45,9 +46,9 @@ let ergodicFolder = async (folderPath, handler) => {
  */
 module.exports.release = async (req, res) => {
     let proxy = new Proxy()
-    let hookData = new HookData(req.body)
-    let { repository } = hookData.get()
-    let { web_dir, server_dir } = path
+    let data = new HookData(req.body)
+    let { repository } = data.get()
+    let { web_dir, server_dir } = _path
     let isWeb = /\.web/.test(repository)
 
     repository = repository.replace('blog.', '').replace('.web', '')
@@ -61,7 +62,7 @@ module.exports.release = async (req, res) => {
         gitPush: ''
     }
 
-    result.catalogTo = await proxy.call("catalog.to", [`${repository}/${catalog}`])
+    result.catalogTo = await proxy.call("catalog.to", [`${repository}${path.sep}${catalog}`])
     result.gitPull = await proxy.call("git.pull", [])
 
     // 构建可发布版本
@@ -73,15 +74,20 @@ module.exports.release = async (req, res) => {
     }
     
     if (isWeb) {
-        ergodicFolder('dist', (filepath) => {
-            aliOss.upload(filepath)
+        let manifestTest = /manifest\.json/
+        let wwwTest = /www/
+
+        ergodicFolder('dist', (filePath) => {
+            if (manifestTest.test(filePath) && wwwTest.test(filePath)) {
+                aliOss.upload(filePath)
+            }
         })
     }
     
-    await releaseRecordDao.create(new RecordDto(hookData).get(), result)
+    await releaseRecordDao.create(new ReleaseRecordDto(data).get(), result)
 
-    await proxy.call("project.restart", [`${hookData.project}`])
-    await proxy.call("project.start", [`${hookData.project}`])
+    await proxy.call("project.restart", [`${data.project}`])
+    await proxy.call("project.start", [`${data.project}`])
     await proxy.call("catalog.back", [])
 
     res.send({
