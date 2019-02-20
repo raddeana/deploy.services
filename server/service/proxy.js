@@ -17,7 +17,7 @@ class Proxy {
      * 构造函数
      * @contructor
      */
-    contructor () {
+    constructor () {
         this.nonBlocking = true
     }
   

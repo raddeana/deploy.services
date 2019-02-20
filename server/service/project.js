@@ -48,7 +48,7 @@ module.exports.restart = async (args) => {
  * @return none
  */
 module.exports.replaceHash = () => {
-    let config = JSON.parse(fs.readFileSync('.deploy.json', 'utf8'))
+    let config = JSON.parse(fs.readFileSync('.deploy.js', 'utf8'))
     let portals = config.portals
 
     portals.forEach((portal) => {

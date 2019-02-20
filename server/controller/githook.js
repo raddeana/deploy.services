@@ -83,12 +83,14 @@ module.exports.release = async (req, res) => {
             }
         })
     }
-    
-    await releaseRecordDao.create(new ReleaseRecordDto(data).get(), result)
 
     await proxy.call("project.restart", [`${data.project}`])
     await proxy.call("project.start", [`${data.project}`])
     await proxy.call("catalog.back", [])
+
+    if (proxy.nonBlocking) {
+        await releaseRecordDao.create(new ReleaseRecordDto(data).get(), result) 
+    }
 
     res.send({
         message: "hello github"

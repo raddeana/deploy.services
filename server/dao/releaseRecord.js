@@ -43,10 +43,10 @@ const schema = new Schema({
 })
  
 // 校验
-schema.path("url").required(true, "ref cannot be blank")
+schema.path("url").required(true, "url cannot be blank")
 schema.path("repository").required(true, "repository cannot be blank")
-schema.path("tag_name").required(true, "messages cannot be blank")
-schema.path("published_at").required(true, "modified cannot be blank")
+schema.path("tag_name").required(true, "tag name cannot be blank")
+schema.path("published_at").required(true, "published time cannot be blank")
 
 schema.statics = {
   /**
