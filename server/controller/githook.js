@@ -73,7 +73,7 @@ module.exports.release = async (req, res) => {
         result.gitPush = await proxy.call("git.push", [`${repository}`])
     }
     
-    if (isWeb) {
+    if (isWeb && proxy.nonBlocking) {
         let manifestTest = /manifest\.json/
         let wwwTest = /www/
 

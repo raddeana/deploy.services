@@ -3,5 +3,5 @@
  * @author Philip
  */
 module.exports = {
-    
+
 }

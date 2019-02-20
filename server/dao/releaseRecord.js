@@ -77,10 +77,10 @@ schema.statics = {
      * @param {object} release 记录
      * @return {array} list
      */
-    async create (_record) {
-        let Record = this.model("record")
-        let record = new Record(_record)
-        let result = await record.save()
+    async create (record) {
+        let ReleaseRecord = this.model("releaseRecord")
+        let releaseRecord = new ReleaseRecord(record)
+        let result = await releaseRecord.save()
         
         return result
     },

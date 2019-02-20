@@ -17,8 +17,8 @@ class Proxy {
      * 构造函数
      * @contructor
      */
-    contructor (context) {
-        this.context = context
+    contructor () {
+        this.nonBlocking = true
     }
   
     /**
@@ -29,6 +29,8 @@ class Proxy {
      */
     async actionHandler (action, args) {
         let success = false
+
+        console.info(`processing ${action}`)
 
         switch (action) {
             case "npm.build":
@@ -104,6 +106,13 @@ class Proxy {
    * @return {object} 调用结果
    */
     async call (action, args) {
+        if (!this.nonBlocking) {
+            return {
+                success: false,
+                message: 'no execution caused by error blocking'
+            }
+        }
+
         const success = await this.actionHandler.bind(this)(action, args)
 
         if (success) {
@@ -112,6 +121,8 @@ class Proxy {
                 message: "execute success"
             }
         } else {
+            this.nonBlocking = false
+
             return {
                 success: false,
                 message: this.getActionErrorMsg(action)
