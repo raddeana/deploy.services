@@ -5,7 +5,7 @@
 
 const AliOss = require("ali-oss")
 const { read, write } = require("../utils")
-const projectDao = require("../dao/Project")
+const projectDao = require("../dao/project")
 
 module.exports = {
     /**
