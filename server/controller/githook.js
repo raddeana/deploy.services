@@ -35,7 +35,7 @@ let ergodicFolder = async (folderPath, handler) => {
         if (stat.isDirectory() === true) { 
             await ergodicFolder(folderPath + '/' + fof, handler)
         } else {
-            await handler(folderPath + '/' + fof)
+            await handler(fof, folderPath + '/' + fof)
         }
     }
 }
@@ -47,50 +47,90 @@ let ergodicFolder = async (folderPath, handler) => {
 module.exports.release = async (req, res) => {
     let proxy = new Proxy()
     let data = new HookData(req.body)
-    let { repository } = data.get()
+    let { repository, tag_name } = data.get()
     let { web_dir, server_dir } = _path
     let isWeb = /\.web/.test(repository)
 
     repository = repository.replace('blog.', '').replace('.web', '')
 
     let catalog = isWeb ? web_dir : server_dir
-    let result = {
-        catalogTo: '',
-        gitPull: '',
-        npmBuild: '',
-        projectReplaceHash: '',
-        gitPush: ''
-    }
+    let results = {}
 
-    result.catalogTo = await proxy.call("catalog.to", [`${repository}${path.sep}${catalog}`])
-    result.gitPull = await proxy.call("git.pull", [])
+    results.catalogTo = await proxy.call("catalog.to", [`${repository}${path.sep}${catalog}`])
+    results.gitPull = await proxy.call("git.pull", [])
 
     // 构建可发布版本
     if (isWeb) {
-        result.npmBuild = await proxy.call("npm.build", [`${repository}`])
-        result.projectReplaceHash = proxy.call("project.replaceHash", [])
-
-        result.gitPush = await proxy.call("git.push", [`${repository}`])
+        results.npmBuild = await proxy.call("npm.build", [`${repository}`])
+        results.projectReplaceHash = await proxy.call("project.replaceVersion", [`${tag_name}`])
+        results.gitPush = await proxy.call("git.push", [`${repository}`])
     }
-    
+
     if (isWeb && proxy.nonBlocking) {
         let manifestTest = /manifest\.json/
-        let wwwTest = /www/
+        let wwwTest = /\.html/
+        let jsTest = /\/js/
+        let cssTest = /\/css/
 
-        ergodicFolder('dist', (filePath) => {
-            if (manifestTest.test(filePath) && wwwTest.test(filePath)) {
-                aliOss.upload(filePath)
+        ergodicFolder('dist', (file, filePath) => {
+            if (!manifestTest.test(filePath) && !wwwTest.test(filePath)) {
+                if (jsTest.test(filePath)) {
+                    file = `/js/${file}`
+                }
+
+                if (cssTest.test(filePath)) {
+                    file = `/css/${file}`
+                }
+
+                aliOss.upload(file, filePath)
             }
         })
     }
 
-    await proxy.call("project.restart", [`${data.project}`])
-    await proxy.call("project.start", [`${data.project}`])
-    await proxy.call("catalog.back", [])
 
-    if (proxy.nonBlocking) {
-        await releaseRecordDao.create(new ReleaseRecordDto(data).get(), result) 
+    results.projectRestart = await proxy.call("project.restart", [`${data.project}`])
+    
+    if (!results.projectStart.success) {
+        results.projectStart = await proxy.call("project.start", [`${data.project}`])
     }
+    
+    results.catalogBack = await proxy.call("catalog.back", [])
+
+    let releaseRecordDto = new ReleaseRecordDto()
+
+    await releaseRecordDto.set(data.get(), results)
+    await releaseRecordDao.create(releaseRecordDto.get())
+
+    res.send({
+        message: "hello github"
+    })
+}
+
+/**
+ * 部署发布
+ * @param {object} 请求
+ * @param {object} 相应
+ * @controller
+ */
+module.exports.deployRelease = async (req, res) => {
+    let proxy = new Proxy()
+    let data = new HookData(req.body)
+    let { repository, tag_name } = data.get()
+    let results = {}
+
+    results.projectReplaceHash = await proxy.call("project.replaceVersion", [`${tag_name}`])
+    results.gitPush = await proxy.call("git.push", [`${repository}`])
+
+    results.projectRestart = await proxy.call("project.restart", [`${data.project}`])
+    
+    if (!results.projectStart.success) {
+        results.projectStart = await proxy.call("project.start", [`${data.project}`])
+    }
+
+    let releaseRecordDto = new ReleaseRecordDto()
+
+    await releaseRecordDto.set(data.get(), results)
+    await releaseRecordDao.create(releaseRecordDto.get())
 
     res.send({
         message: "hello github"

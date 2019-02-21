@@ -17,13 +17,17 @@ class HookData {
             }
         }
 
-        const { repository, release } = data
+        let { repository, release } = data
+        let { name } = repository
+        let { url, tag_name, published_at } = release
+        
 
         this.data = {
-            url: release.url,
-            tag_name: release.tag_name,
-            repository: repository.name,
-            published_at: release.published_at
+            name: name.replace('blog.', '').replace('.web', ''),
+            url: url,
+            tag_name: tag_name,
+            repository: name,
+            published_at: published_at
         }
     }
 

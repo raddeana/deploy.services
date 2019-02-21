@@ -2,7 +2,7 @@
  * 项目重启，替换静态资源版本
  * @author Philip
  */
-const fs = require('fs')
+const { read, write } = require('../utils')
 const { exec, echo, exit } = require('./shell')
 
 /**
@@ -26,7 +26,7 @@ module.exports.start = async (args) => {
 
 /**
  * 重启项目
- * @param {string} 项目名称
+ * @param {array} 函数参数
  * @return none
  */
 module.exports.restart = async (args) => {
@@ -47,18 +47,46 @@ module.exports.restart = async (args) => {
  * 替换静态资源版本
  * @return none
  */
-module.exports.replaceHash = () => {
-    let config = JSON.parse(fs.readFileSync('.deploy.js', 'utf8'))
-    let portals = config.portals
+module.exports.replaceHash = async () => {
+    try {
+        let deploy = await read('.deploy.json', 'utf8')
+        let deployJson = JSON.parse(file)
+        let manifest = await read('dist/manifest.json', 'utf8')
+        let manifestJson = JSON.parse(manifest)
 
-    portals.forEach((portal) => {
-        const file = fs.readFileSync(portal, 'utf8')
-        const manifest = JSON.parse(fs.readFileSync(`dist/manifest.json`, 'utf8'))
+        for (let i = 0, len = deployJson.portals.length; i < len; i ++) {
+            let portal = deployJson.portals[i]
+            let content = fs.readFileSync(portal, 'utf8')
+            
+            Object.keys(manifestJson).forEach((origin) => {
+                content = content.replace(origin, manifestJson[origin])
+            })
+    
+            await write(portal, content, 'utf8')
+        }
 
-        Object.keys(manifest).forEach((origin) => {
-            file.replace(origin, manifest[origin])
-        })
+        return true
+    } catch (e) {
+        return false
+    }
+}
 
-        fs.writeFileSync(portal, file, 'utf8')
-    })
+/**
+ * 替换
+ * @param {array} 函数参数
+ * @return {boolean} true
+ */
+module.exports.replaceVersion = async (args) => {
+    try {
+        let file = await read('package.json', 'utf8')
+        let json = JSON.parse(file)
+
+        json.version = args[0]
+
+        await write('package.json', JSON.stringify(json), 'utf8')
+    
+        return true
+    } catch (e) {
+        return false
+    }
 }

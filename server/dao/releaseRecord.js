@@ -3,10 +3,16 @@
  * @author Philip
  */
 const mongoose = require("mongoose")
+const projectSchema = require("./project")
 const Schema = mongoose.Schema
 
 // 发布记录
 const schema = new Schema({
+    name: {
+        type: String,
+        default: "",
+        trim: true
+    },
     url: {
         type: String,
         default: "",
@@ -23,20 +29,14 @@ const schema = new Schema({
         trim: true
     },
     published_at: {
-        type: String,
-        default: "",
-        trim: true
+        type: Date,
+        default: Date.now
     },
-    errorMsg: {
-        type: String,
-        default: "",
-        trim: true
-    },
-    result: {
+    results: {
         type: Object,
         default: {}
     },
-    userId:{
+    projectId: {
         type: Schema.Types.ObjectId, 
         ref: 'project' 
     }
@@ -74,13 +74,13 @@ schema.statics = {
     
     /**
      * 添加日志
-     * @param {object} release 记录
+     * @param {ReleaseRecordDto} release 记录
      * @return {array} list
      */
-    async create (record) {
-        let ReleaseRecord = this.model("releaseRecord")
-        let releaseRecord = new ReleaseRecord(record)
-        let result = await releaseRecord.save()
+    async create (releaseRecord) {
+        let ReleaseRecordModel = this.model("releaseRecord")
+        let releaseRecordModel = new ReleaseRecordModel(releaseRecord)
+        let result = await releaseRecordModel.save()
         
         return result
     },
@@ -96,5 +96,8 @@ schema.statics = {
         return result
     }
 }
- 
-module.exports = mongoose.model("releaseRecord", schema)
+
+let releaseRecordDao = mongoose.model("releaseRecord", schema)
+mongoose.model("project", projectSchema)
+
+module.exports = releaseRecordDao

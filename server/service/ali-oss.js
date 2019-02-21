@@ -3,8 +3,8 @@
  * @author Philip
  */
 
-const fs = require("fs")
 const AliOss = require("ali-oss")
+const { read, write } = require("../utils")
 const projectDao = require("../dao/Project")
 
 module.exports = {
@@ -12,12 +12,12 @@ module.exports = {
      * 获取阿里云 Oss 实例
      * @return {AliOss} 阿里云 Oss SDK 实例
      */
-    getClient () {
-        let config = this.getConfig()
+    async getClient () {
+        let deployJson = await this.getConfig()
         let client = null
 
-        if (config) {
-            client = new AliOss(config.ali_oss)
+        if (deployJson) {
+            client = new AliOss(deployJson.ali_oss)
         }
         
         return client
@@ -27,16 +27,15 @@ module.exports = {
      * 获取部署配置
      * @return {object} 部署配置
      */
-    getConfig () {
-        let config = null
-        
+    async getConfig () {
         try {
-            config = JSON.parse(fs.readFileSync(".deploy.json", "utf8"))
+            let deploy = await read(".deploy.json", "utf8")
+            let deployJson = JSON.parse(deploy)
+
+            return deployJson
         } catch (err) {
-            console.error(err)
+            return false
         }
-        
-        return config
     },
 
     /**
@@ -45,10 +44,10 @@ module.exports = {
      * @return none
      */
     async remove (objectName) {
-        let client = this.getClient()
-        let config = this.getConfig()
+        let client = await this.getClient()
         
         try {
+            console.info(`removing ${objectName}`)
             return await client.delete(objectName)
         } catch (err) {
             console.error(err)
@@ -61,11 +60,13 @@ module.exports = {
      * @return none
      */
     async upload (objectName, filepath) {
-        let client = this.getClient()
-        let config = this.getConfig()
+        let client = await this.getClient()
         
         try {
-            return await client.put(objectName, filepath)
+            console.info(`uploading ${objectName}`, filepath)
+            let res = await client.put(objectName, filepath)
+
+            return res
         } catch (err) {
             console.error(err)
         }

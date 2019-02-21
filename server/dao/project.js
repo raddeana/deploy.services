@@ -67,11 +67,9 @@ schema.statics = {
    * @return {array} list
    */
   async create (project) {
-    const Project = this.model("project", project)
-    const projectEntity = new Project()
-    const result = await projectEntity.save()
-
-    return result
+    const Project = this.model("project")
+    const projectEntity = new Project(project)
+    return await projectEntity.save()
   },
   
   /**
@@ -80,9 +78,7 @@ schema.statics = {
    * @return {array} list
    */
   async update (project) {
-    const result = await this.update({ _id: project._id }, project)
-
-    return result
+    return await this.update({ _id: project._id }, project)
   },
 
   /**
@@ -114,9 +110,16 @@ schema.statics = {
    * @return {array} list
    */
   async delete (projectId) {
-    const result = await this.remove({ _id: projectId })
+    return await this.remove({ _id: projectId })
+  },
 
-    return result
+  /**
+   * 根据项目名称查找项目
+   * @param {string} 项目名称
+   * @return {project} list
+   */
+  async findOneByName (name) {
+    return await this.findOne({ name })
   }
 }
  

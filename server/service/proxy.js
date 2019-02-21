@@ -4,7 +4,7 @@
  */
  
 // 行为错误信息
-const errorMessages = require("../constant/errorMessages")
+const errorMessages = require("../constant/deploy-errors")
 
 // 部署服务
 const npm = require("./npm")
@@ -48,8 +48,8 @@ class Proxy {
             case "project.restart":
                 success = await project.restart(args)
                 break
-            case "project.replaceHash":
-                success = await project.replaceHash(args)
+            case "project.replaceVersion":
+                success = await project.replaceVersion(args)
                 break
             case "git.push":
                 success = await git.push(args)
@@ -74,7 +74,7 @@ class Proxy {
             BACKDEPLOYERROR,
             STARTERROR,
             RESTARTERROR,
-            REPLACEHASHERROR,
+            REPLACEVERSIONERROR,
             PUSHERROR,
             PULLERROR
         } = errorMessages;
@@ -90,8 +90,8 @@ class Proxy {
                 return STARTERROR
             case "project.restart":
                 return RESTARTERROR
-            case "project.replaceHash":
-                return REPLACEHASHERROR
+            case "project.replaceVersion":
+                return REPLACEVERSIONERROR
             case "git.push":
                 return PUSHERROR
             case "git.pull":

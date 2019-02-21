@@ -2,15 +2,22 @@
  * git hook 请求记录
  * @author Philip
  */
-class Record {
-    /**
-     * 构造函数
-     * @constructor
-     */
-    construcotr (data, result) {
-        this.record = Object.assign({}, data, {
-            result,
+
+const mongoose = require('mongoose')
+
+class ReleaseRecord {
+    async set (data, results) {
+        this.data = Object.assign(data, {
+            results,
         })
+
+        let projectDao = mongoose.model('project');
+        let { name } = data
+        let project = await projectDao.findOneByName(name)
+
+        if (project) {
+            this.data.projectId = mongoose.Types.ObjectId(project._id)
+        }
     }
     
     /**
@@ -18,8 +25,8 @@ class Record {
      * @return {object} 日志数据 
      */
     get () {
-        return this.record
+        return this.data
     }
 }
 
-module.exports = Record
+module.exports = ReleaseRecord

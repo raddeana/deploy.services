@@ -11,5 +11,5 @@ module.exports = {
     RESTARTERROR: "restart project failed",
     PULLERROR: "git pull failed",
     PUSHERROR: "git push failed",
-    REPLACEHASHERROR: "replace hash error"
+    REPLACEVERSIONERROR: "replace version failed"
 }
