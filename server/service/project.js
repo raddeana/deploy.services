@@ -51,6 +51,7 @@ module.exports.replaceHash = async () => {
     try {
         let deploy = await read('.deploy.json', 'utf8')
         let deployJson = JSON.parse(file)
+        
         let manifest = await read('dist/manifest.json', 'utf8')
         let manifestJson = JSON.parse(manifest)
 

@@ -109,7 +109,7 @@ module.exports = (app) => {
     })
 
     // github hook 接口
-    app.post("/api/git/deployRelease", (req, res) => {
+    app.post("/api/git/release/deploy", (req, res) => {
         githookController.deployRelease(req, res)
     })
 }

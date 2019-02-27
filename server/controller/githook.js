@@ -110,7 +110,7 @@ module.exports.release = async (req, res) => {
  * 部署发布
  * @param {object} 请求
  * @param {object} 相应
- * @controller
+ * @Controller
  */
 module.exports.deployRelease = async (req, res) => {
     let proxy = new Proxy()
