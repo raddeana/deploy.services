@@ -13,11 +13,11 @@ const Proxy = require("../service/proxy")
 const aliOss = require("../service/ali-oss")
 
 // dao
-const releaseRecordDao = require("../dao/releaseRecord")
+const releaseRecordDao = require("../dao/release-record")
 
 // dto
-const ReleaseRecordDto = require("../dto/ReleaseRecord")
-const HookData = require("../dto/HookData")
+const ReleaseRecordDto = require("../dto/release-record")
+const HookData = require("../dto/hook-data")
 
 /**
  * 遍历文件夹

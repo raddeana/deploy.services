@@ -2,7 +2,7 @@
  * 统计控制器
  * @author Philip
  */
-const releaseRecordDao = require("../dao/releaseRecord")
+const releaseRecordDao = require("../dao/release-record")
 
 /**
  * 提交分类统计

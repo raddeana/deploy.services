@@ -2,7 +2,7 @@
  * git钩子记录
  * @author Philip
  */
-const releaseRecordDao = require("../dao/releaseRecord")
+const releaseRecordDao = require("../dao/release-record")
 
 /**
  * 记录查询
