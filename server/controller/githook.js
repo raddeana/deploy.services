@@ -87,10 +87,10 @@ module.exports.release = async (req, res) => {
         })
     }
 
-    results.projectRestart = await proxy.call("project.restart", [`${data.project}`])
+    results.projectRestart = await proxy.call("project.restart", [`${repository}`])
     
     if (!results.projectStart.success) {
-        results.projectStart = await proxy.call("project.start", [`${data.project}`])
+        results.projectStart = await proxy.call("project.start", [`${repository}`])
     }
     
     results.catalogBack = await proxy.call("catalog.back", [])
