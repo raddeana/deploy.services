@@ -33,13 +33,13 @@ module.exports.restart = async (args) => {
     let code = await exec(`pm2 restart ${args[0]}`)
 
     if (code !== 0) {
-        echo(`Error:\trestart\t${args[0]}\tfailed`)
+        echo(`Error: \trestart\t${args[0]}\tfailed`)
         exit(1)
 
         return false
     }
     
-    echo(`Error:\trestart\t${args[0]}\tsuccess`)
+    echo(`Info: \trestart\t${args[0]}\tsuccess`)
     return true
 }
 

@@ -87,7 +87,6 @@ module.exports.release = async (req, res) => {
         })
     }
 
-
     results.projectRestart = await proxy.call("project.restart", [`${data.project}`])
     
     if (!results.projectStart.success) {
