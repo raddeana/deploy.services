@@ -4,23 +4,24 @@
  */
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: "babel-eslint",
   parserOptions: {
-    sourceType: 'module'
+    sourceType: "module"
   },
   env: {
     browser: true,
   },
-  extends: 'standard',
+  extends: "standard",
   // required to lint *.vue files
-  plugins: ['node'],
+  plugins: ["node"],
   // add your custom rules here
   rules: {
     // allow async-await
-    'generator-star-spacing': 'off',
-    'quotes': 'off',
-    'no-trailing-spaces': 'off',
-    'no-unused-vars': 'off',
+    "indent": ["error", 4],
+    "generator-star-spacing": "off",
+    "quotes": "off",
+    "no-trailing-spaces": "off",
+    "no-unused-vars": "off",
   },
   globals: {
     Objects: true,
