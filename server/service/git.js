@@ -26,9 +26,6 @@ module.exports.pull = async (args) => {
  * @return none
  */
 module.exports.push = async () => {
-    await exec("git add -A")
-    await exec("git commit -m'auto#publish'")
-    await exec("git push")
-    
+    await exec("git add -A && git commit -m'auto:publish' && git push")
     return true
 }
