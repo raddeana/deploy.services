@@ -12,8 +12,7 @@ const _path = require("../config/path")
  * @return none
  */
 module.exports.to = async (args) => {
-    shell.cd('..')
-    shell.cd(`${args[0]}`)
+    shell.cd(`/root/${args[0]}`)
 
     return true
 }
