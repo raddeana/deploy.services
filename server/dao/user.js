@@ -2,7 +2,7 @@
  * 用户
  * @author Philip
  */
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // user
@@ -22,8 +22,8 @@ const schema = new Schema({
 })
  
 // 校验
-schema.path("username").required(true, "username cannot be blank")
-schema.path("password").required(true, "password cannot be blank")
+schema.path('username').required(true, 'username cannot be blank')
+schema.path('password').required(true, 'password cannot be blank')
 
 schema.statics = {
     /**
@@ -40,7 +40,7 @@ schema.statics = {
         } catch (e) {
             return {
                 code: 500,
-                message: "未知错误，请重试"
+                message: '未知错误，请重试'
             }
         }
         
@@ -78,7 +78,7 @@ schema.statics = {
         } catch (e) {
             return {
                 code: 404,
-                message: "用户未找到"
+                message: '用户未找到'
             }
         }
         
@@ -91,4 +91,4 @@ schema.statics = {
     }
 }
 
-module.exports = mongoose.model("user", schema)
+module.exports = mongoose.model('user', schema)

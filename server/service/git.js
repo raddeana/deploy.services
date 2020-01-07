@@ -9,7 +9,7 @@ const { exec, echo, exit } = require('./shell')
  * @return none
  */
 module.exports.pull = async (args) => {
-    let code = await exec("git pull")
+    let code = await exec('git pull')
 
     if (code !== 0) {
         echo(`Error:\tpull\t${args[0]}\tfailed`)
@@ -26,6 +26,6 @@ module.exports.pull = async (args) => {
  * @return none
  */
 module.exports.push = async () => {
-    await exec("git add -A && git commit -m'auto:publish' && git push")
+    await exec('git add -A && git commit -m\'auto:publish\' && git push')
     return true
 }

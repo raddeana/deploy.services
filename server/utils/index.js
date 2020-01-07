@@ -1,3 +1,7 @@
+/**
+ * 工具函数
+ * @author Philip
+ */
 const fs = require('fs')
 
 /**
@@ -15,7 +19,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, utf, (err, data) => {
                 if (err) {
-                    reject(err);
+                    reject(err)
                 } else {
                     resolve(data)
                 }

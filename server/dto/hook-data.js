@@ -13,20 +13,19 @@ class HookData {
             try {
                 data = JSON.parse(data)
             } catch (e) {
-                throw(e)
+                throw (e)
             }
         }
 
         let { repository, release, action } = data
         let { name } = repository
-        let { url, tag_name, published_at } = release
+        let { url, tagName, published_at } = release
         
-
         this.data = {
             action,
             name: name.replace('blog.', '').replace('.web', ''),
             url: url,
-            tag_name: tag_name,
+            tagName: tagName,
             repository: name,
             published_at: published_at
         }

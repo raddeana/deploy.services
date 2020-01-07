@@ -4,7 +4,7 @@
  */
 const path = require('path')
 const shell = require('shelljs')
-const _path = require("../config/path")
+const _path = require('../config/path')
 
 /**
  * 跳转至项目目录

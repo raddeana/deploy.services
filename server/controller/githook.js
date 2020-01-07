@@ -2,22 +2,22 @@
  * git hook 发出的请求
  * @author Philip
  */
-const fs = require("fs")
+const fs = require('fs')
 const path = require('path')
 
 // 配置
-const _path = require("../config/path")
+const _path = require('../config/path')
 
 // 服务
-const Proxy = require("../service/proxy")
-const aliOss = require("../service/ali-oss")
+const Proxy = require('../service/proxy')
+const aliOss = require('../service/ali-oss')
 
 // dao
-const releaseRecordDao = require("../dao/release-record")
+const releaseRecordDao = require('../dao/release-record')
 
 // dto
-const ReleaseRecordDto = require("../dto/release-record")
-const HookData = require("../dto/hook-data")
+const ReleaseRecordDto = require('../dto/release-record')
+const HookData = require('../dto/hook-data')
 
 /**
  * 遍历文件夹
@@ -49,7 +49,7 @@ module.exports.release = async (req, res) => {
     let data = new HookData(req.body)
     let { repository, tag_name, action } = data.get()
     
-    if (action === "published") {
+    if (action === 'published') {
         let { web_dir, server_dir } = _path
         let isWeb = /\.web/.test(repository)
 
@@ -58,14 +58,14 @@ module.exports.release = async (req, res) => {
         let catalog = isWeb ? web_dir : server_dir
         let results = {}
 
-        results.catalogTo = await proxy.call("catalog.to", [`${repository}${path.sep}${catalog}`])
-        results.gitPull = await proxy.call("git.pull", [])
+        results.catalogTo = await proxy.call('catalog.to', [`${repository}${path.sep}${catalog}`])
+        results.gitPull = await proxy.call('git.pull', [])
 
         // 构建可发布版本
         if (isWeb) {
-            results.npmBuild = await proxy.call("npm.build", [`${repository}`])
-            results.projectReplaceHash = await proxy.call("project.replaceVersion", [`${tag_name}`])
-            results.gitPush = await proxy.call("git.push", [`${repository}`])
+            results.npmBuild = await proxy.call('npm.build', [`${repository}`])
+            results.projectReplaceHash = await proxy.call('project.replaceVersion', [`${tag_name}`])
+            results.gitPush = await proxy.call('git.push', [`${repository}`])
         }
 
         if (isWeb && proxy.nonBlocking) {
@@ -89,13 +89,13 @@ module.exports.release = async (req, res) => {
             })
         }
 
-        results.projectRestart = await proxy.call("project.restart", [`${repository}`])
+        results.projectRestart = await proxy.call('project.restart', [`${repository}`])
 
         if (!results.projectStart.success) {
-            results.projectStart = await proxy.call("project.start", [`${repository}`])
+            results.projectStart = await proxy.call('project.start', [`${repository}`])
         }
 
-        results.catalogBack = await proxy.call("catalog.back", [])
+        results.catalogBack = await proxy.call('catalog.back', [])
 
         let releaseRecordDto = new ReleaseRecordDto()
 
@@ -104,7 +104,7 @@ module.exports.release = async (req, res) => {
     }
     
     res.send({
-        message: "hello github"
+        message: 'hello github'
     })
 }
 
@@ -119,16 +119,16 @@ module.exports.deployRelease = async (req, res) => {
     let data = new HookData(req.body)
     let { repository, tag_name, action } = data.get()
     
-    if (action === "published") {
+    if (action === 'published') {
         let results = {}
 
-        results.projectReplaceHash = await proxy.call("project.replaceVersion", [`${tag_name}`])
-        results.gitPush = await proxy.call("git.push", [`${repository}`])
+        results.projectReplaceHash = await proxy.call('project.replaceVersion', [`${tag_name}`])
+        results.gitPush = await proxy.call('git.push', [`${repository}`])
 
-        results.projectRestart = await proxy.call("project.restart", [`${data.project}`])
+        results.projectRestart = await proxy.call('project.restart', [`${data.project}`])
 
         if (!results.projectStart.success) {
-            results.projectStart = await proxy.call("project.start", [`${data.project}`])
+            results.projectStart = await proxy.call('project.start', [`${data.project}`])
         }
 
         let releaseRecordDto = new ReleaseRecordDto()
@@ -138,6 +138,6 @@ module.exports.deployRelease = async (req, res) => {
     }
     
     res.send({
-        message: "hello github"
+        message: 'hello github'
     })
 }

@@ -2,7 +2,7 @@
  * 登录
  * @author Philip
  */
-const userDao = require("../dao/user")
+const userDao = require('../dao/user')
 
 /**
  * 登录
@@ -39,7 +39,7 @@ module.exports.logout = async (req, res) => {
     req.session.regenerate()
     req.session.user = null
     
-	res.redirect("/login")
+	res.redirect('/login')
 }
 
 /**

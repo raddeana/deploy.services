@@ -2,7 +2,7 @@
  * 项目
  * @author Philip
  */
-const projectDao = require("../dao/project") 
+const projectDao = require('../dao/project') 
 
 /**
  * 项目查询
@@ -17,7 +17,7 @@ module.exports.query = async (req, res) => {
     Object.keys(params).forEach((key) => {
         const val = params[key]
 
-        if (key !== "pageIndex" || key !== "pageSize") {
+        if (key !== 'pageIndex' || key !== 'pageSize') {
             filters[key] = val
         }
     })

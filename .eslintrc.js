@@ -22,6 +22,7 @@ module.exports = {
     "quotes": "off",
     "no-trailing-spaces": "off",
     "no-unused-vars": "off",
+    "no-return-await": "off"
   },
   globals: {
     Objects: true,

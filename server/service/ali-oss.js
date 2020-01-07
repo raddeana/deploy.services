@@ -3,9 +3,9 @@
  * @author Philip
  */
 
-const AliOss = require("ali-oss")
-const { read, write } = require("../utils")
-const projectDao = require("../dao/project")
+const AliOss = require('ali-oss')
+const { read, write } = require('../utils')
+const projectDao = require('../dao/project')
 
 module.exports = {
     /**
@@ -29,7 +29,7 @@ module.exports = {
      */
     async getConfig () {
         try {
-            let deploy = await read(".deploy.json", "utf8")
+            let deploy = await read('.deploy.json', 'utf8')
             let deployJson = JSON.parse(deploy)
 
             return deployJson

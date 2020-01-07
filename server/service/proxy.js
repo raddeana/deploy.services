@@ -4,13 +4,13 @@
  */
  
 // 行为错误信息
-const errorMessages = require("../constant/deploy-errors")
+const errorMessages = require('../constant/deploy-errors')
 
 // 部署服务
-const npm = require("./npm")
-const git = require("./git")
-const catalog = require("./catalog")
-const project = require("./project")
+const npm = require('./npm')
+const git = require('./git')
+const catalog = require('./catalog')
+const project = require('./project')
 
 class Proxy {
     /**
@@ -33,30 +33,30 @@ class Proxy {
         console.info(`processing ${action}`)
 
         switch (action) {
-            case "npm.build":
-                success = await npm.build(args)
-                break
-            case "catalog.to":
-                success = await catalog.to(args)
-                break
-            case "catalog.back":
-                success = await catalog.back(args)
-                break
-            case "project.start":
-                success = await project.start(args)
-                break
-            case "project.restart":
-                success = await project.restart(args)
-                break
-            case "project.replaceVersion":
-                success = await project.replaceVersion(args)
-                break
-            case "git.push":
-                success = await git.push(args)
-                break
-            case "git.pull":
-                success = await git.pull(args)
-                break
+        case 'npm.build':
+            success = await npm.build(args)
+            break
+        case 'catalog.to':
+            success = await catalog.to(args)
+            break
+        case 'catalog.back':
+            success = await catalog.back(args)
+            break
+        case 'project.start':
+            success = await project.start(args)
+            break
+        case 'project.restart':
+            success = await project.restart(args)
+            break
+        case 'project.replaceVersion':
+            success = await project.replaceVersion(args)
+            break
+        case 'git.push':
+            success = await git.push(args)
+            break
+        case 'git.pull':
+            success = await git.pull(args)
+            break
         }
 
         return success
@@ -77,25 +77,25 @@ class Proxy {
             REPLACEVERSIONERROR,
             PUSHERROR,
             PULLERROR
-        } = errorMessages;
+        } = errorMessages
 
         switch (action) {
-            case "build":
-                return BUILDERROR
-            case "catalog.to":
-                return TOPROJECTERROR
-            case "catalog.back":
-                return BACKDEPLOYERROR
-            case "project.start":
-                return STARTERROR
-            case "project.restart":
-                return RESTARTERROR
-            case "project.replaceVersion":
-                return REPLACEVERSIONERROR
-            case "git.push":
-                return PUSHERROR
-            case "git.pull":
-                return PULLERROR
+        case 'build':
+            return BUILDERROR
+        case 'catalog.to':
+            return TOPROJECTERROR
+        case 'catalog.back':
+            return BACKDEPLOYERROR
+        case 'project.start':
+            return STARTERROR
+        case 'project.restart':
+            return RESTARTERROR
+        case 'project.replaceVersion':
+            return REPLACEVERSIONERROR
+        case 'git.push':
+            return PUSHERROR
+        case 'git.pull':
+            return PULLERROR
         }
     }
 
@@ -118,7 +118,7 @@ class Proxy {
         if (success) {
             return {
                 success: true,
-                message: "execute success"
+                message: 'execute success'
             }
         } else {
             this.nonBlocking = false

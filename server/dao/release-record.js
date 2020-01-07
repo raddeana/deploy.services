@@ -2,30 +2,30 @@
  * release 记录列表
  * @author Philip
  */
-const mongoose = require("mongoose")
-const projectSchema = require("./project")
+const mongoose = require('mongoose')
+const projectSchema = require('./project')
 const Schema = mongoose.Schema
 
 // 发布记录
 const schema = new Schema({
     name: {
         type: String,
-        default: "",
+        default: '',
         trim: true
     },
     url: {
         type: String,
-        default: "",
+        default: '',
         trim: true
     },
     tag_name: {
         type: String,
-        default: "",
+        default: '',
         trim: true
     },
     repository: {
         type: String,
-        default: "",
+        default: '',
         trim: true
     },
     published_at: {
@@ -43,13 +43,13 @@ const schema = new Schema({
 })
  
 // 校验
-schema.path("url").required(true, "url cannot be blank")
-schema.path("repository").required(true, "repository cannot be blank")
-schema.path("tag_name").required(true, "tag name cannot be blank")
-schema.path("published_at").required(true, "published time cannot be blank")
+schema.path('url').required(true, 'url cannot be blank')
+schema.path('repository').required(true, 'repository cannot be blank')
+schema.path('tag_name').required(true, 'tag name cannot be blank')
+schema.path('published_at').required(true, 'published time cannot be blank')
 
 schema.statics = {
-  /**
+   /**
     * 获取release 记录列表
     * @param {object} 过滤条件
     * @param {number} 页码
@@ -78,7 +78,7 @@ schema.statics = {
      * @return {array} list
      */
     async create (releaseRecord) {
-        let ReleaseRecordModel = this.model("releaseRecord")
+        let ReleaseRecordModel = this.model('releaseRecord')
         let releaseRecordModel = new ReleaseRecordModel(releaseRecord)
         let result = await releaseRecordModel.save()
         
@@ -97,7 +97,7 @@ schema.statics = {
     }
 }
 
-let releaseRecordDao = mongoose.model("releaseRecord", schema)
-mongoose.model("project", projectSchema)
+let releaseRecordDao = mongoose.model('releaseRecord', schema)
+mongoose.model('project', projectSchema)
 
 module.exports = releaseRecordDao
