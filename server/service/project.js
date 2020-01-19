@@ -44,35 +44,6 @@ module.exports.restart = async (args) => {
 }
 
 /**
- * 替换静态资源版本
- * @return none
- */
-module.exports.replaceHash = async () => {
-    try {
-        let deploy = await read('.deploy.json', 'utf8')
-        let deployJson = JSON.parse(file)
-        
-        let manifest = await read('dist/manifest.json', 'utf8')
-        let manifestJson = JSON.parse(manifest)
-
-        for (let i = 0, len = deployJson.portals.length; i < len; i ++) {
-            let portal = deployJson.portals[i]
-            let content = fs.readFileSync(portal, 'utf8')
-            
-            Object.keys(manifestJson).forEach((origin) => {
-                content = content.replace(origin, manifestJson[origin])
-            })
-    
-            await write(portal, content, 'utf8')
-        }
-
-        return true
-    } catch (e) {
-        return false
-    }
-}
-
-/**
  * 替换
  * @param {array} 函数参数
  * @return {boolean} true
